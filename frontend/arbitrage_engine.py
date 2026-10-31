@@ -13,9 +13,12 @@ from typing import Dict, Any, Optional
 import json
 import os
 from pathlib import Path
+import sys
 
 # Paths
 REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 SNAPSHOT_PATH = REPO_ROOT / "data" / "offline_snapshots" / "nashik_tomato_glut.json"
 
 
