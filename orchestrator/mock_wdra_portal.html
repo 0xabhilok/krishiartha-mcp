@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDRA e-NWR Pledge Financing Portal | Government of India</title>
+    <style>
+        :root {
+            --primary: #155724;
+            --primary-dark: #0b3014;
+            --secondary: #c67d00;
+            --accent: #2e7d32;
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --border: #d0d7de;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --success-bg: #e8f5e9;
+            --success-border: #a5d6a7;
+            --gold: #d97706;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+        .header-stripe {
+            height: 6px;
+            background: linear-gradient(90deg, #ff9933 33.3%, #ffffff 33.3%, #ffffff 66.6%, #138808 66.6%);
+        }
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .emblem {
+            width: 48px;
+            height: 48px;
+            background: #0b3014;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .titles h1 {
+            font-size: 18px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .titles h2 {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .status-pill {
+            background: var(--success-bg);
+            color: var(--primary);
+            border: 1px solid var(--success-border);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-pill::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .container {
+            max-width: 900px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .card-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+        input, select {
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            color: #111827;
+            background: #ffffff;
+            transition: border-color 0.15s ease;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+        }
+        .highlight-box {
+            background: #f0fdf4;
+            border: 1px dashed var(--accent);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .highlight-box .val-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .highlight-box .val-num {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        button.btn-primary {
+            background: var(--accent);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease, transform 0.05s ease;
+            box-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
+        }
+        button.btn-primary:hover {
+            background: #1b5e20;
+        }
+        button.btn-primary:active {
+            transform: scale(0.99);
+        }
+        #confirmation_slip {
+            display: none;
+            background: #ffffff;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 24px;
+            position: relative;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 42px;
+            font-weight: 900;
+            color: rgba(46, 125, 50, 0.07);
+            pointer-events: none;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .slip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+        .slip-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+        .badge-sanctioned {
+            background: #059669;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dotted #e5e7eb;
+            font-size: 14px;
+        }
+        .detail-label {
+            color: #6b7280;
+        }
+        .detail-value {
+            font-weight: 600;
+            color: #111827;
+        }
+        .legal-footer {
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 11px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+        .qr-placeholder {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-align: center;
+            color: #9ca3af;
+            background: #f9fafb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-stripe"></div>
+    <header>
+        <div class="brand">
+            <div class="emblem">&#x269C;</div>
+            <div class="titles">
+                <h1>Warehousing Development and Regulatory Authority</h1>
+                <h2>Government of India &bull; Electronic Negotiable Warehouse Receipt (e-NWR) Portal</h2>
+            </div>
+        </div>
+        <div class="status-pill" id="portal_status">WDRA REPOSITORY LIVE &bull; 2026</div>
+    </header>
+
+    <div class="container">
+        <form id="wdra_loan_form">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">&#128100; Section 1: Farmer &amp; Lot Intake KYC</span>
+                    <span style="font-size: 12px; color: var(--text-muted);">Direct Beneficiary Transfer (DBT) Linked</span>
+                </div>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label for="farmer_name">Farmer / FPO Manager Name</label>
+                        <input type="text" id="farmer_name" name="farmer_name" value="Suresh Patil" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="farmer_id">Aadhaar / Farmer ID</label>
+                        <input type="text" id="farmer_id" name="farmer_id" value="MH-NSK-2026-8812" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Registered Mobile</label>
+                        <input type="text" id="phone" name="phone" value="+919822012345" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">&#127806; Section 2: Commodity &amp; Lot Valuation</span>
+                    <span style="font-size: 12px; color: var(--text-muted);">Physical Assay Grade: Grade-A Perishable</span>
+                </div>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label for="commodity">Commodity Name</label>
+                        <input type="text" id="commodity" name="commodity" value="Tomato" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lot_weight">Lot Weight (Quintals)</label>
+                        <input type="number" step="0.1" id="lot_weight" name="lot_weight" value="50.0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="valuation_inr">Current Modal Valuation (&#8377;)</label>
+                        <input type="number" step="0.1" id="valuation_inr" name="valuation_inr" value="45000.0" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">&#127970; Section 3: WDRA Accredited Warehouse &amp; Subvention Financing</span>
+                    <span style="font-size: 12px; color: var(--text-muted);">NABARD Circular 128 Compliant</span>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="warehouse_name">WDRA Scientific Cold Warehouse</label>
+                        <input type="text" id="warehouse_name" name="warehouse_name" value="MSWC Scientific Warehouse & Cold Chain, Ozar" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="warehouse_reg_no">WDRA Registration Number</label>
+                        <input type="text" id="warehouse_reg_no" name="warehouse_reg_no" value="WDRA-MH-NSK-0429" required>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div>
+                        <div class="val-title">Sanctionable Pledge Advance (75% LTV)</div>
+                        <div class="val-num" id="display_loan_val">&#8377;33,750</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="val-title">Effective Post-Harvest Rate (KCC Subvention)</div>
+                        <div class="val-num" style="color: #059669;" id="display_rate">4.0% p.a.</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="loan_amount">Requested Pledge Advance Loan (&#8377;)</label>
+                        <input type="number" step="0.1" id="loan_amount" name="loan_amount" value="33750.0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest_rate">Effective Interest Rate (%)</label>
+                        <input type="number" step="0.1" id="interest_rate" name="interest_rate" value="4.0" required>
+                    </div>
+                </div>
+
+                <button type="button" id="submit_loan_btn" class="btn-primary" onclick="submitWDRAApplication()">
+                    Approve &amp; Disburse e-NWR Pledge Loan (&#8377;33,750)
+                </button>
+            </div>
+        </form>
+
+        <div id="confirmation_slip">
+            <div class="watermark">WDRA SANCTIONED</div>
+            <div class="slip-header">
+                <div>
+                    <div class="slip-title">Electronic Negotiable Warehouse Receipt (e-NWR) Pledge Sanction Slip</div>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                        Application ID: <span id="submission_id" style="font-weight: 700; color: #111827;">WDRA-MH-NSK-2026-8812-75</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <span class="badge-sanctioned" id="status_badge">SANCTIONED &amp; PLEDGED</span>
+                    <div class="qr-placeholder">&#x25A3;&#x25A3;<br>VERIFIED</div>
+                </div>
+            </div>
+
+            <div class="detail-row">
+                <span class="detail-label">Beneficiary Farmer</span>
+                <span class="detail-value" id="slip_farmer_name">Suresh Patil (MH-NSK-2026-8812)</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Pledged Commodity &amp; Lot</span>
+                <span class="detail-value" id="slip_lot">50.0 Quintals Tomato</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">WDRA Warehouse Repository</span>
+                <span class="detail-value" id="slip_warehouse">MSWC Scientific Warehouse &amp; Cold Chain, Ozar (WDRA-MH-NSK-0429)</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Assessed Lot Valuation</span>
+                <span class="detail-value" id="slip_valuation">&#8377;45,000.00</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Disbursed Pledge Advance (75% LTV)</span>
+                <span class="detail-value" style="color: #059669; font-size: 16px;" id="sanctioned_amount">&#8377;33,750.00</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Effective Interest Rate</span>
+                <span class="detail-value">4.0% p.a. (7% nominal &minus; 3% NABARD KCC Prompt Repayment Subvention)</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Holding &amp; Tenancy Buffer</span>
+                <span class="detail-value">Up to 6 Months (Rebound Window: 10 Days)</span>
+            </div>
+
+            <div class="legal-footer">
+                <strong>Statutory Assurance:</strong> Issued under Section 11 of the Warehousing (Development and Regulation) Act 2007. Fiduciary guarantee against deterioration, insect damage, or weight loss held in custody of repository. Collateralized digitally on CCRL / NERL repos.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitWDRAApplication() {
+            const farmerName = document.getElementById('farmer_name').value || 'Suresh Patil';
+            const farmerId = document.getElementById('farmer_id').value || 'MH-NSK-2026-8812';
+            const commodity = document.getElementById('commodity').value || 'Tomato';
+            const weight = parseFloat(document.getElementById('lot_weight').value || '50.0');
+            const valuation = parseFloat(document.getElementById('valuation_inr').value || '45000.0');
+            const loanAmount = parseFloat(document.getElementById('loan_amount').value || '33750.0');
+            const warehouseName = document.getElementById('warehouse_name').value || 'MSWC Scientific Warehouse, Ozar';
+            const warehouseReg = document.getElementById('warehouse_reg_no').value || 'WDRA-MH-NSK-0429';
+
+            const cleanId = farmerId.replace(/[^a-zA-Z0-9]/g, '');
+            const submissionId = 'WDRA-ENWR-' + cleanId + '-' + Math.round(loanAmount);
+
+            document.getElementById('submission_id').innerText = submissionId;
+            document.getElementById('slip_farmer_name').innerText = farmerName + ' (' + farmerId + ')';
+            document.getElementById('slip_lot').innerText = weight.toFixed(1) + ' Quintals ' + commodity;
+            document.getElementById('slip_warehouse').innerText = warehouseName + ' (' + warehouseReg + ')';
+            document.getElementById('slip_valuation').innerText = '₹' + valuation.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('sanctioned_amount').innerText = '₹' + loanAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+
+            const slip = document.getElementById('confirmation_slip');
+            slip.style.display = 'block';
+
+            window.lastSubmission = {
+                submission_id: submissionId,
+                status: 'SANCTIONED_AND_PLEDGED',
+                farmer_name: farmerName,
+                farmer_id: farmerId,
+                commodity: commodity,
+                quantity_quintals: weight,
+                valuation_inr: valuation,
+                loan_amount_inr: loanAmount,
+                warehouse_name: warehouseName,
+                warehouse_reg_no: warehouseReg,
+                timestamp: new Date().toISOString()
+            };
+
+            return window.lastSubmission;
+        }
+
+        // Live calculation on quantity or valuation change
+        document.getElementById('valuation_inr').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value) || 0;
+            const loan = Math.round(val * 0.75);
+            document.getElementById('loan_amount').value = loan;
+            document.getElementById('display_loan_val').innerText = '₹' + loan.toLocaleString('en-IN');
+            document.getElementById('submit_loan_btn').innerText = 'Approve & Disburse e-NWR Pledge Loan (₹' + loan.toLocaleString('en-IN') + ')';
+        });
+    </script>
+</body>
+</html>

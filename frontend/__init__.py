@@ -1,0 +1,3 @@
+"""
+KrishiArtha-MCP Frontend Package
+"""

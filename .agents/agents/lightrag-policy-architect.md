@@ -23,3 +23,4 @@ You must NOT edit files outside this working set.
 5. Unit Testing:
    - Provide unit tests in `tests/test_lightrag.py` verifying hybrid retrieval, deterministic fallback, statutory calculations, and schema compatibility.
    - Run `pytest tests/test_lightrag.py` and verify all tests pass.
+

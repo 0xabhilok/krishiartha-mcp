@@ -29,3 +29,4 @@ You must NOT edit files outside this working set.
 3. Unit Testing:
    - Provide unit tests in `tests/test_ui.py` testing Streamlit component functions, UI state management, and fallback execution.
    - Run `pytest tests/test_ui.py` and verify all tests pass.
+
