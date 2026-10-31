@@ -138,3 +138,4 @@ Open **[http://localhost:8501](http://localhost:8501)** in your browser.
 - `frontend/`: Streamlit dashboard, Bhashini multilingual speech triggers, 3-column matrix.
 - `data/offline_snapshots/`: Air-gapped deterministic stage snapshot for zero-fail live demos.
 - `docs/`: 7-Slide Pitch Deck, 5-Minute Video Walkthrough Script, and Submission Copy.
+

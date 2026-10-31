@@ -85,3 +85,4 @@ KrishiArtha-MCP replaces generic LLM guessing with a deterministic 4-node multi-
   - Connecting Farmer Producer Organizations (FPOs) directly to the Open Network for Digital Commerce (ONDC) logistics grid.
   - Integration with Agmarknet 2.0 national telemetry across 688 Indian mandis.
   - Direct banking integration via Jan Dhan-Aadhaar-Mobile (JAM) trinity for automated subvented loan disbursals in <60 seconds.
+

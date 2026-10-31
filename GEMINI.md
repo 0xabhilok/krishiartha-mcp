@@ -78,3 +78,4 @@ $$\text{NRP}_m = \left[ P_{50} \cdot (1 - L) \cdot (1 - \gamma_{\text{APMC}}) \r
 - **Post-Glut Rebound (10 Days):** Rebound price $P_{\text{rebound}} = ₹1,480/\text{qtl}$.
 - **Net Farmer Take-Home:** $50 \times ₹1,480 - ₹5,600 \text{ (storage \& interest)} = ₹68,400$.
 - **Net Arbitrage Gain over Panic Sale:** $+₹23,400 \text{ (+52.0\%)}$.
+

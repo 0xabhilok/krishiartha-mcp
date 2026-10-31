@@ -96,3 +96,4 @@
   > By bridging foundation time-series AI, physical logistics thermodynamics, and digital public infrastructure, KrishiArtha transforms agricultural vulnerability into rural economic resilience.
   >
   > Thank you!"
+

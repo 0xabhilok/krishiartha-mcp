@@ -1,16 +1,19 @@
 """
 KrishiArtha-MCP: Bhashini UI Mission Control Dashboard
-Main Streamlit Application
+Main Streamlit Application — World-Class Interactive Cockpit for FORGE'26
 
 Features:
-(a) Bhashini Multilingual Voice Input & 1-Click Stage Audio Triggers (Marathi, Hindi, Telugu, English).
-(b) 3-Column Financial Arbitrage Matrix:
-    - Option A: Local Panic Sale (₹45,000 Net @ ₹900/q)
-    - Option B: Surat Transit (Nominal ₹1,350/q eroded to ₹48,280 Net by 18.4% Q10 spoilage + ₹6,800 diesel)
-    - Option C: WDRA Cold Storage + 75% e-NWR Loan + Post-Rain Rebound = ₹68,400 Net (+₹23,400 / +52% gain).
-(c) Interactive LangGraph interrupt() Consent Card with 'Approve e-NWR Loan (होय / हाँ / Approve)'
-    button firing Command(resume=True).
-(d) Stage Controls Sidebar: OFFLINE_STAGE_SAFE_MODE toggle & 'What-If Rainfall Shock Slider' (+0mm to +100mm).
+1. Bhashini Multilingual Voice Input & 1-Click Stage Audio Triggers (Marathi, Hindi, Telugu, English).
+2. Live Open-Meteo Meteorological Radar Widget (Ambient Temp, Humidity, Rain Influx, Q10 factor).
+3. 3-Column Financial Arbitrage Matrix:
+   - Option A: Local Panic Sale (₹45,000 Net @ ₹900/q)
+   - Option B: Surat Transit Arbitrage (Nominal ₹1,350/q eroded to ₹48,280 Net by 18.4% Q10 decay + ₹6,800 diesel)
+   - Option C: WDRA Cold Storage + 75% e-NWR Loan + Post-Rain Rebound = ₹68,400 Net (+₹23,400 / +52% gain).
+4. Interactive 3D GIS PyDeck Spatial Arbitrage Route Map.
+5. Interactive Chronos-2 Foundation AI Quantile Fan Chart (Plotly P10, P50, P90 cone).
+6. Live Pan-India APMC Telemetry Search (Zero Mock Data across 8 crops & 7 states).
+7. LangGraph v1.2.18 Human-in-the-Loop Consent Gate & Official WDRA Digital Sanction Slip.
+8. Live Multi-Agent Execution Trace & StateGraph Inspector.
 """
 
 import os
@@ -27,12 +30,19 @@ import streamlit as st
 import pandas as pd
 from typing import Dict, Any, Optional
 
-# Import local frontend components
+# Import local frontend components & visualizers
 from frontend.onnx_bridge.translator import get_translator
 from frontend.arbitrage_engine import (
     compute_arbitrage_matrix,
     execute_langgraph_consent,
     load_offline_snapshot,
+)
+from frontend.map_visualizer import create_mandi_map
+from frontend.chart_visualizer import create_quantile_fan_chart
+from frontend.live_telemetry_tab import (
+    render_live_telemetry_section,
+    render_weather_radar_widget,
+    render_agent_trace_inspector,
 )
 
 # Page configuration
@@ -47,12 +57,15 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Metric Card Styling */
     .metric-card {
-        border-radius: 10px;
-        padding: 16px;
+        border-radius: 12px;
+        padding: 18px;
         margin-bottom: 12px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease;
+    }
+    .metric-card:hover {
+        transform: translateY(-2px);
     }
     .card-option-a {
         background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
@@ -75,36 +88,44 @@ st.markdown(
         margin-bottom: 6px;
     }
     .card-price-primary {
-        font-size: 1.85rem;
+        font-size: 1.95rem;
         font-weight: 800;
         margin: 4px 0;
     }
     .badge-recommended {
         background-color: #22543d;
         color: white;
-        padding: 3px 10px;
+        padding: 4px 12px;
         border-radius: 12px;
         font-size: 0.8rem;
-        font-weight: 600;
+        font-weight: 700;
         display: inline-block;
     }
     .badge-trap {
         background-color: #9b2c2c;
         color: white;
-        padding: 3px 10px;
+        padding: 4px 12px;
         border-radius: 12px;
         font-size: 0.8rem;
-        font-weight: 600;
+        font-weight: 700;
         display: inline-block;
     }
     .badge-warning {
         background-color: #c05621;
         color: white;
-        padding: 3px 10px;
+        padding: 4px 12px;
         border-radius: 12px;
         font-size: 0.8rem;
-        font-weight: 600;
+        font-weight: 700;
         display: inline-block;
+    }
+    .sanction-slip {
+        background: white;
+        border: 2px solid #276749;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 15px;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
     .interrupt-box {
         background-color: #ebf8ff;
@@ -112,13 +133,6 @@ st.markdown(
         border-radius: 12px;
         padding: 20px;
         margin: 15px 0;
-    }
-    .voice-box {
-        background-color: #f7fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 14px;
-        margin-bottom: 16px;
     }
     </style>
     """,
@@ -129,7 +143,7 @@ st.markdown(
 def init_session_state():
     """Initializes persistent Streamlit session state keys."""
     if "selected_language" not in st.session_state:
-        st.session_state.selected_language = "mr"  # Default to Marathi for Nashik Tomato demo
+        st.session_state.selected_language = "mr"
     if "rainfall_shock_mm" not in st.session_state:
         st.session_state.rainfall_shock_mm = 0.0
     if "offline_safe_mode" not in st.session_state:
@@ -161,11 +175,11 @@ def _(text: str) -> str:
 
 
 # -----------------------------------------------------------------------------
-# SIDEBAR: Stage Controls & Simulation
+# SIDEBAR: Stage Controls & Interactive Parameters
 # -----------------------------------------------------------------------------
 with st.sidebar:
     st.markdown("### ⚙️ Stage Controls")
-    st.caption("Judge & Audience Interactive Controls")
+    st.caption("Judge & Audience Interactive Simulation")
 
     # OFFLINE_STAGE_SAFE_MODE toggle
     safe_mode = st.toggle(
@@ -177,12 +191,12 @@ with st.sidebar:
     if safe_mode:
         st.success("🟢 100% Offline Safe Mode Active")
     else:
-        st.warning("🟡 Live Network MCP Ingestion Active")
+        st.warning("🟡 Live Network FastMCP Active")
 
     st.markdown("---")
 
     # Language Switcher
-    st.markdown("### 🌐 Language / भाषा / భాష")
+    st.markdown("### 🌐 Language / भाषा / भाष")
     lang_options = {
         "mr": "मराठी (Marathi)",
         "hi": "हिन्दी (Hindi)",
@@ -248,7 +262,7 @@ with header_col2:
         st.markdown(
             """<div style='background-color:#c6f6d5; border:1px solid #38a169; border-radius:8px; padding:8px 12px; text-align:center;'>
             <b style='color:#22543d;'>🟢 OFFLINE EDGE MODE</b><br>
-            <small style='color:#276749;'>WebAssembly ONNX Active</small>
+            <small style='color:#276749;'>Deterministic Air-Gapped Safe</small>
             </div>""",
             unsafe_allow_html=True,
         )
@@ -256,7 +270,7 @@ with header_col2:
         st.markdown(
             """<div style='background-color:#feebc8; border:1px solid #dd6b20; border-radius:8px; padding:8px 12px; text-align:center;'>
             <b style='color:#7b341e;'>🌐 CLOUD CONNECTED</b><br>
-            <small style='color:#7b341e;'>Live FastMCP Streaming</small>
+            <small style='color:#7b341e;'>Live FastMCP Streaming Active</small>
             </div>""",
             unsafe_allow_html=True,
         )
@@ -277,49 +291,45 @@ with voice_box:
     trig_col1, trig_col2, trig_col3, trig_col4 = st.columns(4)
 
     with trig_col1:
-        if st.button("▶ मराठी (Marathi) Stage Audio", width="stretch"):
+        if st.button("▶ मराठी (Marathi) Stage Audio", use_container_width=True):
             st.session_state.selected_language = "mr"
             st.session_state.farmer_query = translator.get_stage_prompt("mr")
             st.rerun()
 
     with trig_col2:
-        if st.button("▶ हिन्दी (Hindi) Stage Audio", width="stretch"):
+        if st.button("▶ हिन्दी (Hindi) Stage Audio", use_container_width=True):
             st.session_state.selected_language = "hi"
             st.session_state.farmer_query = translator.get_stage_prompt("hi")
             st.rerun()
 
     with trig_col3:
-        if st.button("▶ తెలుగు (Telugu) Stage Audio", width="stretch"):
+        if st.button("▶ తెలుగు (Telugu) Stage Audio", use_container_width=True):
             st.session_state.selected_language = "te"
             st.session_state.farmer_query = translator.get_stage_prompt("te")
             st.rerun()
 
     with trig_col4:
-        if st.button("▶ English Stage Audio", width="stretch"):
+        if st.button("▶ English Stage Audio", use_container_width=True):
             st.session_state.selected_language = "en"
             st.session_state.farmer_query = translator.get_stage_prompt("en")
             st.rerun()
 
-    # Audio recorder & live text query input
+    # Query Input & Speech Synthesis
     query_col1, query_col2 = st.columns([3, 1])
     with query_col1:
         st.session_state.farmer_query = st.text_input(
             "Transcribed Farmer Voice Query (Bhashini ASR / ULCA)",
             value=st.session_state.farmer_query,
-            help="Spoken query captured from farmer microphone or stage demo triggers.",
         )
     with query_col2:
-        # Check if browser audio input widget is available
         if hasattr(st, "audio_input"):
             audio_data = st.audio_input("Record Voice Query (ASR)", label_visibility="collapsed")
             if audio_data is not None:
                 st.caption("🎙️ Live Voice Chunk Received (Bhashini ASR Transcribing...)")
 
-    # Spoken Audio Playback
     advisory_script = translator.get_vernacular_advisory(st.session_state.selected_language)
     with st.expander(f"🔊 {_('Speak Advisory')} (Bhashini TTS Vernacular Audio Output)", expanded=False):
         st.info(f"**Synthesized Voice Response:**\n\n{advisory_script}")
-        # Audio playback simulation via Web Speech API or audio trigger
         st.markdown(
             f"""
             <button onclick="window.speechSynthesis.cancel(); var msg = new SpeechSynthesisUtterance('{advisory_script[:180].replace("'", "")}'); msg.lang='{st.session_state.selected_language}'; window.speechSynthesis.speak(msg);"
@@ -330,14 +340,18 @@ with voice_box:
             unsafe_allow_html=True,
         )
 
+# -----------------------------------------------------------------------------
+# SECTION 2: Live Weather Radar Widget
+# -----------------------------------------------------------------------------
+st.markdown("---")
+render_weather_radar_widget(rainfall_shock_mm=st.session_state.rainfall_shock_mm)
 
 # -----------------------------------------------------------------------------
-# SECTION 2: 3-Column Financial Arbitrage Matrix
+# SECTION 3: 3-Column Financial Arbitrage Matrix
 # -----------------------------------------------------------------------------
 st.markdown("---")
 st.markdown(f"### 📊 {_('3-Column Financial Arbitrage Matrix')}")
 
-# Compute live numbers based on rainfall shock slider and lot parameters
 matrix_data = compute_arbitrage_matrix(
     quantity_qtl=st.session_state.lot_quantity_qtl,
     rainfall_shock_mm=st.session_state.rainfall_shock_mm,
@@ -350,7 +364,6 @@ opt_c = matrix_data["option_c"]
 
 col_a, col_b, col_c = st.columns(3)
 
-# ----------------- COLUMN 1: OPTION A (LOCAL PANIC SALE) -----------------
 with col_a:
     st.markdown(
         f"""
@@ -372,7 +385,6 @@ with col_a:
         unsafe_allow_html=True,
     )
 
-# ----------------- COLUMN 2: OPTION B (SURAT TRANSIT ARBITRAGE) -----------------
 with col_b:
     st.markdown(
         f"""
@@ -394,7 +406,6 @@ with col_b:
         unsafe_allow_html=True,
     )
 
-# ----------------- COLUMN 3: OPTION C (KRISHIARTHA RECOMMENDED) -----------------
 with col_c:
     st.markdown(
         f"""
@@ -416,9 +427,48 @@ with col_c:
         unsafe_allow_html=True,
     )
 
+# -----------------------------------------------------------------------------
+# SECTION 4: Interactive 3D GIS PyDeck Spatial Arbitrage Map
+# -----------------------------------------------------------------------------
+st.markdown("---")
+st.markdown("### 🗺️ 3D GIS Spatial Arbitrage & Route Highway Simulator")
+st.caption("Visualizing Highway Distances, Q10 Thermal Rot Trajectories & Fiduciary Warehouse Hubs")
+
+snapshot_data = load_offline_snapshot()
+candidate_mandis_list = snapshot_data.get("candidate_mandis", [])
+warehouse_dict = snapshot_data.get("recommended_distress_solution", {}).get("warehouse", {})
+
+map_deck = create_mandi_map(
+    farm_lat=19.9975,
+    farm_lon=73.7898,
+    candidate_mandis=candidate_mandis_list,
+    warehouse_info=warehouse_dict,
+)
+st.pydeck_chart(map_deck)
+
+st.caption("🟢 Green Arc: Recommended WDRA Cold Storage (Ozar, 14.2 km) | 🟠 Amber Arcs: Surat/Mumbai False Arbitrage (High Q10 Transit Rot) | 🔴 Red: Pimpalgaon APMC Local Crash")
 
 # -----------------------------------------------------------------------------
-# SECTION 3: Interactive LangGraph interrupt() Consent Card
+# SECTION 5: Interactive Chronos-2 Foundation AI Quantile Fan Chart
+# -----------------------------------------------------------------------------
+st.markdown("---")
+st.markdown("### 📈 Chronos-2 Foundation AI Quantile Fan Chart")
+st.caption("Probabilistic 7-Day Time-Series Horizon Conditioned on Exogenous Weather Covariates")
+
+fan_chart_fig = create_quantile_fan_chart(
+    rainfall_shock_mm=st.session_state.rainfall_shock_mm,
+    cost_floor_per_qtl=st.session_state.cost_floor_per_qtl,
+)
+st.plotly_chart(fan_chart_fig, use_container_width=True)
+
+# -----------------------------------------------------------------------------
+# SECTION 6: Live Pan-India APMC Telemetry Explorer (Rule 4 Zero Mock Data)
+# -----------------------------------------------------------------------------
+st.markdown("---")
+render_live_telemetry_section()
+
+# -----------------------------------------------------------------------------
+# SECTION 7: LangGraph Statutory Consent Gate & Official Sanction Slip
 # -----------------------------------------------------------------------------
 st.markdown("---")
 st.markdown(f"### 🛡️ {_('LangGraph Statutory Consent Card')}")
@@ -455,7 +505,7 @@ with interrupt_container:
 
     with btn_col1:
         approve_btn_label = f"✅ {_('Approve e-NWR Loan (होय / हाँ / Approve)')}"
-        if st.button(approve_btn_label, type="primary", width="stretch"):
+        if st.button(approve_btn_label, type="primary", use_container_width=True):
             with st.spinner("Dispatching Command(resume=True) to LangGraph StateGraph..."):
                 consent_result = execute_langgraph_consent(
                     action="APPROVE",
@@ -470,7 +520,7 @@ with interrupt_container:
 
     with btn_col2:
         reject_btn_label = f"❌ {_('Reject & Force Local Sale')}"
-        if st.button(reject_btn_label, width="stretch"):
+        if st.button(reject_btn_label, use_container_width=True):
             consent_result = execute_langgraph_consent(
                 action="REJECT",
                 farmer_name=st.session_state.farmer_name,
@@ -483,71 +533,51 @@ with interrupt_container:
             st.session_state.approval_result = consent_result
 
     with btn_col3:
-        if st.button("🔄 Reset LangGraph State", width="stretch"):
+        if st.button("🔄 Reset LangGraph State", use_container_width=True):
             st.session_state.approval_status = "PENDING"
             st.session_state.approval_result = None
             st.rerun()
 
-    # Display consent execution status
+    # Display Official Sanction Slip Certificate
     if st.session_state.approval_status == "APPROVED_ENWR" and st.session_state.approval_result:
         res = st.session_state.approval_result
-        st.success(
-            f"🎉 **{_('Loan Approved Successfully!')}**\n\n"
-            f"- **LangGraph Resume:** `Command(resume=True)` successfully delivered.\n"
-            f"- **Submission ID:** `{res['submission_id']}`\n"
-            f"- **WDRA Gate Pass Issued:** `{res['gate_pass_code']}`\n"
-            f"- **Pledge Advance Disbursed:** ₹{res['pledge_loan_amount_inr']:,.2f} into registered KCC bank account.\n"
-            f"- **Timestamp:** {res['timestamp']}"
+        st.markdown(
+            f"""
+            <div class="sanction-slip">
+                <div style="text-align:center; border-bottom:2px solid #276749; padding-bottom:8px; margin-bottom:12px;">
+                    <h3 style="color:#276749; margin:0;">GOVERNMENT OF INDIA • WAREHOUSING DEVELOPMENT AND REGULATORY AUTHORITY</h3>
+                    <h4 style="color:#2d3748; margin:4px 0;">STATUTORY e-NWR LOAN PLEDGE SANCTION CERTIFICATE & GATE PASS</h4>
+                    <span style="background-color:#c6f6d5; color:#22543d; padding:2px 8px; border-radius:4px; font-weight:700;">OFFICIALLY SANCTIONED & DIGITALLY VERIFIED</span>
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size:0.92rem; color:#2d3748;">
+                    <div><b>Sanction Submission ID:</b> <code>{res['submission_id']}</code></div>
+                    <div><b>Gate Pass Entry Code:</b> <code style="color:#22543d; font-weight:700;">{res['gate_pass_code']}</code></div>
+                    <div><b>Beneficiary Farmer:</b> {res['farmer_name']} (ID: {res['farmer_id']})</div>
+                    <div><b>Accredited Warehouse:</b> {opt_c['warehouse_name']} ({res['warehouse_reg_no']})</div>
+                    <div><b>Pledged Commodity & Weight:</b> {res['commodity']} • {res['quantity_quintals']:.1f} Quintals</div>
+                    <div><b>Sanctioned 75% LTV Loan:</b> <b style="color:#22543d; font-size:1.15rem;">₹{res['pledge_loan_amount_inr']:,.2f}</b></div>
+                    <div><b>Subvented Interest Rate:</b> 4.0% p.a. (NABARD Circular 128 / KCC Subvention Active)</div>
+                    <div><b>Disbursal Mode:</b> Direct Bank Account Transfer (DBT) via Jan Dhan/KCC</div>
+                </div>
+                <div style="margin-top:12px; font-size:0.8rem; color:#718096; text-align:right;">
+                    Verified by LangGraph Orchestrator Node 4 (execute_enwr_browser) • Timestamp: {res['timestamp']}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
-    elif st.session_state.approval_status == "REJECTED_LOCAL_SALE":
-        st.warning(
-            "⚠️ **Distress Sale Forced:** Farmer opted out of WDRA e-NWR pledge loan. "
-            "Proceeding with local distress liquidation at ₹900/qtl."
-        )
-
 
 # -----------------------------------------------------------------------------
-# SECTION 4: Comparative Analytics & Chronos-2 Forecasting
+# SECTION 8: Live Multi-Agent Execution Trace & Terminal
 # -----------------------------------------------------------------------------
 st.markdown("---")
-st.markdown("### 📈 Visual Arbitrage Breakdown & Chronos-2 Trajectory")
-
-chart_col1, chart_col2 = st.columns([3, 2])
-
-with chart_col1:
-    st.write("**Financial Payout Comparison (INR)**")
-    df_chart = pd.DataFrame(
-        {
-            "Strategy": [
-                "Option A: Local Panic Sale",
-                "Option B: Surat Transit (Post Q10 Decay)",
-                "Option C: WDRA e-NWR Payout",
-            ],
-            "Net Payout (₹)": [
-                opt_a["total_net_payout_inr"],
-                opt_b["total_net_payout_inr"],
-                opt_c["net_take_home_inr"],
-            ],
-        }
-    )
-    st.bar_chart(df_chart.set_index("Strategy"), color="#38a169")
-
-with chart_col2:
-    st.write("**Chronos-2 Price Rebound Quantiles (₹/qtl)**")
-    # 7-day quantile projection
-    df_quantiles = pd.DataFrame(
-        {
-            "Horizon": ["Day 1 (Crash)", "Day 3 (Rain Peaks)", "Day 5 (Clearing)", "Day 7 (Rebound)", "Day 10 (Clear)"],
-            "P10 (Glut)": [620, 580, 750, 980, 1250],
-            "P50 (Expected)": [900, 850, 1050, 1340, 1480],
-            "P90 (Upside)": [950, 920, 1180, 1490, 1620],
-        }
-    )
-    st.dataframe(df_quantiles, width="stretch", hide_index=True)
-
+render_agent_trace_inspector(
+    approval_status=st.session_state.approval_status,
+    consent_result=st.session_state.approval_result,
+)
 
 # -----------------------------------------------------------------------------
-# SECTION 5: Statutory Citations
+# SECTION 9: Statutory Citations
 # -----------------------------------------------------------------------------
 with st.expander(f"📜 {_('Statutory Policy Citations')} (NABARD Circulars & WDRA Guidelines)", expanded=False):
     for citation in matrix_data.get("statutory_citations", []):
@@ -562,5 +592,5 @@ with st.expander(f"📜 {_('Statutory Policy Citations')} (NABARD Circulars & WD
 
 st.markdown("---")
 st.caption(
-    "KrishiArtha-MCP | Built for FORGE'26 GenAI Buildathon | High-Fidelity Bhashini & Neuro-Symbolic Architecture"
+    "KrishiArtha-MCP | Built for FORGE'26 GenAI Buildathon | Neuro-Symbolic Agricultural Decision Engine"
 )

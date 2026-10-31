@@ -52,3 +52,4 @@
 - [x] Streamlit dashboard running live at `http://localhost:8501`
 - [ ] Pitch Deck (5–7 slides covering Problem, Solution, Architecture, Economics, Future Scope)
 - [ ] 5-Minute Video Walkthrough Script
+
