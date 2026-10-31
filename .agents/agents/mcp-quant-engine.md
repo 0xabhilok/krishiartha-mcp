@@ -29,3 +29,4 @@ You must NOT edit files outside this working set.
 5. Unit Testing:
    - Provide comprehensive unit tests in `tests/test_quant.py` validating FastMCP tools, Chronos quantile outputs, $Q_{10}$ decay math, and offline fallback.
    - Run `pytest tests/test_quant.py` and verify all tests pass.
+

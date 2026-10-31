@@ -1,0 +1,50 @@
+[
+  {
+    "scheme_name": "Pledge Financing Scheme Against Negotiable Warehouse Receipts (e-NWR)",
+    "issuing_authority": "NABARD / Reserve Bank of India",
+    "circular_number": "Circular No. 128 / DoR-GBS-24 / 2021",
+    "statutory_clause": "Section 4(A): Pledge Financing against Electronic Negotiable Warehouse Receipts (e-NWR) to Small and Marginal Farmers",
+    "interest_rate_nominal_pct": 7.0,
+    "interest_subvention_pct": 3.0,
+    "effective_interest_rate_pct": 4.0,
+    "max_ltv_pct": 75.0,
+    "tenure_months": 6,
+    "summary": "Eligible small and marginal farmers can pledge e-NWR issued by WDRA-accredited warehouses to obtain immediate liquidity up to 75% LTV of current modal market valuation at 7% base interest with 3% prompt repayment subvention (effective 4% p.a.) for up to 6 months under the Kisan Credit Card (KCC) post-harvest framework."
+  },
+  {
+    "scheme_name": "WDRA Scientific Warehousing & e-NWR Electronic Pledge Framework",
+    "issuing_authority": "Warehousing Development and Regulatory Authority (WDRA)",
+    "circular_number": "Warehousing (Development and Regulation) Registration Rules 2017",
+    "statutory_clause": "Rule 14 & Rule 27: Electronic Negotiable Warehouse Receipt (e-NWR) Security, Fiduciary Guarantee and Assaying Standards",
+    "interest_rate_nominal_pct": 7.0,
+    "interest_subvention_pct": 3.0,
+    "effective_interest_rate_pct": 4.0,
+    "max_ltv_pct": 75.0,
+    "tenure_months": 12,
+    "summary": "Mandates that WDRA-accredited scientific cold storages and warehouses guarantee fiduciary protection against weight loss, spoilage, and quality deterioration. Pledged stock generates legally binding electronic e-NWRs on NeRL/CCRL repository platforms recognized by commercial and cooperative banks."
+  },
+  {
+    "scheme_name": "Agriculture Infrastructure Fund (AIF) Post-Harvest Management Scheme",
+    "issuing_authority": "Ministry of Agriculture & Farmers Welfare, GoI / NABARD",
+    "circular_number": "MoA&FW Guidelines F.No. 1-1/2020-AIF",
+    "statutory_clause": "Operational Guidelines Clause 3.2: 3% Interest Subvention & Credit Guarantee for Farm-Gate Post-Harvest Infrastructure",
+    "interest_rate_nominal_pct": 9.0,
+    "interest_subvention_pct": 3.0,
+    "effective_interest_rate_pct": 6.0,
+    "max_ltv_pct": 75.0,
+    "tenure_months": 84,
+    "summary": "Provides 3% annual interest subvention for medium-to-long term debt financing up to ₹2 Crore for investment in viable post-harvest management projects, cold stores, cold chain logistics, and primary processing units with CGTMSE credit guarantee coverage."
+  },
+  {
+    "scheme_name": "KCC Post-Harvest Produce Marketing / Warehouse Receipt Loan",
+    "issuing_authority": "Reserve Bank of India / NABARD",
+    "circular_number": "RBI/2018-19/137 FIDD.CO.FSD.BC.No.12/05.05.010/2018-19",
+    "statutory_clause": "Clause 2.1(b): Post-Harvest Liquidity Window against Warehouse Receipts for Individual Farmers",
+    "interest_rate_nominal_pct": 7.0,
+    "interest_subvention_pct": 3.0,
+    "effective_interest_rate_pct": 4.0,
+    "max_ltv_pct": 75.0,
+    "tenure_months": 6,
+    "summary": "Provides post-harvest distress mitigation loans up to ₹3,00,000 for a period of up to 6 months against pledged warehouse receipts/e-NWR at 7% base interest with 3% prompt repayment subvention (net 4% p.a.) to avert panic sales during harvest market gluts."
+  }
+]

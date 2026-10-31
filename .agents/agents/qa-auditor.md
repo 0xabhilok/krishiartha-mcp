@@ -17,3 +17,4 @@ You operate in `workspace: inherit`.
    - Rule 5 & 6: Real GenAI Core verification (Chronos-2 covariate forecasting, LangGraph human-in-the-loop state machine, LightRAG hybrid retrieval).
 3. Execute the full test suite across all modules (`pytest tests/`) under both `OFFLINE_STAGE_SAFE_MODE=true` and live mode.
 4. Report test coverage, latency benchmarks, and any security/secret vulnerabilities.
+

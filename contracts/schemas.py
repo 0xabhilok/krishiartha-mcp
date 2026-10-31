@@ -127,3 +127,4 @@ class KrishiArthaGraphStateDict(TypedDict):
 
     # Reducer accumulator for live tracing
     execution_trace: Annotated[List[Dict[str, Any]], operator.add]
+
