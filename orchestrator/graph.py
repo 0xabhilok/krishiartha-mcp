@@ -393,3 +393,11 @@ def build_krishi_artha_graph(checkpointer: Optional[Any] = None) -> Any:
 
 # Module-level default graph instance
 graph = build_krishi_artha_graph()
+
+
+def resume_graph(thread_id: str = "forge_stage_demo", resume_value: Any = True) -> Dict[str, Any]:
+    """
+    Convenience helper to resume a paused LangGraph thread with Command(resume=resume_value).
+    """
+    config = {"configurable": {"thread_id": thread_id}}
+    return graph.invoke(Command(resume=resume_value), config=config)
