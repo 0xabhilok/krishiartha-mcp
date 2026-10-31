@@ -1,0 +1,124 @@
+KrishiArtha-MCP (MandiPulse) is designed as a multi-agent, neuro-symbolic agricultural supply-chain and spatial arbitrage engine. The exhaustive, file-by-file, mathematical, and architectural master specification below is structured so you can copy-paste it directly into Antigravity (or your agentic IDE context/rules file) to build the complete system without ambiguity.1. Master System Context Block (Copy-Paste into .antigravity/rules.md or System Prompt)Markdown# PROJECT: KrishiArtha-MCP (MandiPulse) — Autonomous Covariate Mandi Arbitrage & Policy Execution Engine
+# TARGET EVENT: FORGE'26 (48-Hour GenAI Buildathon)
+
+## 1. CORE ARCHITECTURAL MANDATE
+You are building a production-grade, neuro-symbolic multi-agent system—NOT a generic chatbot wrapper.
+- **No LLM Math Hallucinations:** Never ask an LLM to guess future commodity prices, road distances, or spoilage percentages.
+- **Deterministic & Foundation Model Spine:**
+  1. Time-series forecasting MUST execute via `amazon/chronos-2` (or `autogluon/chronos-2-small` for CPU speed) using historical wholesale prices + 7-day Open-Meteo rainfall/temperature exogenous covariates.
+  2. Spatial-thermodynamic arbitrage MUST execute via deterministic Python physics/economics functions using OSRM highway distances, diesel freight formulas, Arrhenius/Q10 thermal-humidity transit decay, and APMC mandi fee deductions.
+  3. Policy & subsidy reasoning (NABARD e-NWR warehouse receipt loans, PM-FME cold storage grants) MUST execute via `HKUDS/LightRAG` (>= v1.3.9) in `mix` mode.
+  4. Orchestration MUST run on `langchain-ai/langgraph` (v1.2.18) `StateGraph` with `MemorySaver`/`PostgresSaver` checkpointers and an explicit `interrupt()` human-in-the-loop gate before generating statutory PDFs or dispatching trucks.
+  5. Data ingestion MUST run through standardized Model Context Protocol (`mcp`) tool servers wrapping `mandi-api.onrender.com` (keyless 5-state normalized API) and `api.data.gov.in` (OGD resource IDs `9ef84268-d588-465a-a308-a864a43d0070` and `35985678-0d79-46b4-9ed6-6f13308a1d24`).
+  6. Multilingual Accessibility MUST pair `Bhashini ULCA` (voice ASR/TTS across 22 scheduled Indian languages) with `NakliTechie/Anuvaad` (`IndicTrans2-200M` ONNX via `onnxruntime-web`) running 100% inside the browser WebAssembly runtime for offline zero-server resilience.
+2. Exact Monorepo Directory TreeInstruct Antigravity to scaffold this exact repository layout so Developer 1 (Backend/AI/MCP) and Developer 2 (Frontend/GIS/ONNX) never hit merge conflicts:Plaintextkrishi-artha-mcp/
+├── .env.example
+├── docker-compose.yml                  # PostgreSQL 16 (pgvector + Apache AGE) + FastAPI
+├── pyproject.toml                      # Managed via `uv` (Python 3.12+)
+├── backend/
+│   ├── main.py                         # FastAPI gateway + SSE streaming + interrupt resume endpoints
+│   ├── config.py                       # Env vars, API keys, APMC fee constants, crop Q10 constants
+│   ├── mcp_servers/
+│   │   ├── agmarknet_server.py         # FastMCP server for mandi-api + data.gov.in + SQLite/PG cache
+│   │   └── geo_weather_server.py       # FastMCP server for Open-Meteo hourly covariates + OSRM routing
+│   ├── engine/
+│   │   ├── chronos_forecaster.py       # Chronos-2 covariate tensor alignment & quantile extraction
+│   │   ├── spoilage_arbitrage.py       # Thermodynamic Q10 decay + diesel freight + Net Realization math
+│   │   ├── lightrag_policy.py          # LightRAG >=1.3.9 setup (mix mode) for NABARD e-NWR / PM-FME
+│   │   └── pdf_generator.py            # PyMuPDF statutory e-NWR pledge & FPO transport slip generator
+│   ├── agent/
+│   │   ├── state.py                    # TypedDict StateGraph schema & Annotated reducers
+│   │   └── graph.py                    # 5-node LangGraph workflow + conditional crash edge + interrupt()
+│   └── data/
+│       ├── seed_mandis.json            # Coordinates, state, district, APMC fee % for 50 key mandis
+│       ├── fallback_history.parquet    # Pre-cached 90-day mandi series for 100% offline/demo safety
+│       └── policies/                   # Curated PDFs: NABARD e-NWR, PM-FME, WDRA warehouse guidelines
+└── frontend/
+    ├── package.json                    # Next.js 15, React 19, Deck.gl, MapLibre, Recharts, onnxruntime-web
+    ├── public/
+    │   └── models/indictrans2-onnx/    # Cached Anuvaad IndicTrans2-200M ONNX weights for Wi-Fi-Off demo
+    └── src/
+        ├── app/page.tsx                # Main Split-Screen Cockpit (GIS Map + Quantile Fan + Agent Trace)
+        ├── components/
+        │   ├── MandiArbitrageMap.tsx   # Deck.gl ArcLayer + ScatterplotLayer (Green=Profit, Red=Glut)
+        │   ├── ChronosFanChart.tsx     # 10th / 50th / 90th percentile forecast + Weather Shock Slider
+        │   ├── ArbitrageTable.tsx      # Gross Price vs. Diesel vs. Spoilage Loss vs. Net Profit/Quintal
+        │   ├── AgentTraceSidebar.tsx   # Live SSE stream of LangGraph nodes + MCP JSON-RPC calls
+        │   ├── InterruptModal.tsx      # Human-in-the-Loop approval gate for e-NWR / Truck Dispatch
+        │   └── VoiceAndLanguageBar.tsx # Bhashini ASR mic + Anuvaad Offline ONNX language switcher
+        └── lib/
+            ├── anuvaad-onnx.ts         # Browser-native WebAssembly IndicProcessor + ONNX inference
+            └── sse-client.ts           # EventSource client connecting to FastAPI LangGraph stream
+3. Data Contracts, External APIs & Schema NormalizationAntigravity needs the exact request parameters, JSON response structures, and edge-case traps for every external data source:A. Agmarknet & Mandi Price APIs (Dual-Tier Ingestion Strategy)Tier 1 — Keyless Normalized 5-State Developer API (Fastest, Zero Auth):Base URL: [https://mandi-api.onrender.com/v1](https://mandi-api.onrender.com/v1)Endpoints:GET /v1/prices?state=Maharashtra&commodity=OnionGET /v1/prices/history?state=Maharashtra&commodity=Onion&market=Lasalgaon&days=60GET /v1/states, GET /v1/commodities, GET /v1/marketsCoverage: Maharashtra, Uttar Pradesh, Punjab, Madhya Pradesh, Karnataka (synced daily at 8:30 PM IST from data.gov.in).Tier 2 — Official Government of India OGD REST API (Pan-India Coverage, Including Assam/NE):Daily Prices URL: [https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=](https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=){DATA_GOV_API_KEY}&format=json&limit=100&filters[state.keyword]={STATE}&filters[commodity]={COMMODITY}Historical Archive URL: [https://api.data.gov.in/resource/35985678-0d79-46b4-9ed6-6f13308a1d24?api-key=](https://api.data.gov.in/resource/35985678-0d79-46b4-9ed6-6f13308a1d24?api-key=){DATA_GOV_API_KEY}&format=json&limit=500Normalized Output Schema (What agmarknet_server.py MUST return):JSON{
+  "state": "Maharashtra",
+  "district": "Nashik",
+  "market": "Lasalgaon",
+  "lat": 20.1424,
+  "lon": 74.2398,
+  "commodity": "Onion",
+  "variety": "Red",
+  "arrival_date": "2026-10-30",
+  "is_stale": false,
+  "staleness_hours": 14,
+  "min_price_inr_per_quintal": 1800.0,
+  "max_price_inr_per_quintal": 2450.0,
+  "modal_price_inr_per_quintal": 2150.0
+}
+Critical Edge-Case Rule for Antigravity: On data.gov.in, an HTTP 200 response frequently contains records from 2–4 days ago if a mandi did not report today. Your ingestion parser must parse arrival_date (DD/MM/YYYY or YYYY-MM-DD), compare it against the current date, set is_stale = (today - arrival_date).days > 2, and forward-fill missing daily timestamps using linear interpolation before passing the array to Chronos-2.B. Open-Meteo Exogenous Weather Covariate API (Zero Key Required)Endpoint:[https://api.open-meteo.com/v1/forecast?latitude=](https://api.open-meteo.com/v1/forecast?latitude=){LAT}&longitude={LON}&daily=temperature_2m_max,precipitation_sum,relative_humidity_2m_mean&past_days=60&forecast_days=7&timezone=Asia%2FKolkataWhy past_days=60 and forecast_days=7: Chronos-2 requires historical covariates aligned with the historical target series ($t_{-60} \dots t_0$) plus known future covariates for the prediction horizon ($t_{+1} \dots t_{+7}$).C. OSRM Highway Routing API (Zero Key Required)Endpoint:[https://router.project-osrm.org/route/v1/driving/](https://router.project-osrm.org/route/v1/driving/){FARM_LON},{FARM_LAT};{MANDI_LON},{MANDI_LAT}?overview=full&geometries=geojsonExtracted Fields:distance_km = response["routes"][0]["distance"] / 1000.0duration_hours = response["routes"][0]["duration"] / 3600.0route_geojson = response["routes"][0]["geometry"] (passed directly to Deck.gl PathLayer on the frontend).4. Exact Mathematical & Scientific Formulas (engine/ Module Specs)Give these exact equations to Antigravity so the backend computes rigorous, defensible numbers during judge Q&A.Module 1: Covariate Time-Series Forecasting (engine/chronos_forecaster.py)Chronos-2 (amazon/chronos-2 at 120M parameters or autogluon/chronos-2-small at 28M parameters) uses a dual-attention mechanism alternating between Time Attention (across patches within a series) and Group Attention (across target price and weather covariates at the same patch index).   Input Tensors per Mandi $m$:Historical Target Price Vector: $\mathbf{y}_{1:T}^{(m)} \in \mathbb{R}^T$ where $T = 60\text{ days}$ (daily modal price in ₹/Quintal).Exogenous Weather Covariates: $\mathbf{X}_{1:T+H}^{(m)} \in \mathbb{R}^{(T+H) \times 3}$ where $H = 7\text{ days}$ (columns: precipitation_sum in mm, temperature_2m_max in °C, and a binary unseasonal_rain_shock flag).What-If Weather Shock Simulator Hook:
+When a judge drags the "Rainfall Shock Slider" on the UI by $+\Delta R\text{ mm}$ (e.g., $+45\text{ mm}$ unseasonal cloudburst at the local mandi), the backend modifies future covariate slice $\mathbf{X}_{T+1:T+H}^{(\text{local})}$ in memory and re-runs Chronos-2 inference (which takes $<400\text{ ms}$ on CPU/T4 GPU).Output Quantiles:
+For each day $h \in \{1 \dots 7\}$, extract the 10th percentile ($P_{10, h}^{(m)}$, downside panic-glut risk), 50th percentile ($P_{50, h}^{(m)}$, expected modal clearing price), and 90th percentile ($P_{90, h}^{(m)}$, upside shortage price).Module 2: Thermodynamic Transit Spoilage & Spatial Arbitrage (engine/spoilage_arbitrage.py)Standard apps assume 0% crop loss during transport. In reality, transporting perishable crops (Onion, Tomato, Potato, Green Chilli, Banana) in non-refrigerated open tarp trucks under high ambient heat and humidity causes rapid respiration and microbial decay.Q10 Biological Spoilage Decay Formula:
+Let $T_{\text{amb}}$ be the average ambient highway temperature (°C) along the route, $RH$ be the relative humidity (%), and $t_{\text{transit}}$ be total transit + mandi queuing time ($t_{\text{transit}} = \text{duration\_hours} + 4.0\text{ hr queuing buffer}$).
+The crop-specific spoilage rate constant $k(T_{\text{amb}}, RH)$ is modeled using the Q10 temperature coefficient ($Q_{10} \approx 2.2$ for perishables):$$k(T_{\text{amb}}, RH) = k_{\text{base}} \cdot \left(Q_{10}\right)^{\frac{T_{\text{amb}} - 20.0}{10.0}} \cdot \left(1 + \alpha_{\text{hum}} \cdot \max\left(0, \frac{RH - 70}{100}\right)\right)$$where $k_{\text{base}}$ is the baseline hourly loss rate at $20^\circ\text{C}$ (0.0018 for Onion, 0.0065 for Tomato, 0.0050 for Leafy Greens) and $\alpha_{\text{hum}} = 1.5$ (moisture rot multiplier).
+The fraction of marketable weight lost in transit is:$$L_{\text{spoilage}}^{(m)} = 1 - \exp\left(-k(T_{\text{amb}}, RH) \cdot t_{\text{transit}}^{(m)}\right)$$Freight & Handling Cost Formula:
+For a farmer or FPO shipping quantity $Q$ (in quintals, e.g., $Q = 50\text{ quintals} = 5\text{ metric tonnes}$ on a light commercial vehicle):$$C_{\text{transport}}^{(m)} = 2 \cdot d_{\text{km}}^{(m)} \cdot r_{\text{diesel\_per\_km}} + Q \cdot C_{\text{loading\_per\_qtl}}$$where $d_{\text{km}}^{(m)}$ is the OSRM highway distance, $r_{\text{diesel\_per\_km}} = ₹22/\text{km}$ (round-trip mini-truck freight equivalent), and $C_{\text{loading\_per\_qtl}} = ₹35/\text{quintal}$ (hamali / loading-unloading fee).APMC Market Fee & Commission Deduction:$$C_{\text{mandi\_fee}}^{(m)} = \gamma_{\text{APMC}}^{(m)} \cdot P_{50, h^*}^{(m)}$$where $\gamma_{\text{APMC}}^{(m)}$ is the state APMC market fee + commission fraction (e.g., 0.01 to 0.025).Net Realizable Profit per Quintal ($\text{NRP}_m$):$$\text{NRP}_m = \left[ P_{50, h^*}^{(m)} \cdot \left(1 - L_{\text{spoilage}}^{(m)}\right) \cdot \left(1 - \gamma_{\text{APMC}}^{(m)}\right) \right] - \frac{C_{\text{transport}}^{(m)}}{Q}$$Risk-Adjusted Downside Floor ($\text{NRP}_{m, 10}$): Computed identically using the 10th percentile forecast $P_{10, h^*}^{(m)}$ so the farmer sees worst-case guaranteed take-home cash.Module 3: Distress Crash Detection & LightRAG Policy Trigger (engine/lightrag_policy.py)Define the crop's Minimum Viable Threshold $P_{\text{floor}}$ (either the government MSP/MIS benchmark or the farmer's cost of production + $15\%$).Condition A (Spatial Arbitrage Wins): If $\max_m (\text{NRP}_m) \ge P_{\text{floor}}$, recommend the top-ranked mandi $m^* = \arg\max_m (\text{NRP}_m)$ and calculate exact Arbitrage Gain:$$\Delta \text{Gain} = Q \cdot \left(\text{NRP}_{m^*} - \text{NRP}_{\text{local}}\right)$$Condition B (Regional Crash — Trigger LightRAG Warehouse Subsidy Node): If $\max_m (\text{NRP}_m) < P_{\text{floor}}$ (meaning every reachable mandi within 250 km is crashing due to a macro glut), the LangGraph conditional edge routes automatically to LightRAGPolicyAdvisorNode.LightRAG ($\ge\text{v1.3.9}$, mode="mix") queries the indexed NABARD / WDRA policy graph to calculate an Electronic Negotiable Warehouse Receipt (e-NWR) Pledge Loan:Pledge Advance: $75\%$ of current valuation at a WDRA-accredited scientific cold storage.Interest Rate: $7.0\%$ p.a. minus $3.0\%$ Interest Subvention under Kisan Credit Card (KCC) post-harvest extension = $4.0\%$ effective annual interest (just $0.33\%$ per month) while waiting 30 days for the mandi glut to clear.5. LangGraph State Machine & MCP Wiring (agent/state.py & agent/graph.py)Provide this exact state schema and node topology to Antigravity:Python# backend/agent/state.py
+from typing import TypedDict, Annotated, List, Dict, Any, Optional
+import operator
+
+class MandiCandidate(TypedDict):
+    market_name: str
+    district: str
+    lat: float
+    lon: float
+    distance_km: float
+    transit_hours: float
+    current_modal_price: float
+    forecast_p10: float
+    forecast_p50: float
+    forecast_p90: float
+    spoilage_loss_pct: float
+    transport_cost_per_qtl: float
+    mandi_fee_per_qtl: float
+    net_realizable_price_per_qtl: float
+    total_net_payout_inr: float
+    route_geojson: Dict[str, Any]
+
+class KrishiArthaState(TypedDict):
+    # User Intake Slots
+    farmer_name: str
+    language_code: str                  # e.g., "mr_IN", "hi_IN", "as_IN", "te_IN"
+    raw_query: str
+    commodity: str                      # e.g., "Onion", "Tomato", "Potato"
+    quantity_quintals: float            # e.g., 50.0
+    farm_lat: float
+    farm_lon: float
+    farm_district: str
+    weather_shock_Delta_mm: float       # Controlled by UI "What-If Rainfall Slider" (default 0.0)
+
+    # Telemetry & Execution Trace
+    execution_trace: Annotated[List[Dict[str, Any]], operator.add]
+    mandi_candidates: List[MandiCandidate]
+    optimal_mandi: Optional[MandiCandidate]
+    local_mandi: Optional[MandiCandidate]
+    net_arbitrage_gain_inr: float
+
+    # Crash & Policy Graph State
+    is_regional_crash: bool
+    cost_floor_per_qtl: float
+    lightrag_policy_recommendation: Optional[Dict[str, Any]]
+
+    # Human-in-the-Loop & Final Output
+    human_approval_status: Optional[str] # "PENDING", "APPROVED_DISPATCH", "APPROVED_ENWR"
+    generated_pdf_url: Optional[str]
+    vernacular_advisory_text: str
+The 6-Node LangGraph Execution Topology (backend/agent/graph.py)intake_slot_node: Parses text or Bhashini ASR transcript into structured slots (commodity, quantity_quintals, farm_lat, farm_lon, language_code).mcp_telemetry_node: Invokes agmarknet_server.py and geo_weather_server.py over MCP to retrieve the 10 nearest mandis within a 250 km radius, their 60-day historical price series, OSRM highway geometries, and 7-day Open-Meteo weather forecasts.chronos2_forecast_node: Runs Chronos-2 across all 10 candidate mandis conditioned on the weather covariates (plus weather_shock_Delta_mm if the slider is active), outputting 7-day $P_{10}, P_{50}, P_{90}$ quantiles.spoilage_arbitrage_node: Executes the Q10 spoilage and OSRM diesel equations, sorts mandi_candidates descending by net_realizable_price_per_qtl, computes net_arbitrage_gain_inr over the local mandi, and sets is_regional_crash = (best_nrp < cost_floor_per_qtl).Conditional Edge (route_after_arbitrage):If is_regional_crash == True $\rightarrow$ transitions to lightrag_policy_node (queries HKUDS/LightRAG in mix mode for NABARD e-NWR warehouse loan calculation + cold storage directory) $\rightarrow$ transitions to human_interrupt_node.If is_regional_crash == False $\rightarrow$ transitions directly to human_interrupt_node.human_interrupt_node & pdf_execution_node:
+Calls interrupt({...}) from langgraph.types to pause graph execution and send the recommendation card to the Next.js frontend. Once the user or FPO operator clicks "Approve Truck Dispatch & Generate Gate Pass" or "Approve NABARD e-NWR Warehouse Pledge", FastAPI invokes graph.invoke(Command(resume="APPROVED"), config=thread_config) to generate the statutory PDF via PyMuPDF.6. Browser-Native Offline ONNX Translation (frontend/src/lib/anuvaad-onnx.ts)To guarantee full marks on FORGE'26's 30% Live Demonstration & Robustness rubric, instruct Antigravity to wire the dual-layer language architecture:Online Voice Layer: Bhashini ULCA REST API handles spoken audio input (ASR) and spoken audio playback (TTS).Offline Zero-Server Text Layer (NakliTechie/Anuvaad):Uses onnxruntime-web to load the distilled 200M IndicTrans2 ONNX model (encoder_model.onnx + decoder_model_merged.onnx) cached in the browser's Origin Private File System (OPFS) / Cache Storage.Runs the pure JavaScript port of IndicProcessor:preprocess(text, src_lang="eng_Latn", tgt_lang) normalizes punctuation and prepends language tags.Greedy token decoding runs via WebAssembly (wasm execution provider).postprocess(tokens, tgt_lang) converts unified Devanagari script tokens back into the target native script (mar_Deva, hin_Deva, asm_Beng, tam_Taml, tel_Telu, kan_Knda, ben_Beng, guj_Gujr, mal_Mlym, pan_Guru, ory_Orya) using deterministic Unicode code-point offsets.Include a prominent "Offline Edge Mode (WebAssembly ONNX)" badge in the top navbar so judges can watch translation happen with zero network calls in Chrome DevTools.7. Sequential Antigravity Prompting Strategy (How to Build It in 4 Phases)Instead of dumping everything into a single giant prompt and risking token truncation, feed these 4 sequential prompts into Antigravity:Phase 1 Prompt (Data & MCP Layer):"Scaffold the backend/mcp_servers/ directory. Implement agmarknet_server.py using FastMCP (mcp SDK) with two tools: get_live_mandi_prices and get_historical_mandi_series. Connect them first to [https://mandi-api.onrender.com/v1/prices](https://mandi-api.onrender.com/v1/prices) and /v1/prices/history, with fallback to api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070 and local seed_mandis.json. Enforce arrival_date staleness checking and linear forward-filling of missing dates. Then implement geo_weather_server.py wrapping Open-Meteo (past_days=60, forecast_days=7) and OSRM (router.project-osrm.org). Write a CLI test script to verify all 4 tools return clean JSON."Phase 2 Prompt (Chronos-2 + Thermodynamic Arbitrage Engine):"Implement backend/engine/chronos_forecaster.py using chronos-forecasting (autogluon/chronos-2-small by default, configurable to amazon/chronos-2). Align the 60-day historical mandi price series with Open-Meteo precipitation and max temperature covariates, support an interactive weather_shock_Delta_mm parameter on the 7-day forecast horizon, and return 10th, 50th, and 90th percentile arrays. Next, implement backend/engine/spoilage_arbitrage.py using the Q10 biological decay equation, OSRM highway distance diesel freight cost, and APMC fee deductions to rank mandis by Net Realizable Profit per Quintal."Phase 3 Prompt (LightRAG Policy Graph + LangGraph Orchestrator + FastAPI):"Implement backend/engine/lightrag_policy.py using lightrag-hku>=1.3.9 in mix mode to index NABARD e-NWR warehouse receipt subsidy rules and cold-storage directories. Wire the 6-node StateGraph in backend/agent/graph.py with MemorySaver checkpointer, conditional routing on is_regional_crash, and interrupt() before pdf_execution_node. Expose /api/analyze/stream (SSE) and /api/analyze/resume in backend/main.py."Phase 4 Prompt (Next.js 15 Cockpit + Deck.gl + Weather Shock Slider + Anuvaad ONNX):"Build the Next.js 15 frontend cockpit in frontend/. Create a split-screen layout featuring: (1) MandiArbitrageMap.tsx using Deck.gl ArcLayer and PathLayer to draw OSRM highway routes from the farm pin to candidate mandis color-coded by Net Profit; (2) ChronosFanChart.tsx rendering the 10th/50th/90th quantile forecast cone alongside an interactive 'What-If Rainfall Shock Slider' (+0mm to +100mm) and 'Simulate Regional Glut Crash' toggle; (3) ArbitrageTable.tsx breaking down Gross Price, Diesel Cost, Q10 Spoilage %, and Net Profit; (4) AgentTraceSidebar.tsx and InterruptModal.tsx for 1-click e-NWR/Dispatch PDF generation; and (5) anuvaad-onnx.ts for offline browser translation."

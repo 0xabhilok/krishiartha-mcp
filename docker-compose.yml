@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: apache/age:PG16_v0.5.0
+    container_name: krishiartha-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-krishiartha}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-forge2026secure}
+      POSTGRES_DB: ${POSTGRES_DB:-krishiartha_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/init_extensions.sql:/docker-entrypoint-initdb.d/init_extensions.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U krishiartha -d krishiartha_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: krishiartha-backend
+    restart: always
+    environment:
+      - OFFLINE_STAGE_SAFE_MODE=${OFFLINE_STAGE_SAFE_MODE:-true}
+      - DATABASE_URL=postgresql://krishiartha:forge2026secure@postgres:5432/krishiartha_db
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: krishiartha-streamlit
+    restart: always
+    environment:
+      - OFFLINE_STAGE_SAFE_MODE=${OFFLINE_STAGE_SAFE_MODE:-true}
+      - BACKEND_API_URL=http://backend:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

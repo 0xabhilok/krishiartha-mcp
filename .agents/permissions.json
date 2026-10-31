@@ -1,0 +1,17 @@
+{
+  "allow": [
+    "pytest *",
+    "python -m pytest *",
+    "python -m py_compile *",
+    "ruff check *",
+    "git status",
+    "git diff *"
+  ],
+  "ask": [
+    "git merge *",
+    "git push *",
+    "pip install *",
+    "docker compose *",
+    "rm -rf *"
+  ]
+}
