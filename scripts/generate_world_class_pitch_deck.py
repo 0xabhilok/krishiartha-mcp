@@ -126,18 +126,36 @@ s1 = prs.slides.add_slide(blank_layout)
 create_background(s1)
 apply_morph_transition(s1)
 
-# Left Side: Vision, Title, Team & Stats Bento
-cat_box = s1.shapes.add_textbox(Inches(0.8), Inches(0.7), Inches(7.0), Inches(0.35))
+# Category Tag
+cat_box = s1.shapes.add_textbox(Inches(0.8), Inches(0.48), Inches(6.8), Inches(0.32))
 tf = cat_box.text_frame
 tf.word_wrap = True
+tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
 tf.paragraphs[0].text = "FORGE'26 HACKATHON BUILD • THEME B: CLIMATE & SUPPLY RESILIENCE"
-tf.paragraphs[0].font.size = Pt(11)
+tf.paragraphs[0].font.size = Pt(10.5)
 tf.paragraphs[0].font.bold = True
 tf.paragraphs[0].font.color.rgb = EMERALD
 
-title_box = s1.shapes.add_textbox(Inches(0.8), Inches(1.05), Inches(7.0), Inches(1.3))
+# Prominent Live Prototype Badge
+badge_bg = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(0.85), Inches(5.6), Inches(0.36))
+badge_bg.fill.solid()
+badge_bg.fill.fore_color.rgb = RGBColor(6, 78, 59)  # Deep Emerald
+badge_bg.line.color.rgb = EMERALD
+badge_bg.line.width = Pt(1.5)
+tb_badge = s1.shapes.add_textbox(Inches(0.9), Inches(0.88), Inches(5.4), Inches(0.3))
+tf_b = tb_badge.text_frame
+tf_b.margin_left = tf_b.margin_right = tf_b.margin_top = tf_b.margin_bottom = 0
+p_b = tf_b.paragraphs[0]
+p_b.text = "● 100% Live Prototype Active on Streamlit Community Cloud"
+p_b.font.size = Pt(10)
+p_b.font.bold = True
+p_b.font.color.rgb = RGBColor(167, 243, 208)  # Emerald 200
+
+# Title & Crisp 8-Word YC One-Liner Subtitle
+title_box = s1.shapes.add_textbox(Inches(0.8), Inches(1.3), Inches(6.8), Inches(1.05))
 tf = title_box.text_frame
 tf.word_wrap = True
+tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
 p = tf.paragraphs[0]
 p.text = "KrishiArtha-MCP"
 p.font.size = Pt(36)
@@ -145,36 +163,60 @@ p.font.bold = True
 p.font.color.rgb = TEXT_WHITE
 
 p_sub = tf.add_paragraph()
-p_sub.text = "(MandiPulse) • Autonomous Covariate Mandi Arbitrage, Spoilage Physics & Statutory Distress-Credit Engine"
-p_sub.font.size = Pt(13.5)
+p_sub.text = "Autonomous Climate Mandi Arbitrage & Statutory Distress-Credit Engine"
+p_sub.font.size = Pt(13)
+p_sub.font.bold = True
 p_sub.font.color.rgb = SKY_BLUE
 p_sub.space_before = Pt(4)
 
-team_box = s1.shapes.add_textbox(Inches(0.8), Inches(2.45), Inches(7.0), Inches(0.4))
+# Team Box
+team_box = s1.shapes.add_textbox(Inches(0.8), Inches(2.42), Inches(6.8), Inches(0.35))
 tf = team_box.text_frame
 tf.word_wrap = True
+tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
 p_team = tf.paragraphs[0]
 p_team.text = "Team INFINITE LOOP (IIIT Guwahati) • Abhilok Reddy Bellamkonda & Sai Chandra"
-p_team.font.size = Pt(11.5)
+p_team.font.size = Pt(11)
 p_team.font.bold = True
 p_team.font.color.rgb = TEXT_MUTED
 
-mission_box = s1.shapes.add_textbox(Inches(0.8), Inches(2.85), Inches(6.8), Inches(1.3))
-tf = mission_box.text_frame
-tf.word_wrap = True
-p_m = tf.paragraphs[0]
-p_m.text = "Eliminating India's ₹40,000+ Crore annual post-harvest wealth destruction by fusing zero-shot foundation forecasting (amazon/chronos-2), Arrhenius Q10 transit physics, and statutory NABARD/WDRA pledge financing into a deterministic, human-governed agentic workflow."
-p_m.font.size = Pt(12)
-p_m.font.color.rgb = TEXT_SUB
+# Two Bold Value Bullets Replacing Dense Text Block
+val_box = s1.shapes.add_textbox(Inches(0.8), Inches(2.82), Inches(6.8), Inches(1.4))
+tf_v = val_box.text_frame
+tf_v.word_wrap = True
+tf_v.margin_left = tf_v.margin_right = tf_v.margin_top = tf_v.margin_bottom = 0
 
-# 4 Bento Stat Cards
+pv1 = tf_v.paragraphs[0]
+pv1.space_after = Pt(8)
+r1_lead = pv1.add_run()
+r1_lead.text = "• The Crisis: "
+r1_lead.font.bold = True
+r1_lead.font.size = Pt(11.5)
+r1_lead.font.color.rgb = AMBER
+r1_text = pv1.add_run()
+r1_text.text = "Halting ₹40,000+ Cr annual post-harvest distress sales triggered by unseasonal weather gluts."
+r1_text.font.size = Pt(11.5)
+r1_text.font.color.rgb = TEXT_SUB
+
+pv2 = tf_v.add_paragraph()
+r2_lead = pv2.add_run()
+r2_lead.text = "• The Breakthrough: "
+r2_lead.font.bold = True
+r2_lead.font.size = Pt(11.5)
+r2_lead.font.color.rgb = EMERALD
+r2_text = pv2.add_run()
+r2_text.text = "Fusing amazon/chronos-2 foundation AI, Arrhenius transit thermodynamics, and statutory NABARD e-NWR pledge liquidity."
+r2_text.font.size = Pt(11.5)
+r2_text.font.color.rgb = TEXT_SUB
+
+# 4 Bento Stat Cards with Micro-Category Tags
 bento_stats = [
-    ("₹40,000+ Cr", "Annual Post-Harvest Loss Targeted", AMBER),
-    ("+52.0%", "Farmer Net Income Surge (Nashik 50qtl)", EMERALD),
-    ("1.21s", "Playwright WDRA Sanction SLA (<4.0s)", SKY_BLUE),
-    ("70/70", "Pytest Suite & AgentShield Grade A", PURPLE)
+    ("[CRISIS TARGET]", "₹40,000+ Cr", "Annual Post-Harvest Loss Targeted", AMBER),
+    ("[VALIDATED GAIN]", "+52.0%", "Farmer Net Income Surge (Nashik 50qtl)", EMERALD),
+    ("[1.21s SLA]", "1.21s", "Playwright WDRA Auto-Filing (<4.0s SLA)", SKY_BLUE),
+    ("[70/70 TESTS]", "70/70", "Pytest Suite & AgentShield Grade A", PURPLE)
 ]
-for idx, (stat, label, col) in enumerate(bento_stats):
+for idx, (tag, stat, label, col) in enumerate(bento_stats):
     b_left = Inches(0.8 + idx * 1.7)
     b_card = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, b_left, Inches(4.35), Inches(1.58), Inches(2.45))
     b_card.fill.solid()
@@ -182,33 +224,44 @@ for idx, (stat, label, col) in enumerate(bento_stats):
     b_card.line.color.rgb = CARD_BORDER
     b_card.line.width = Pt(1.2)
 
-    tb_stat = s1.shapes.add_textbox(b_left + Inches(0.12), Inches(4.5), Inches(1.34), Inches(2.1))
+    tb_stat = s1.shapes.add_textbox(b_left + Inches(0.1), Inches(4.45), Inches(1.38), Inches(2.25))
     tf_s = tb_stat.text_frame
     tf_s.word_wrap = True
-    p_val = tf_s.paragraphs[0]
+    tf_s.margin_left = tf_s.margin_right = tf_s.margin_top = tf_s.margin_bottom = 0
+
+    p_tag = tf_s.paragraphs[0]
+    p_tag.text = tag
+    p_tag.font.size = Pt(8)
+    p_tag.font.bold = True
+    p_tag.font.color.rgb = col
+    p_tag.space_after = Pt(4)
+
+    p_val = tf_s.add_paragraph()
     p_val.text = stat
-    p_val.font.size = Pt(18)
+    p_val.font.size = Pt(17)
     p_val.font.bold = True
     p_val.font.color.rgb = col
-    p_val.space_after = Pt(8)
+    p_val.space_after = Pt(6)
 
     p_lbl = tf_s.add_paragraph()
     p_lbl.text = label
-    p_lbl.font.size = Pt(10)
+    p_lbl.font.size = Pt(9.5)
     p_lbl.font.color.rgb = TEXT_MUTED
 
 # Right Side: 3D Photorealistic Agritech Hero Image Frame
 hero_img_path = ASSETS_DIR / "3d_hero_agritech.jpg"
+if not hero_img_path.exists():
+    hero_img_path = ASSETS_DIR / "agritech_pitch_deck_hero.jpg"
 if hero_img_path.exists():
-    frame = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(7.8), Inches(0.8), Inches(4.7), Inches(5.95))
+    frame = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(7.8), Inches(0.6), Inches(4.7), Inches(6.2))
     frame.fill.solid()
     frame.fill.fore_color.rgb = CARD_BG
     frame.line.color.rgb = EMERALD
     frame.line.width = Pt(2.0)
 
-    s1.shapes.add_picture(str(hero_img_path), Inches(7.95), Inches(0.95), Inches(4.4), Inches(5.1))
+    s1.shapes.add_picture(str(hero_img_path), Inches(7.95), Inches(0.75), Inches(4.4), Inches(5.35))
     
-    cap_box = s1.shapes.add_textbox(Inches(7.95), Inches(6.12), Inches(4.4), Inches(0.5))
+    cap_box = s1.shapes.add_textbox(Inches(7.95), Inches(6.2), Inches(4.4), Inches(0.45))
     tf_cap = cap_box.text_frame
     tf_cap.word_wrap = True
     p_cap = tf_cap.paragraphs[0]
@@ -224,44 +277,122 @@ if hero_img_path.exists():
 s2 = prs.slides.add_slide(blank_layout)
 create_background(s2)
 apply_morph_transition(s2)
-add_header(s2, "The Crisis: Why Existing Agri Systems Fail Smallholder Farmers")
+add_header(s2, "The Crisis: Why Existing Agri Systems Fail Smallholder Farmers",
+           category="THE PROBLEM • GROUND REALITY CASE STUDY: FARMER RAMESH (NASHIK, 50 QTL TOMATOES)")
 
-sub_tb = s2.shapes.add_textbox(Inches(0.8), Inches(1.3), Inches(11.7), Inches(0.35))
-sub_tf = sub_tb.text_frame
-sub_p = sub_tf.paragraphs[0]
-sub_p.text = "Ground Reality Case Study: Farmer Ramesh in Nashik cultivating 50 Quintals of perishable Tomatoes"
-sub_p.font.size = Pt(12)
-sub_p.font.color.rgb = SKY_BLUE
+# Visual Diagram at Top: Causal Distress Cycle Flow
+distress_img_path = ASSETS_DIR / "causal_distress_cycle.png"
+if distress_img_path.exists():
+    s2.shapes.add_picture(str(distress_img_path), Inches(0.8), Inches(1.28), Inches(11.733), Inches(2.25))
 
-add_card(s2, Inches(0.8), Inches(1.75), Inches(3.7), Inches(5.15),
-         "1. Passive & Backward-Looking",
-         [
-             "Agmarknet 2.0 & eNAM only display yesterday's clearing price.",
-             "Zero predictive awareness of approaching storm fronts or localized harvest gluts.",
-             "Farmers harvest prematurely in panic, glutting local mandis simultaneously.",
-             "Modal wholesale price crashes to ₹900/qtl (well below the ₹1,100/qtl smallholder cost floor).",
-             "Result: Devastating immediate distress dumping."
-         ], AMBER, title_size=16, bullet_size=11.5)
+# 3 Bento Cards Below Diagram (Max 3 bullets each with bold colored lead-ins)
+def add_card_with_lead_ins(slide, left, top, width, height, title, tag, items, accent_color):
+    card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
+    card.fill.solid()
+    card.fill.fore_color.rgb = CARD_BG
+    card.line.color.rgb = accent_color
+    card.line.width = Pt(1.5)
 
-add_card(s2, Inches(4.8), Inches(1.75), Inches(3.7), Inches(5.15),
-         "2. Blind to Transit Rot & Diesel",
-         [
-             "Agri apps recommend distant mandis (Surat @ ₹1,350/qtl) as lucrative arbitrage.",
-             "Fatal Flaw: Portals assume 0% transit spoilage across 234 km highway transit.",
-             "Tomatoes in open mini-trucks under 32°C & 85% RH suffer severe microbial rotting (18.4% physical decay).",
-             "Round-trip diesel (₹22/km) + ₹35/qtl handling erodes ₹19,220 in costs.",
-             "Result: Net profit (+7.3%) is a dangerous false trap."
-         ], CRIMSON, title_size=16, bullet_size=11.5)
+    tb = slide.shapes.add_textbox(left + Inches(0.2), top + Inches(0.15), width - Inches(0.4), height - Inches(0.3))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
 
-add_card(s2, Inches(8.8), Inches(1.75), Inches(3.7), Inches(5.15),
-         "3. Zero Financial Safety Net",
-         [
-             "When all regional mandis crash, existing applications offer zero actionable exit.",
-             "Smallholders fall prey to predatory informal lenders charging 24% to 36% APR.",
-             "Statutory government warehouse pledge financing (NABARD Cir 128 / WDRA) remains undiscovered.",
-             "KrishiArtha provides instant 75% e-NWR pledge advances at 4% net interest.",
-             "Farmers hold harvest until market rebound (+52% net gain)."
-         ], EMERALD, title_size=16, bullet_size=11.5)
+    p0 = tf.paragraphs[0]
+    r_tag = p0.add_run()
+    r_tag.text = f"{tag}\n"
+    r_tag.font.size = Pt(8.5)
+    r_tag.font.bold = True
+    r_tag.font.color.rgb = accent_color
+    
+    r_tit = p0.add_run()
+    r_tit.text = title
+    r_tit.font.size = Pt(13.5)
+    r_tit.font.bold = True
+    r_tit.font.color.rgb = TEXT_WHITE
+    p0.space_after = Pt(6)
+
+    for lead, body in items:
+        p = tf.add_paragraph()
+        r_bullet = p.add_run()
+        r_bullet.text = "• "
+        r_bullet.font.size = Pt(9.5)
+        r_bullet.font.bold = True
+        r_bullet.font.color.rgb = accent_color
+
+        r_lead = p.add_run()
+        r_lead.text = lead + " "
+        r_lead.font.size = Pt(9.5)
+        r_lead.font.bold = True
+        r_lead.font.color.rgb = accent_color
+
+        r_body = p.add_run()
+        r_body.text = body
+        r_body.font.size = Pt(9.2)
+        r_body.font.color.rgb = TEXT_SUB
+        p.space_after = Pt(4)
+
+    return card
+
+card1_items = [
+    ("Blind Telemetry:", "Agmarknet & eNAM only report yesterday's clearing price with zero forecast horizon."),
+    ("Panic Stripping:", "Farmers harvest prematurely to avoid fungal mold, glutting mandis simultaneously."),
+    ("Mandi Crash:", "Pimpalgaon APMC crashes to ₹900/qtl, collapsing deep below the ₹1,100 cost floor.")
+]
+add_card_with_lead_ins(s2, Inches(0.8), Inches(3.65), Inches(3.7), Inches(2.45),
+                       "1. Passive & Backward-Looking", "[MARKET RIGIDITY]", card1_items, AMBER)
+
+card2_items = [
+    ("Spatial Trap:", "Portals recommend Surat APMC (234 km) @ ₹1,350/qtl assuming 0% transit decay."),
+    ("Thermodynamic Rot:", "32°C & 85% RH triggers 18.4% microbial rot decay (-₹12,420 loss on 50 qtl lot)."),
+    ("Freight Burden:", "₹6,800 diesel + handling collapses net arbitrage into a dangerous false trap (+7.3%).")
+]
+add_card_with_lead_ins(s2, Inches(4.81), Inches(3.65), Inches(3.7), Inches(2.45),
+                       "2. Blind to Transit Rot & Diesel", "[THE TRANSIT MIRAGE]", card2_items, CRIMSON)
+
+card3_items = [
+    ("Predatory Debt:", "When mandis crash regionally, smallholders borrow from local lenders at 24%–36% APR."),
+    ("Hidden Safety Net:", "Statutory NABARD Cir 128 / WDRA pledge financing remains completely undiscovered."),
+    ("KrishiArtha Recourse:", "Instant 75% e-NWR pledge advance (₹33,750 @ 4% net interest) unlocks +52% rebound.")
+]
+add_card_with_lead_ins(s2, Inches(8.83), Inches(3.65), Inches(3.7), Inches(2.45),
+                       "3. Zero Financial Safety Net", "[STATUTORY LIQUIDITY]", card3_items, EMERALD)
+
+# Spatial Dilemma Callout Bar at Bottom
+dilemma_box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(6.22), Inches(11.733), Inches(0.9))
+dilemma_box.fill.solid()
+dilemma_box.fill.fore_color.rgb = CARD_BG
+dilemma_box.line.color.rgb = AMBER
+dilemma_box.line.width = Pt(1.5)
+
+tb_dil = s2.shapes.add_textbox(Inches(0.95), Inches(6.27), Inches(11.433), Inches(0.8))
+tf_d = tb_dil.text_frame
+tf_d.word_wrap = True
+tf_d.margin_left = tf_d.margin_right = tf_d.margin_top = tf_d.margin_bottom = 0
+
+pd1 = tf_d.paragraphs[0]
+r_dil_head = pd1.add_run()
+r_dil_head.text = "⚡ THE SPATIAL DILEMMA: "
+r_dil_head.font.size = Pt(10.5)
+r_dil_head.font.bold = True
+r_dil_head.font.color.rgb = AMBER
+
+r_dil1 = pd1.add_run()
+r_dil1.text = "Pimpalgaon APMC (12 km) = ₹900/qtl Distress Crash (-₹10,000 Loss)   VS.   Surat APMC (234 km) = 18.4% Rot Trap (-₹12,420 Rot Loss + ₹6,800 Diesel = False Mirage)\n"
+r_dil1.font.size = Pt(9.8)
+r_dil1.font.color.rgb = TEXT_WHITE
+
+r_sol_head = pd1.add_run()
+r_sol_head.text = "🏆 KRISHIARTHA BREAKTHROUGH: "
+r_sol_head.font.size = Pt(10.5)
+r_sol_head.font.bold = True
+r_sol_head.font.color.rgb = EMERALD
+
+r_sol1 = pd1.add_run()
+r_sol1.text = "MSWC Ozar (14.2 km) → ₹33,750 Immediate Cash Advance (75% LTV @ 4% KCC) + Day +10 Rebound → +₹23,400 Cash (+52.0% Income Surge)"
+r_sol1.font.size = Pt(9.8)
+r_sol1.font.bold = True
+r_sol1.font.color.rgb = RGBColor(167, 243, 208)
 
 # ==============================================================================
 # SLIDE 3: Neuro-Symbolic Multi-Agent Architecture
@@ -269,45 +400,111 @@ add_card(s2, Inches(8.8), Inches(1.75), Inches(3.7), Inches(5.15),
 s3 = prs.slides.add_slide(blank_layout)
 create_background(s3)
 apply_morph_transition(s3)
-add_header(s3, "The Solution: 4-Node LangGraph Neuro-Symbolic State Machine")
+add_header(s3, "The Solution: 4-Node LangGraph Neuro-Symbolic State Machine",
+           category="NEURO-SYMBOLIC ARCHITECTURE • ZERO LLM MATH HALLUCINATIONS • TYPED PYDANTIC V2 SCHEMAS")
 
-# Embed Architecture Flow Chart
+# Subtitle / Latency Pill
+sub_tb3 = s3.shapes.add_textbox(Inches(0.8), Inches(1.18), Inches(11.733), Inches(0.3))
+tf3_sub = sub_tb3.text_frame
+tf3_sub.word_wrap = True
+tf3_sub.margin_left = tf3_sub.margin_right = tf3_sub.margin_top = tf3_sub.margin_bottom = 0
+p3_sub = tf3_sub.paragraphs[0]
+p3_sub.text = "End-to-End Execution Latency: 1.04s (Target SLA: <4.0s) • Immutable Pydantic v2 State Contracts Prevent Schema Corruption"
+p3_sub.font.size = Pt(10.5)
+p3_sub.font.bold = True
+p3_sub.font.color.rgb = SKY_BLUE
+
+# Embed Upgraded Architecture Flow Chart
 arch_img_path = ASSETS_DIR / "architecture_flow.png"
 if arch_img_path.exists():
-    s3.shapes.add_picture(str(arch_img_path), Inches(0.8), Inches(1.4), Inches(11.73), Inches(2.6))
+    s3.shapes.add_picture(str(arch_img_path), Inches(0.8), Inches(1.48), Inches(11.733), Inches(2.6))
 
-# 4 Bento Cards Below Diagram
-add_card(s3, Inches(0.8), Inches(4.15), Inches(2.78), Inches(2.95),
-         "Agent 1: FastMCP Telemetry",
-         [
-             "Zero mock data: Live Agmarknet & data.gov.in (OGD 9ef84268...) API.",
-             "Open-Meteo 7-day hourly rain & temp covariate ingestion.",
-             "OSRM highway routing for road distance & transit hours."
-         ], SKY_BLUE, title_size=13, bullet_size=10)
+# 4 Redesigned Bento Cards with Latency SLAs and Pydantic v2 Schemas
+def add_sla_card(slide, left, top, width, height, title, sla_badge, schema_tag, items, accent_color):
+    card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
+    card.fill.solid()
+    card.fill.fore_color.rgb = CARD_BG
+    card.line.color.rgb = accent_color
+    card.line.width = Pt(1.5)
 
-add_card(s3, Inches(3.78), Inches(4.15), Inches(2.78), Inches(2.95),
-         "Agent 2: Chronos-2 Forecaster",
-         [
-             "amazon/chronos-2 foundation time-series zero-shot model.",
-             "Combines wholesale prices with weather covariates.",
-             "P10, P50, P90 price quantiles pinpoints Day +10 rebound."
-         ], EMERALD, title_size=13, bullet_size=10)
+    tb = slide.shapes.add_textbox(left + Inches(0.16), top + Inches(0.14), width - Inches(0.32), height - Inches(0.28))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
 
-add_card(s3, Inches(6.76), Inches(4.15), Inches(2.78), Inches(2.95),
-         "Agent 3: Spoilage & Arbitrage",
-         [
-             "Arrhenius Q10 thermal-humidity biological decay equation.",
-             "Mandatory +2.5h APMC unloading buffer.",
-             "Round-trip diesel + handling deductions -> Net Realizable Price (NRP)."
-         ], AMBER, title_size=13, bullet_size=10)
+    p0 = tf.paragraphs[0]
+    r_tit = p0.add_run()
+    r_tit.text = f"{title}\n"
+    r_tit.font.size = Pt(11.5)
+    r_tit.font.bold = True
+    r_tit.font.color.rgb = accent_color
 
-add_card(s3, Inches(9.74), Inches(4.15), Inches(2.78), Inches(2.95),
-         "Agent 4: LightRAG & Consent",
-         [
-             "LightRAG indexes NABARD Cir 128, WDRA, & AIF guidelines.",
-             "LangGraph stateful interrupt() gate halts for farmer consent.",
-             "Automated Playwright browser agent submits WDRA in 1.21s."
-         ], PURPLE, title_size=13, bullet_size=10)
+    r_sla = p0.add_run()
+    r_sla.text = f"[{sla_badge}]\n"
+    r_sla.font.size = Pt(8.5)
+    r_sla.font.bold = True
+    r_sla.font.color.rgb = accent_color
+
+    r_sch = p0.add_run()
+    r_sch.text = f"Schema: {schema_tag}"
+    r_sch.font.size = Pt(8.0)
+    r_sch.font.bold = True
+    r_sch.font.color.rgb = TEXT_MUTED
+    p0.space_after = Pt(6)
+
+    for lead, body in items:
+        p = tf.add_paragraph()
+        r_bullet = p.add_run()
+        r_bullet.text = "• "
+        r_bullet.font.size = Pt(9.2)
+        r_bullet.font.bold = True
+        r_bullet.font.color.rgb = accent_color
+
+        r_lead = p.add_run()
+        r_lead.text = lead + " "
+        r_lead.font.size = Pt(9.2)
+        r_lead.font.bold = True
+        r_lead.font.color.rgb = accent_color
+
+        r_body = p.add_run()
+        r_body.text = body
+        r_body.font.size = Pt(8.8)
+        r_body.font.color.rgb = TEXT_SUB
+        p.space_after = Pt(3)
+
+    return card
+
+node1_items = [
+    ("Live Telemetry:", "Zero mock data; pulls Agmarknet OGD API (9ef84268...) + Open-Meteo 7-day hourly rain/temp."),
+    ("OSRM Routing:", "Computes exact highway distances & transit hours via router.project-osrm.org."),
+    ("State Contract:", "Inputs validated into immutable Pydantic v2 contract preventing injection.")
+]
+add_sla_card(s3, Inches(0.8), Inches(4.2), Inches(2.78), Inches(2.95),
+             "Node 1: FastMCP Ingest", "410ms SLA", "MandiTelemetryPayload", node1_items, SKY_BLUE)
+
+node2_items = [
+    ("Foundation AI:", "amazon/chronos-2 zero-shot model conditioned on rainfall & temp covariates."),
+    ("Price Quantiles:", "Emits P10, P50, P90 trajectories; pins Day +10 rebound to ₹1,480/qtl (+64.4%)."),
+    ("Deterministic:", "Numeric time-series tensors eliminate generative LLM pricing hallucinations.")
+]
+add_sla_card(s3, Inches(3.78), Inches(4.2), Inches(2.78), Inches(2.95),
+             "Node 2: Chronos-2", "280ms SLA", "PriceForecastDistribution", node2_items, EMERALD)
+
+node3_items = [
+    ("Arrhenius Q10:", "Thermodynamic rot decay (Q10=2.2, 18.4% decay) + 2.5h APMC unloading buffer."),
+    ("Diesel Freight:", "Round-trip mini-truck (₹22/km) + ₹35/qtl handling -> Net Realizable Price (NRP)."),
+    ("Symbolic Integrity:", "Deterministic physics kernel prevents fake long-distance arbitrage traps.")
+]
+add_sla_card(s3, Inches(6.76), Inches(4.2), Inches(2.78), Inches(2.95),
+             "Node 3: Spoilage Physics", "12ms SLA", "ArbitrageRanking", node3_items, AMBER)
+
+node4_items = [
+    ("Policy Graph:", "LightRAG hybrid graph indexes NABARD Circular 128 (75% LTV @ 4% net interest)."),
+    ("interrupt() Gate:", "LangGraph stateful barrier halts execution for explicit farmer consent."),
+    ("Browser Agent:", "Playwright agent auto-fills WDRA portal & emits sanction slip in 1.21s.")
+]
+add_sla_card(s3, Inches(9.74), Inches(4.2), Inches(2.78), Inches(2.95),
+             "Node 4: LightRAG & Consent", "340ms SLA", "SanctionExecutionRecord", node4_items, PURPLE)
 
 # ==============================================================================
 # SLIDE 4: Scientific & Mathematical Defensibility
