@@ -771,336 +771,165 @@ if slip_path.exists():
         p_zd.font.color.rgb = TEXT_WHITE
 
 # ==============================================================================
-# SLIDE 7: Production UI & Vernacular Speech Rails
+# SLIDE 7: Vernacular Edge Experience & Dual-Device Multi-Modal Interface
 # ==============================================================================
-print("[7/9] Building Slide 7: Production UI & Vernacular Speech Rails...")
+print("[7/9] Building Slide 7: Edge & Vernacular Experience...")
 s7 = prs.slides.add_slide(blank_layout)
 create_background(s7)
 apply_morph_transition(s7)
-add_header(s7, "Production UI: Vernacular Speech Rails & Live Mission Control",
+add_header(s7, "Edge & Vernacular Experience: Dual-Device Multi-Modal Interface",
            category="MULTILINGUAL INCLUSIVITY • BHASHINI VOICE RAILS & MISSION CONTROL",
-           subtext="Dual-device architecture: Streamlit FPO cockpit paired with Marathi WhatsApp voice card")
+           subtext="Desktop Mission Control Cockpit (FPO/Trader) paired with Smartphone WhatsApp Voice Note Rails (Smallholder Farmer)")
 
 # Left Frame: Desktop Streamlit Mission Control Cockpit
 ui_mockup_path = ASSETS_DIR / "browser_mockup.png"
 if ui_mockup_path.exists():
-    frame_ui = s7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.55), Inches(5.7), Inches(4.15))
+    frame_ui = s7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.55), Inches(6.2), Inches(4.65))
     frame_ui.fill.solid()
     frame_ui.fill.fore_color.rgb = CARD_BG
     frame_ui.line.color.rgb = SKY_BLUE
     frame_ui.line.width = Pt(1.5)
 
-    s7.shapes.add_picture(str(ui_mockup_path), Inches(0.92), Inches(1.68), Inches(5.46), Inches(3.20))
+    s7.shapes.add_picture(str(ui_mockup_path), Inches(0.95), Inches(1.68), Inches(5.9), Inches(3.50))
 
-    tb_uic = s7.shapes.add_textbox(Inches(0.92), Inches(4.95), Inches(5.46), Inches(0.70))
+    tb_uic = s7.shapes.add_textbox(Inches(0.95), Inches(5.25), Inches(5.9), Inches(0.85))
     tf_uic = tb_uic.text_frame
     tf_uic.word_wrap = True
     p1 = tf_uic.paragraphs[0]
-    p1.text = "FPO Mission Control: https://krishiartha-mcp.streamlit.app"
-    p1.font.size = Pt(10.5)
+    p1.text = "FPO & Mandi Trader View: Streamlit Mission Control Cockpit"
+    p1.font.size = Pt(11)
     p1.font.bold = True
     p1.font.color.rgb = SKY_BLUE
-    p2 = tf_uic.add_paragraph()
-    p2.text = "Live Agmarknet telemetry, Arrhenius rot warnings, and 1-click WDRA approval."
-    p2.font.size = Pt(9.0)
-    p2.font.color.rgb = TEXT_MUTED
 
-# Right Frame: Mobile WhatsApp Vernacular Audio Card
-wa_mockup_path = ASSETS_DIR / "whatsapp_vernacular_card.jpg"
-if wa_mockup_path.exists():
-    frame_wa = s7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.55), Inches(5.733), Inches(4.15))
+    p2 = tf_uic.add_paragraph()
+    p2.text = "Live Agmarknet prices, real-time Open-Meteo storm radar, Arrhenius rot alerts & 1-click WDRA filing.\n🌐 Live Web Prototype: https://krishiartha-mcp.streamlit.app"
+    p2.font.size = Pt(8.8)
+    p2.font.color.rgb = TEXT_WHITE
+    p2.space_before = Pt(2)
+
+# Right Frame: Smartphone Vernacular WhatsApp Voice Note Card in Marathi
+wa_card_path = ASSETS_DIR / "whatsapp_vernacular_card.png"
+if wa_card_path.exists():
+    frame_wa = s7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(7.2), Inches(1.55), Inches(5.333), Inches(4.65))
     frame_wa.fill.solid()
     frame_wa.fill.fore_color.rgb = CARD_BG
     frame_wa.line.color.rgb = EMERALD
     frame_wa.line.width = Pt(1.5)
 
-    s7.shapes.add_picture(str(wa_mockup_path), Inches(6.92), Inches(1.68), Inches(5.49), Inches(3.20))
+    s7.shapes.add_picture(str(wa_card_path), Inches(7.35), Inches(1.65), Inches(5.033), Inches(4.45))
 
-    tb_wac = s7.shapes.add_textbox(Inches(6.92), Inches(4.95), Inches(5.49), Inches(0.70))
-    tf_wac = tb_wac.text_frame
-    tf_wac.word_wrap = True
-    p1 = tf_wac.paragraphs[0]
-    p1.text = "Farmer Edge Mobile Card: WhatsApp Voice & IVR (मराठी / हिन्दी / తెలుగు)"
-    p1.font.size = Pt(10.5)
-    p1.font.bold = True
-    p1.font.color.rgb = EMERALD
-    p2 = tf_wac.add_paragraph()
-    p2.text = "\"शेतकरी रमेश: टोमॅटो विकू नका! ओझर गोदामात ठेवा, ₹33,750 तात्काळ कर्ज मिळवा (४% व्याज).\""
-    p2.font.size = Pt(9.0)
-    p2.font.color.rgb = TEXT_WHITE
+# Footer Trust & Speech Rails Banner (Demoting offline mode to subtle badge)
+ft_banner = s7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(6.32), Inches(11.733), Inches(0.68))
+ft_banner.fill.solid()
+ft_banner.fill.fore_color.rgb = CARD_BG
+ft_banner.line.color.rgb = CARD_BORDER
+ft_banner.line.width = Pt(1.0)
 
-# Bottom 3 Feature Badges
-s7_features = [
-    ("Bhashini Multilingual Speech Rails", "1-Click speech synthesis across Marathi, Hindi, Telugu, and English for low-literacy smallholders.", AMBER),
-    ("Edge ONNX Translation Bridge", "Sub-50ms local translation bridge operating 100% offline with zero cloud latency jitter.", SKY_BLUE),
-    ("Stage Certified Demo Mode", "OFFLINE_STAGE_SAFE_MODE=true guarantees bulletproof stage execution with zero Wi-Fi dependencies.", EMERALD)
-]
-for idx, (f_title, f_desc, f_col) in enumerate(s7_features):
-    f_left = Inches(0.8 + idx * 3.98)
-    card_f = s7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, f_left, Inches(5.82), Inches(3.78), Inches(1.25))
-    card_f.fill.solid()
-    card_f.fill.fore_color.rgb = CARD_BG
-    card_f.line.color.rgb = f_col
-    card_f.line.width = Pt(1.2)
+tf_ft = ft_banner.text_frame
+tf_ft.word_wrap = True
+p_ft1 = tf_ft.paragraphs[0]
+p_ft1.text = "🌐 Bhashini ULCA Multilingual Speech Rails: मराठी (Marathi) • हिन्दी (Hindi) • తెలుగు (Telugu) • English (22 Scheduled Indian Languages)"
+p_ft1.font.size = Pt(10)
+p_ft1.font.bold = True
+p_ft1.font.color.rgb = SKY_BLUE
+p_ft1.alignment = PP_ALIGN.CENTER
 
-    tb_f = card_f.text_frame
-    tb_f.word_wrap = True
-    p_ft = tb_f.paragraphs[0]
-    p_ft.text = f_title
-    p_ft.font.size = Pt(10.5)
-    p_ft.font.bold = True
-    p_ft.font.color.rgb = f_col
-    p_ft.space_after = Pt(2)
-
-    p_fd = tb_f.add_paragraph()
-    p_fd.text = f_desc
-    p_fd.font.size = Pt(8.5)
-    p_fd.font.color.rgb = TEXT_WHITE
+p_ft2 = tf_ft.add_paragraph()
+p_ft2.text = "🛡️ Stage Certified Trust Badge: 100% Offline Safe-Mode Resilient (OFFLINE_STAGE_SAFE_MODE=true • Zero Stage Wi-Fi Risk)"
+p_ft2.font.size = Pt(8.8)
+p_ft2.font.bold = True
+p_ft2.font.color.rgb = EMERALD
+p_ft2.alignment = PP_ALIGN.CENTER
+p_ft2.space_before = Pt(2)
 
 # ==============================================================================
-# SLIDE 8: Enterprise Security Posture & National DPI Architecture (Zero Walls of Text!)
+# SLIDE 8: Enterprise Security Posture & National DPI Architecture (De-Textified!)
 # ==============================================================================
 print("[8/9] Building Slide 8: Enterprise Security Posture & DPI Architecture...")
 s8 = prs.slides.add_slide(blank_layout)
 create_background(s8)
 apply_morph_transition(s8)
-add_header(s8, "Enterprise Security Posture & National DPI Architecture",
+add_header(s8, "Enterprise Security Audit & National DPI Scalability",
            category="ENTERPRISE SECURITY & DPI ROADMAP • RULE 7A & 7C COMPLIANCE",
-           subtext="Grade A certified security sandbox & multi-tier digital public infrastructure integration")
+           subtext="AgentShield Grade A certified posture + Interconnected national agricultural digital public infrastructure")
 
-# Left Column: 3 Visual Security Badges (Zero walls of text!)
-badges = [
-    ("100 / 100", "AgentShield Grade A Security Audit", "SCANNED VIA npx ecc-agentshield", [
-        "Zero exposed API keys, tokens, or credentials.",
-        "Zero prompt injection attack vectors.",
-        "Zero toxic dependencies or supply-chain CVEs."
-    ], EMERALD),
-    ("70 / 70 PASS", "Deterministic Pytest Suite (100% Pass)", "13.0s FULL PIPELINE EXECUTION SLA", [
-        "23 FastMCP & Spoilage Quant Math Tests",
-        "18 LightRAG & Statutory Policy Tests",
-        "10 LangGraph State Machine Tests & 19 UI Tests"
-    ], SKY_BLUE),
-    ("100% DETERMINISTIC", "Pydantic v2 Symbolic Sandbox", "DECIMAL PRECISION FINANCIAL LEDGER", [
-        "Pydantic v2 frozen schema state contracts.",
-        "Symbolic Python Arrhenius & freight kernels.",
-        "Deterministic local fixtures (<500ms SLA fallback)."
-    ], PURPLE)
-]
+# Top: 3 Security Shield Badges Graphic (De-textified!)
+sec_badges_path = ASSETS_DIR / "security_shield_badges.png"
+if sec_badges_path.exists():
+    frame_sec = s8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.55), Inches(11.733), Inches(2.25))
+    frame_sec.fill.solid()
+    frame_sec.fill.fore_color.rgb = CARD_BG
+    frame_sec.line.color.rgb = EMERALD
+    frame_sec.line.width = Pt(1.2)
 
-for idx, (stat, title, tag, points, col) in enumerate(badges):
-    b_top = Inches(1.50 + idx * 1.78)
-    card_badge = s8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), b_top, Inches(5.6), Inches(1.68))
-    card_badge.fill.solid()
-    card_badge.fill.fore_color.rgb = CARD_BG
-    card_badge.line.color.rgb = col
-    card_badge.line.width = Pt(1.5)
+    s8.shapes.add_picture(str(sec_badges_path), Inches(0.85), Inches(1.60), Inches(11.633), Inches(2.15))
 
-    tb_b = s8.shapes.add_textbox(Inches(0.95), b_top + Inches(0.10), Inches(5.3), Inches(1.48))
-    tf_b = tb_b.text_frame
-    tf_b.word_wrap = True
+# Bottom: National DPI Architecture Interconnect Diagram
+dpi_arch_path = ASSETS_DIR / "national_dpi_architecture.png"
+if dpi_arch_path.exists():
+    frame_dpi = s8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(3.92), Inches(11.733), Inches(3.18))
+    frame_dpi.fill.solid()
+    frame_dpi.fill.fore_color.rgb = CARD_BG
+    frame_dpi.line.color.rgb = SKY_BLUE
+    frame_dpi.line.width = Pt(1.2)
 
-    p_top = tf_b.paragraphs[0]
-    p_top.text = f"{stat}  •  {title}"
-    p_top.font.size = Pt(12)
-    p_top.font.bold = True
-    p_top.font.color.rgb = col
-
-    p_tag = tf_b.add_paragraph()
-    p_tag.text = tag
-    p_tag.font.size = Pt(8.5)
-    p_tag.font.bold = True
-    p_tag.font.color.rgb = TEXT_MUTED
-    p_tag.space_after = Pt(3)
-
-    for pt in points:
-        p_pt = tf_b.add_paragraph()
-        p_pt.text = "✓ " + pt
-        p_pt.font.size = Pt(9.0)
-        p_pt.font.color.rgb = TEXT_WHITE
-        p_pt.space_after = Pt(1)
-
-# Right Column: National DPI Ecosystem Architecture Diagram
-dpi_tiers = [
-    ("Tier 1: Data Discovery DPI", "Agmarknet 2.0 (Price Discovery) + Open-Meteo (IMD Weather Shocks)",
-     "Consumes live APMC wholesale feeds and meteorological covariates via FastMCP servers.", SKY_BLUE),
-    ("Tier 2: KrishiArtha Multi-Agent Brain", "FastMCP Telemetry ➔ Chronos-2 AI ➔ Arrhenius Physics ➔ LightRAG Policy ➔ LangGraph HITL",
-     "Neuro-symbolic state machine enforcing human-in-the-loop consent before execution.", EMERALD),
-    ("Tier 3: Execution & Credit DPI", "ONDC Logistics (Mini-Trucks) + WDRA/NABARD (e-NWR) + JAM Trinity (DBT Disbursal)",
-     "Automates warehouse pledge loans and dispatches instant credit to KCC accounts in <60s.", AMBER)
-]
-
-for idx, (t_name, t_sub, t_desc, col) in enumerate(dpi_tiers):
-    t_top = Inches(1.50 + idx * 1.50)
-    card_t = s8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), t_top, Inches(5.733), Inches(1.38))
-    card_t.fill.solid()
-    card_t.fill.fore_color.rgb = CARD_BG
-    card_t.line.color.rgb = col
-    card_t.line.width = Pt(1.5)
-
-    tb_t = s8.shapes.add_textbox(Inches(6.95), t_top + Inches(0.10), Inches(5.433), Inches(1.18))
-    tf_t = tb_t.text_frame
-    tf_t.word_wrap = True
-
-    p_h = tf_t.paragraphs[0]
-    p_h.text = t_name
-    p_h.font.size = Pt(12)
-    p_h.font.bold = True
-    p_h.font.color.rgb = col
-    p_h.space_after = Pt(2)
-
-    p_s = tf_t.add_paragraph()
-    p_s.text = t_sub
-    p_s.font.size = Pt(9.5)
-    p_s.font.bold = True
-    p_s.font.color.rgb = TEXT_WHITE
-    p_s.space_after = Pt(2)
-
-    p_d = tf_t.add_paragraph()
-    p_d.text = t_desc
-    p_d.font.size = Pt(8.5)
-    p_d.font.color.rgb = TEXT_MUTED
-
-# Bottom TAM Scale Banner on Right
-tam_card = s8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(6.05), Inches(5.733), Inches(0.80))
-tam_card.fill.solid()
-tam_card.fill.fore_color.rgb = RGBColor(30, 20, 48)
-tam_card.line.color.rgb = PURPLE
-tam_card.line.width = Pt(1.2)
-tf_tam = tam_card.text_frame
-tf_tam.word_wrap = True
-p_tam1 = tf_tam.paragraphs[0]
-p_tam1.text = "NATIONAL ADDRESSABLE MARKET: 140M Smallholders • 688 Mandis • 5,000+ Warehouses"
-p_tam1.font.size = Pt(10)
-p_tam1.font.bold = True
-p_tam1.font.color.rgb = PURPLE
-p_tam1.alignment = PP_ALIGN.CENTER
-
-p_tam2 = tf_tam.add_paragraph()
-p_tam2.text = "Transforms India's agricultural digital public infrastructure from passive price reporting into active wealth defense."
-p_tam2.font.size = Pt(8.5)
-p_tam2.font.color.rgb = TEXT_SUB
-p_tam2.alignment = PP_ALIGN.CENTER
+    s8.shapes.add_picture(str(dpi_arch_path), Inches(0.85), Inches(3.96), Inches(11.633), Inches(3.10))
 
 # ==============================================================================
-# SLIDE 9: Evaluation Hub & Live Prototype (Dual QR Codes & Winning Thesis)
+# SLIDE 9: Evaluation Hub & Rapid Verification Protocol (Dual QR Codes & Winning Thesis)
 # ==============================================================================
-print("[9/9] Building Slide 9: Evaluation Hub & Live Prototype...")
+print("[9/9] Building Slide 9: Evaluation Hub & Rapid Verification Protocol...")
 s9 = prs.slides.add_slide(blank_layout)
 create_background(s9)
 apply_morph_transition(s9)
 add_header(s9, "Judge Evaluation Hub & Rapid Verification Protocol",
            category="FORGE'26 EVALUATION HUB • LIVE VERIFICATION & REPOSITORY ARTIFACTS",
-           subtext="Interactive evaluation protocol • Dual QR codes for instant smartphone testing & HD video review")
+           subtext="Zero-friction live verification for FORGE'26 evaluators • Dual QR codes for cloud prototype & 5-min HD demo")
 
-# Left Upper Card: 4-Step Rapid Verification Protocol
-add_card(s9, Inches(0.8), Inches(1.50), Inches(7.5), Inches(2.90),
-         "Live Evaluation Verification Protocol",
+# Left Side: 4-Step Rapid Evaluator Test Vector Card
+add_card(s9, Inches(0.8), Inches(1.55), Inches(5.9), Inches(4.55),
+         "4-Step Rapid Evaluator Test Vector",
          [
-             "1. SCAN QR CODE ➔ Access https://krishiartha-mcp.streamlit.app on mobile or laptop.",
-             "2. INPUT TEST VECTOR ➔ District: Nashik | Crop: Tomato | Lot Size: 50 Quintals.",
-             "3. OBSERVE ARBITRAGE ➔ Pimpalgaon crashes to ₹900/qtl; Surat 18.4% rot penalty exposed.",
-             "4. TRIGGER 1.21s SANCTION ➔ Click 'Approve WDRA Filing' to trigger Playwright e-NWR receipt.",
-             "5. VERNACULAR AUDIO ➔ Toggle Marathi (मराठी) voice synthesizer for acoustic guidance."
-         ], EMERALD, title_size=14, bullet_size=10)
+             "1. Open Prototype (10s): Scan QR 1 or visit https://krishiartha-mcp.streamlit.app on any device.",
+             "2. Input Test Vector (15s): Select District: Nashik | Crop: Tomato | Lot Size: 50 Quintals.",
+             "3. Review Financial Matrix (20s): Observe Pimpalgaon ₹900 crash vs MSWC ₹1,480 rebound (+52.0% net gain).",
+             "4. Trigger Execution (1.21s): Click 'Approve WDRA Filing (होय)' -> Observe Playwright auto-issue sanction slip.",
+             "Codebase Verification: 70/70 Pytests Passing in 11.3s | OFFLINE_STAGE_SAFE_MODE=true air-gap certified."
+         ], EMERALD, title_size=15, bullet_size=10.5)
 
-# Left Lower Card: Repository & Official Artifacts
-add_card(s9, Inches(0.8), Inches(4.50), Inches(7.5), Inches(1.70),
-         "Repository & Official Submission Artifacts",
-         [
-             "Full Codebase & Tests: 70/70 Pytests Passing (100% Pass Rate in 13.0s)",
-             "Live Prototype (SSL): https://krishiartha-mcp.streamlit.app (Zero Mock Ingestion)",
-             "GitHub Source: https://github.com/0xabhilok/krishiartha-mcp",
-             "Stage Demo Resilience: OFFLINE_STAGE_SAFE_MODE=true for 100% offline execution"
-         ], SKY_BLUE, title_size=12.5, bullet_size=9.5)
+# Right Side: Dual QR Code Card (Live Prototype + Masterpiece Demo Video)
+dual_qr_path = ASSETS_DIR / "dual_qr_evaluation.png"
+if dual_qr_path.exists():
+    frame_qr = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.9), Inches(1.55), Inches(5.633), Inches(4.55))
+    frame_qr.fill.solid()
+    frame_qr.fill.fore_color.rgb = CARD_BG
+    frame_qr.line.color.rgb = SKY_BLUE
+    frame_qr.line.width = Pt(1.5)
 
-# Right Side: Dual Framed QR Codes (Live App + Demo Video)
-qr_container = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(8.55), Inches(1.50), Inches(3.98), Inches(4.70))
-qr_container.fill.solid()
-qr_container.fill.fore_color.rgb = CARD_BG
-qr_container.line.color.rgb = EMERALD
-qr_container.line.width = Pt(1.5)
+    s9.shapes.add_picture(str(dual_qr_path), Inches(7.0), Inches(1.72), Inches(5.433), Inches(4.20))
 
-# QR Code 1: Live Cloud Prototype
-qr_app_path = ASSETS_DIR / "qr_code_live_prototype.png"
-if qr_app_path.exists():
-    s9.shapes.add_picture(str(qr_app_path), Inches(8.75), Inches(1.70), Inches(1.65), Inches(1.65))
-
-tb_qa = s9.shapes.add_textbox(Inches(10.50), Inches(1.75), Inches(1.90), Inches(1.55))
-tf_qa = tb_qa.text_frame
-tf_qa.word_wrap = True
-p1 = tf_qa.paragraphs[0]
-p1.text = "LIVE CLOUD APP"
-p1.font.size = Pt(11)
-p1.font.bold = True
-p1.font.color.rgb = EMERALD
-
-p2 = tf_qa.add_paragraph()
-p2.text = "krishiartha-mcp.streamlit.app"
-p2.font.size = Pt(8.5)
-p2.font.color.rgb = SKY_BLUE
-p2.space_before = Pt(2)
-
-p3 = tf_qa.add_paragraph()
-p3.text = "Scan on phone camera. 100% live cloud backend."
-p3.font.size = Pt(8.0)
-p3.font.color.rgb = TEXT_MUTED
-p3.space_before = Pt(4)
-
-# Divider line between QR codes
-div = s9.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(8.75), Inches(3.55), Inches(3.58), Inches(0.02))
-div.fill.solid()
-div.fill.fore_color.rgb = CARD_BORDER
-div.line.fill.background()
-
-# QR Code 2: Masterpiece Demo Video
-qr_vid_path = ASSETS_DIR / "qr_code_demo_video.png"
-if qr_vid_path.exists():
-    s9.shapes.add_picture(str(qr_vid_path), Inches(8.75), Inches(3.75), Inches(1.65), Inches(1.65))
-
-tb_qv = s9.shapes.add_textbox(Inches(10.50), Inches(3.80), Inches(1.90), Inches(1.55))
-tf_qv = tb_qv.text_frame
-tf_qv.word_wrap = True
-p1 = tf_qv.paragraphs[0]
-p1.text = "HD DEMO VIDEO"
-p1.font.size = Pt(11)
-p1.font.bold = True
-p1.font.color.rgb = SKY_BLUE
-
-p2 = tf_qv.add_paragraph()
-p2.text = "Rule 7c Compliant"
-p2.font.size = Pt(8.5)
-p2.font.color.rgb = AMBER
-p2.space_before = Pt(2)
-
-p3 = tf_qv.add_paragraph()
-p3.text = "5-Min Masterpiece Demo. Authentic live execution with zero CGI."
-p3.font.size = Pt(8.0)
-p3.font.color.rgb = TEXT_MUTED
-p3.space_before = Pt(4)
-
-tb_note = s9.shapes.add_textbox(Inches(8.75), Inches(5.60), Inches(3.58), Inches(0.50))
-tf_note = tb_note.text_frame
-tf_note.word_wrap = True
-p_n = tf_note.paragraphs[0]
-p_n.text = "Instant mobile testing • No app installation needed"
-p_n.font.size = Pt(8.5)
-p_n.font.color.rgb = TEXT_SUB
-p_n.alignment = PP_ALIGN.CENTER
-
-# Across Bottom: Winning Closing Thesis Banner
-thesis_banner = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(6.30), Inches(11.733), Inches(0.78))
+# Across Bottom: The Winning Anchor Thesis Banner
+thesis_banner = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(6.22), Inches(11.733), Inches(0.92))
 thesis_banner.fill.solid()
 thesis_banner.fill.fore_color.rgb = CARD_BG
 thesis_banner.line.color.rgb = EMERALD
 thesis_banner.line.width = Pt(1.8)
+
 tf_tb = thesis_banner.text_frame
 tf_tb.word_wrap = True
-p_tb = tf_tb.paragraphs[0]
-p_tb.text = "\"KrishiArtha transforms unseasonal weather from a source of agrarian bankruptcy into a guaranteed driver of smallholder wealth.\""
-p_tb.font.size = Pt(12)
-p_tb.font.bold = True
-p_tb.font.color.rgb = EMERALD
-p_tb.alignment = PP_ALIGN.CENTER
+p_tb1 = tf_tb.paragraphs[0]
+p_tb1.text = "WINNING THESIS: KrishiArtha transforms unseasonal weather from a source of agrarian bankruptcy into a guaranteed driver of smallholder wealth."
+p_tb1.font.size = Pt(12)
+p_tb1.font.bold = True
+p_tb1.font.color.rgb = EMERALD
+p_tb1.alignment = PP_ALIGN.CENTER
+
+p_tb2 = tf_tb.add_paragraph()
+p_tb2.text = "Fusing foundation time-series forecasting, Arrhenius transit thermodynamics, and statutory pledge liquidity into India's agricultural DPI."
+p_tb2.font.size = Pt(9.8)
+p_tb2.font.color.rgb = SKY_BLUE
+p_tb2.alignment = PP_ALIGN.CENTER
+p_tb2.space_before = Pt(3)
 
 # ----------------- SAVE PRESENTATIONS -----------------
 prs.save(str(OUTPUT_PATH))
