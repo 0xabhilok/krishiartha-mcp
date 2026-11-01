@@ -320,3 +320,4 @@ add_card(s7, Inches(6.8), Inches(1.6), Inches(5.6), Inches(5.2),
 
 prs.save(str(OUTPUT_PATH))
 print(f"Successfully generated PowerPoint presentation at: {OUTPUT_PATH}")
+

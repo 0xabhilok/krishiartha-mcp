@@ -2,18 +2,31 @@
 ### Autonomous Covariate Mandi Arbitrage, Weather-Spoilage Physics & Statutory Distress-Credit Engine
 **A Multi-Agent Neuro-Symbolic Platform for Indian Agriculture**
 
+[![Live Prototype](https://img.shields.io/badge/Live%20Prototype-0e955a783109d3.lhr.life-brightgreen.svg)](https://0e955a783109d3.lhr.life)
 [![Tests](https://img.shields.io/badge/pytest-70%2F70%20passed-brightgreen.svg)](tests/)
+[![CI](https://github.com/0xabhilok/krishiartha-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/0xabhilok/krishiartha-mcp/actions/workflows/ci.yml)
 [![AgentShield](https://img.shields.io/badge/AgentShield-Grade%20A%20(100%2F100)-blue.svg)](#security-audit)
 [![Python](https://img.shields.io/badge/python-3.12%20%7C%203.14-blue.svg)](requirements.txt)
-[![Theme](https://img.shields.io/badge/FORGE'26-Climate%20%26%20Resource%20Resilience-orange.svg)](#hackathon-theme)
+[![Theme](https://img.shields.io/badge/FORGE'26-Climate%20%26%20Resource%20Resilience-orange.svg)](#submission-overview)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ---
 
+<a name="submission-overview"></a>
 ## 🏆 FORGE'26 Hackathon Submission Overview
 - **Team:** INFINITE LOOP (IIIT Guwahati)
 - **Members:** Abhilok Reddy Bellamkonda (Leader) & Nimmakayala Naga Venkata Shanmukha Sai Chandra
 - **Chosen Track:** Climate, Resource Infrastructure & Global Supply Resilience *(with cross-cutting Digital Public Infrastructure & Governance impact)*
+
+### 🎯 Fast Links for Judges & Evaluators
+| Deliverable | Direct Link / Resource |
+| :--- | :--- |
+| **🌐 Live Prototype (SSL)** | **[https://0e955a783109d3.lhr.life](https://0e955a783109d3.lhr.life)** *(Live Worldwide)* |
+| **📊 7-Slide Pitch Deck (PPTX)** | [docs/KrishiArtha_MCP_Pitch_Deck.pptx](docs/KrishiArtha_MCP_Pitch_Deck.pptx) |
+| **🖥️ Interactive Web Slide Deck** | [docs/PITCH_DECK.html](docs/PITCH_DECK.html) *(Press `Ctrl+P` to export PDF)* |
+| **🎬 5-Minute Video Script** | [docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md) |
+| **📋 Official Portal Submission Copy** | [docs/PORTAL_SUBMISSION.md](docs/PORTAL_SUBMISSION.md) |
+| **🧪 Pytest Verification Suite** | [tests/](tests/) *(70/70 Tests Passed in 13s)* |
 
 ---
 
@@ -98,6 +111,7 @@ $$\text{NRP}_m = \left[ P_{50} \cdot (1 - L) \cdot (1 - \gamma_{\text{APMC}}) \r
 
 ---
 
+<a name="security-audit"></a>
 ## 🛡️ Security Audit (AgentShield)
 Audited via `npx ecc-agentshield scan`:
 - **Grade:** **A (100/100)**
@@ -126,7 +140,7 @@ pytest
 ```bash
 streamlit run frontend/app.py
 ```
-Open **[http://localhost:8501](http://localhost:8501)** in your browser.
+Open **[http://localhost:8501](http://localhost:8501)** in your browser, or visit the live deployment at **[https://0e955a783109d3.lhr.life](https://0e955a783109d3.lhr.life)**.
 
 ---
 
@@ -138,4 +152,3 @@ Open **[http://localhost:8501](http://localhost:8501)** in your browser.
 - `frontend/`: Streamlit dashboard, Bhashini multilingual speech triggers, 3-column matrix.
 - `data/offline_snapshots/`: Air-gapped deterministic stage snapshot for zero-fail live demos.
 - `docs/`: 7-Slide Pitch Deck, 5-Minute Video Walkthrough Script, and Submission Copy.
-
