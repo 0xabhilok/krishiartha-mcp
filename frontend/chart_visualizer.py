@@ -136,3 +136,4 @@ def create_quantile_fan_chart(
     )
 
     return fig
+

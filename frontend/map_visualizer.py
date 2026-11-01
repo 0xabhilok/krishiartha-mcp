@@ -140,3 +140,4 @@ def create_mandi_map(
         tooltip={"text": "{name}\n{desc}"},
         map_style="road",
     )
+

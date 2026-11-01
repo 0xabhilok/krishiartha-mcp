@@ -160,3 +160,4 @@ def render_agent_trace_inspector(approval_status: str, consent_result: Dict[str,
                 """,
                 unsafe_allow_html=True,
             )
+
