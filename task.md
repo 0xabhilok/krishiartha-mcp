@@ -7,6 +7,7 @@
 - [x] Security Audit: `npx ecc-agentshield scan` -> Grade A (100/100, 0 Secrets, 0 Vulnerabilities)
 - [x] Architecture Steering Lock: `GEMINI.md` and `.superpowers/sdd/progress.md`
 - [x] Live Application Launch: Streamlit Dashboard Running on `http://localhost:8501`
-- [ ] Deliverable: 5–7 Slide Hackathon Pitch Deck
-- [ ] Deliverable: 5-Minute Video Walkthrough Script
-
+- [x] Deliverable: 5–7 Slide Hackathon Pitch Deck (`docs/PITCH_DECK.md`)
+- [x] Deliverable: 5-Minute Video Walkthrough Script (`docs/DEMO_VIDEO_SCRIPT.md`)
+- [x] Deliverable: Portal Submission Copy & Executive Summary (`docs/PORTAL_SUBMISSION.md`)
+- [x] Public GitHub Repository: [https://github.com/0xabhilok/krishiartha-mcp](https://github.com/0xabhilok/krishiartha-mcp)
