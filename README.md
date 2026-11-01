@@ -21,7 +21,8 @@
 ### 🎯 Fast Links for Judges & Evaluators
 | Deliverable | Direct Link / Resource |
 | :--- | :--- |
-| **🌐 Live Prototype (SSL)** | **[https://0e955a783109d3.lhr.life](https://0e955a783109d3.lhr.life)** *(Live Worldwide)* |
+| **🌐 Live Prototype (Stage)** | **[https://krishiartha-forge26.loca.lt](https://krishiartha-forge26.loca.lt)** *(Tunnel IP: `152.58.168.161`)* |
+| **🚀 1-Click Cloud Deploy** | **[Deploy to Streamlit Cloud](https://share.streamlit.io/deploy?repository=0xabhilok/krishiartha-mcp&branch=master&mainModule=frontend/app.py)** |
 | **📊 7-Slide Pitch Deck (PPTX)** | [docs/KrishiArtha_MCP_Pitch_Deck.pptx](docs/KrishiArtha_MCP_Pitch_Deck.pptx) |
 | **🖥️ Interactive Web Slide Deck** | [docs/PITCH_DECK.html](docs/PITCH_DECK.html) *(Press `Ctrl+P` to export PDF)* |
 | **🎬 5-Minute Video Script** | [docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md) |

@@ -49,9 +49,12 @@ Core Features & AI/Agent Capabilities:
 ---
 
 ### Field 5: Live prototype link*
-- **Primary Live Public URL (SSL):** `https://0e955a783109d3.lhr.life`
+- **1-Click Permanent Cloud Deployment (Streamlit Community Cloud):**  
+  👉 Deploy in 30 seconds: [Deploy to Streamlit Cloud](https://share.streamlit.io/deploy?repository=0xabhilok/krishiartha-mcp&branch=master&mainModule=frontend/app.py)  
+  *(Once deployed, your permanent URL will be `https://krishiartha-mcp.streamlit.app`)*
+- **Live Hackathon Stage Tunnel:** `https://krishiartha-forge26.loca.lt` *(Endpoint IP: `152.58.168.161`)*
 - **Local Stage Mirror:** `http://localhost:8501`
-- **GitHub Repository Deployment Source:** `https://github.com/0xabhilok/krishiartha-mcp`
+- **GitHub Repository Source:** `https://github.com/0xabhilok/krishiartha-mcp`
 
 ---
 
