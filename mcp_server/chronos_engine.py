@@ -122,17 +122,25 @@ def get_weather_covariates(
             f_hum = humidities[-forecast_days:] if len(humidities) >= forecast_days else humidities
 
             for idx in range(len(f_times)):
+                t_val = f_temps[idx] if (idx < len(f_temps) and f_temps[idx] is not None) else 30.0
+                p_val = f_precips[idx] if (idx < len(f_precips) and f_precips[idx] is not None) else 0.0
+                h_val = f_hum[idx] if (idx < len(f_hum) and f_hum[idx] is not None) else 75.0
                 forecast_slice.append({
                     "day": idx + 1,
                     "date": f_times[idx],
-                    "temp_max_c": f_temps[idx] if idx < len(f_temps) else 30.0,
-                    "precip_mm": f_precips[idx] if idx < len(f_precips) else 0.0,
-                    "humidity_mean_pct": f_hum[idx] if idx < len(f_hum) else 75.0,
+                    "temp_max_c": float(t_val),
+                    "precip_mm": float(p_val),
+                    "humidity_mean_pct": float(h_val),
                 })
 
-            current_temp = temps[-forecast_days] if len(temps) >= forecast_days else 30.0
-            current_rh = humidities[-forecast_days] if len(humidities) >= forecast_days else 75.0
-            past_rain_total = sum(precips[:past_days]) if len(precips) >= past_days else sum(precips)
+            raw_temp = temps[-forecast_days] if len(temps) >= forecast_days else 30.0
+            current_temp = float(raw_temp) if raw_temp is not None else 30.0
+
+            raw_rh = humidities[-forecast_days] if len(humidities) >= forecast_days else 75.0
+            current_rh = float(raw_rh) if raw_rh is not None else 75.0
+
+            past_precips = [p for p in (precips[:past_days] if len(precips) >= past_days else precips) if p is not None]
+            past_rain_total = sum(past_precips) if past_precips else 0.0
 
             return {
                 "station": f"Open-Meteo ({lat:.2f}, {lon:.2f})",

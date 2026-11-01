@@ -105,7 +105,41 @@ def get_live_mandi_prices(state: str, commodity: str) -> List[Dict[str, Any]]:
                         })
                     return normalized
         except Exception as e:
-            logger.info("Live mandi price API call failed (%s); using deterministic offline snapshot", str(e))
+            logger.info("Live mandi price API call failed (%s); checking data.gov.in or deterministic offline snapshot", str(e))
+            api_key = os.getenv("DATA_GOV_API_KEY") or os.getenv("DATA_GOV_IN_API_KEY")
+            if api_key and api_key != "your_data_gov_in_api_key_here":
+                try:
+                    resource_id = "9ef84268-d588-465a-a308-a864a43d0070"
+                    ogd_url = (
+                        f"https://api.data.gov.in/resource/{resource_id}?api-key={api_key}"
+                        f"&format=json&filters%5Bstate%5D={urllib.parse.quote(state)}"
+                        f"&filters%5Bcommodity%5D={urllib.parse.quote(commodity)}"
+                    )
+                    req = urllib.request.Request(ogd_url, headers={"User-Agent": "KrishiArtha-MCP/1.0"})
+                    with urllib.request.urlopen(req, timeout=2.5) as resp:
+                        ogd_payload = json.loads(resp.read().decode("utf-8"))
+                        ogd_records = ogd_payload.get("records", [])
+                        if ogd_records:
+                            normalized = []
+                            for r in ogd_records:
+                                normalized.append({
+                                    "state": r.get("state", state),
+                                    "district": r.get("district", "N/A"),
+                                    "market": r.get("market", "APMC"),
+                                    "lat": float(r.get("lat") or 20.0),
+                                    "lon": float(r.get("lon") or 74.0),
+                                    "commodity": r.get("commodity", commodity),
+                                    "variety": r.get("variety", "Standard"),
+                                    "arrival_date": r.get("arrival_date", datetime.now().strftime("%Y-%m-%d")),
+                                    "is_stale": False,
+                                    "staleness_hours": 12,
+                                    "min_price_inr_per_quintal": float(r.get("min_price") or 800.0),
+                                    "max_price_inr_per_quintal": float(r.get("max_price") or 1200.0),
+                                    "modal_price_inr_per_quintal": float(r.get("modal_price") or 1000.0),
+                                })
+                            return normalized
+                except Exception as ogd_e:
+                    logger.info("Data.gov.in OGD query failed (%s)", str(ogd_e))
 
     # Offline / Snapshot Deterministic Fallback
     snap = load_offline_snapshot()
