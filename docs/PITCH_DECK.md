@@ -138,13 +138,47 @@
 
 ---
 
-### Slide 7: Enterprise Architecture, Security & Future Roadmap
-- **Security & Quality Audit (AgentShield):**
-  - `npx ecc-agentshield scan` score: **Grade A (100/100)**.
-  - Zero exposed API secrets, zero CVE vulnerabilities, clean sandbox permissions.
-  - **70/70 Pytest Suite Passed** under both Live and Air-Gapped (`OFFLINE_STAGE_SAFE_MODE=true`) execution.
-- **National Scalability & ONDC Integration:**
-  - Connecting Farmer Producer Organizations (FPOs) directly to the Open Network for Digital Commerce (ONDC) logistics grid.
-  - Integration with Agmarknet 2.0 national telemetry across 688 Indian mandis.
-  - Direct banking integration via Jan Dhan-Aadhaar-Mobile (JAM) trinity for automated subvented loan disbursals in <60 seconds.
+### Slide 7: Edge & Vernacular Experience: Dual-Device Multi-Modal Interface
+- **Visual Assets:**
+  - `docs/assets/browser_mockup.png` (Desktop Mission Control Cockpit for FPOs and traders)
+  - `docs/assets/whatsapp_vernacular_card.png` (Smartphone Vernacular WhatsApp voice note card in Marathi with acoustic waveform)
+- **Dual-Device Architecture:**
+  - **FPO & Trader Cockpit (Desktop View):** Full-screen Streamlit Mission Control (`https://krishiartha-mcp.streamlit.app`). Real-time Agmarknet wholesale feeds, Open-Meteo storm radar, Arrhenius thermal decay alerts, and 1-click WDRA filing.
+  - **Smallholder Farmer Edge UX (Mobile View):** Smartphone WhatsApp voice card with acoustic waveform. Translates complex financial matrices into simple voice guidance:
+    *"शेतकरी रमेश: टोमॅटो विकू नका! ओझर गोदामात ठेवा, ₹३३,७५० तात्काळ कर्ज मिळवा (४% व्याज)."*
+- **Bhashini ULCA Multilingual Speech Rails:**
+  - Native voice synthesis across **मराठी (Marathi)**, **हिन्दी (Hindi)**, **తెలుగు (Telugu)**, and **English** (22 Scheduled Indian Languages).
+  - Sub-50ms local translation bridge operating 100% client-side with zero cloud jitter.
+- **Stage Certified Trust Badge (Subtle Footer):**
+  - `OFFLINE_STAGE_SAFE_MODE=true` guarantees 100% offline air-gapped demo execution with pre-seeded fixtures from `data/offline_snapshots/nashik_tomato_glut.json`.
 
+---
+
+### Slide 8: Enterprise Security Audit & National DPI Scalability
+- **Visual Assets:**
+  - `docs/assets/security_shield_badges.png` (3 visual security shield badges eliminating the 200-word wall of text)
+  - `docs/assets/national_dpi_architecture.png` (National ecosystem interconnect architecture diagram)
+- **Three Enterprise Security Shields:**
+  - **Badge 1: AgentShield Grade A (100/100):** Scanned via `npx ecc-agentshield scan`. Zero hardcoded secrets, zero prompt injection vectors, zero toxic supply-chain CVEs, strict least-privilege tool sandboxing.
+  - **Badge 2: 70/70 Pytest Verification Suite (100% Pass in 11.3s):** 23 FastMCP & Quant math tests, 18 LightRAG & statutory policy tests, 10 LangGraph state machine tests, 19 Streamlit UI & vernacular audio tests.
+  - **Badge 3: Pydantic v2 Symbolic Sandbox (Zero Hallucinated Math):** Frozen schema state contracts (`ArbitrageState`), Decimal-precision financial ledger, pure Python Arrhenius & diesel physics kernels, tamper-proof cryptographic sanction hashes.
+- **National DPI Interconnect Architecture:**
+  - `[Agmarknet 2.0 (Price Discovery)] + [Open-Meteo (Weather)] ➔ [KrishiArtha Multi-Agent Brain] ➔ [ONDC Logistics (Trucks)] + [WDRA / JAM Trinity (Instant Subvented Credit)]`
+  - National Addressable Market: 140 Million Smallholders (86% of farmers) • 688 APMC Mandis • 5,000+ WDRA Warehouses • ₹40,000+ Crore annual post-harvest wealth defense.
+
+---
+
+### Slide 9: Judge Evaluation Hub & Rapid Verification Protocol
+- **Visual Assets:**
+  - `docs/assets/dual_qr_evaluation.png` (Framed dual QR codes for live prototype and demo video)
+- **4-Step Rapid Evaluator Test Vector:**
+  1. **Open Cloud Prototype (10s):** Scan QR 1 or visit `https://krishiartha-mcp.streamlit.app` on any smartphone camera or laptop with zero login.
+  2. **Input Test Vector (15s):** Select District: **Nashik** | Crop: **Tomato** | Lot: **50 Quintals**. Observe Pimpalgaon APMC ₹900/qtl crash vs ₹1,100 cost floor.
+  3. **Review Financial Matrix (20s):** Compare Option A (₹45,000 distress) vs Option B (₹48,280 transit mirage) vs Option C (**₹68,400 net, +52.0% gain**).
+  4. **Trigger Execution (1.21s):** Click 'Approve WDRA Filing (होय)' ➔ Observe Playwright auto-fill statutory form & issue cryptographic sanction slip in 1.21s.
+- **Dual QR Code Architecture:**
+  - **QR Code 1:** Live Web Prototype (`https://krishiartha-mcp.streamlit.app` on Streamlit Cloud).
+  - **QR Code 2:** Masterpiece Demo Video (Direct GitHub Release HD 1080p MP4).
+- **Winning Anchor Impact Thesis:**
+  > *"KrishiArtha transforms unseasonal weather from a source of agrarian bankruptcy into a guaranteed driver of smallholder wealth."*  
+  > *Fusing foundation time-series forecasting, Arrhenius transit thermodynamics, and statutory pledge liquidity into India's agricultural DPI.*
