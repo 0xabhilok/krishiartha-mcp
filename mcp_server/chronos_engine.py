@@ -25,7 +25,7 @@ SNAPSHOT_REL_PATH = Path("data") / "offline_snapshots" / "nashik_tomato_glut.jso
 
 def is_offline_mode() -> bool:
     """Checks if OFFLINE_STAGE_SAFE_MODE environment flag is activated."""
-    val = os.getenv("OFFLINE_STAGE_SAFE_MODE", "true").lower()
+    val = os.getenv("OFFLINE_STAGE_SAFE_MODE", "false").lower()
     return val in ("true", "1", "yes")
 
 

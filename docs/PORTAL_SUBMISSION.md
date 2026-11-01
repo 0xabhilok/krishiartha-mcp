@@ -56,7 +56,7 @@ Core Features & AI/Agent Capabilities:
 ---
 
 ### Field 6: Demo video link*
-- **Primary Video Link (HD MP4):** `https://github.com/0xabhilok/krishiartha-mcp/releases/download/v1.0.0-demo/KrishiArtha_MCP_5Min_Demo.mp4`
+- **Primary Video Link (HD MP4 with Dual Neural Voiceover):** `https://github.com/0xabhilok/krishiartha-mcp/releases/download/v1.0.0-demo/KrishiArtha_MCP_Winnable_5Min_Demo.mp4`
 - **Release Page & Video Player:** `https://github.com/0xabhilok/krishiartha-mcp/releases/tag/v1.0.0-demo`
 *(Walkthrough script and architectural notes available in `docs/DEMO_VIDEO_SCRIPT.md`)*
 

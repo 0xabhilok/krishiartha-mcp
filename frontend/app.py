@@ -147,7 +147,7 @@ def init_session_state():
     if "rainfall_shock_mm" not in st.session_state:
         st.session_state.rainfall_shock_mm = 0.0
     if "offline_safe_mode" not in st.session_state:
-        env_val = os.getenv("OFFLINE_STAGE_SAFE_MODE", "true").lower() in ("true", "1", "yes")
+        env_val = os.getenv("OFFLINE_STAGE_SAFE_MODE", "false").lower() in ("true", "1", "yes")
         st.session_state.offline_safe_mode = env_val
     if "farmer_query" not in st.session_state:
         st.session_state.farmer_query = "माझा ५० क्विंटल टोमॅटो नाशिकला ₹९०० ला विकू की सुरतला नेऊ?"
@@ -258,19 +258,19 @@ with header_col1:
     st.subheader(_("Autonomous Covariate Mandi Arbitrage & Distress Policy Engine"))
 with header_col2:
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.session_state.offline_safe_mode:
+    if not st.session_state.offline_safe_mode:
         st.markdown(
-            """<div style='background-color:#c6f6d5; border:1px solid #38a169; border-radius:8px; padding:8px 12px; text-align:center;'>
-            <b style='color:#22543d;'>🟢 OFFLINE EDGE MODE</b><br>
-            <small style='color:#276749;'>Deterministic Air-Gapped Safe</small>
+            """<div style='background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius:10px; padding:10px 14px; text-align:center; color:white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);'>
+            <b style='font-size:0.95rem;'>🟢 LIVE APMC & FASTMCP ACTIVE</b><br>
+            <small style='color:#ecfdf5; font-size:0.8rem;'>Rule 4: Zero Dummy Data (Data.gov.in & Open-Meteo)</small>
             </div>""",
             unsafe_allow_html=True,
         )
     else:
         st.markdown(
-            """<div style='background-color:#feebc8; border:1px solid #dd6b20; border-radius:8px; padding:8px 12px; text-align:center;'>
-            <b style='color:#7b341e;'>🌐 CLOUD CONNECTED</b><br>
-            <small style='color:#7b341e;'>Live FastMCP Streaming Active</small>
+            """<div style='background-color:#edf2f7; border:1px solid #cbd5e0; border-radius:10px; padding:10px 14px; text-align:center;'>
+            <b style='color:#2d3748; font-size:0.95rem;'>💾 OFFLINE STAGE FALLBACK</b><br>
+            <small style='color:#4a5568; font-size:0.8rem;'>Deterministic Air-Gapped Safe</small>
             </div>""",
             unsafe_allow_html=True,
         )

@@ -69,3 +69,7 @@ ehthumbs.db
 # Subagent & assistant tooling caches
 .claude/
 .agents/skills/
+
+# Media & Demo recordings (hosted via GitHub Releases)
+docs/*.mp4
+docs/demo_recording/
