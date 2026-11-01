@@ -2,7 +2,7 @@
 ### Autonomous Covariate Mandi Arbitrage, Weather-Spoilage Physics & Statutory Distress-Credit Engine
 **A Multi-Agent Neuro-Symbolic Platform for Indian Agriculture**
 
-[![Live Prototype](https://img.shields.io/badge/Live%20Prototype-0e955a783109d3.lhr.life-brightgreen.svg)](https://0e955a783109d3.lhr.life)
+[![Live Prototype](https://img.shields.io/badge/Live%20Prototype-krishiartha--mcp.streamlit.app-brightgreen.svg)](https://krishiartha-mcp.streamlit.app/)
 [![Tests](https://img.shields.io/badge/pytest-70%2F70%20passed-brightgreen.svg)](tests/)
 [![CI](https://github.com/0xabhilok/krishiartha-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/0xabhilok/krishiartha-mcp/actions/workflows/ci.yml)
 [![AgentShield](https://img.shields.io/badge/AgentShield-Grade%20A%20(100%2F100)-blue.svg)](#security-audit)
@@ -21,7 +21,7 @@
 ### 🎯 Fast Links for Judges & Evaluators
 | Deliverable | Direct Link / Resource |
 | :--- | :--- |
-| **🌐 Live Prototype (Stage)** | **[https://krishiartha-forge26.loca.lt](https://krishiartha-forge26.loca.lt)** *(Tunnel IP: `152.58.168.161`)* |
+| **🌐 Live Prototype (SSL)** | **[https://krishiartha-mcp.streamlit.app](https://krishiartha-mcp.streamlit.app)** *(24/7 Global Cloud Mirror)* |
 | **🚀 1-Click Cloud Deploy** | **[Deploy to Streamlit Cloud](https://share.streamlit.io/deploy?repository=0xabhilok/krishiartha-mcp&branch=master&mainModule=frontend/app.py)** |
 | **📊 7-Slide Pitch Deck (PPTX)** | [docs/KrishiArtha_MCP_Pitch_Deck.pptx](docs/KrishiArtha_MCP_Pitch_Deck.pptx) |
 | **🖥️ Interactive Web Slide Deck** | [docs/PITCH_DECK.html](docs/PITCH_DECK.html) *(Press `Ctrl+P` to export PDF)* |
@@ -141,7 +141,7 @@ pytest
 ```bash
 streamlit run frontend/app.py
 ```
-Open **[http://localhost:8501](http://localhost:8501)** in your browser, or visit the live deployment at **[https://0e955a783109d3.lhr.life](https://0e955a783109d3.lhr.life)**.
+Open **[http://localhost:8501](http://localhost:8501)** in your browser, or visit the live deployment at **[https://krishiartha-mcp.streamlit.app](https://krishiartha-mcp.streamlit.app)**.
 
 ---
 

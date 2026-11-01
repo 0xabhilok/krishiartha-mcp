@@ -49,12 +49,9 @@ Core Features & AI/Agent Capabilities:
 ---
 
 ### Field 5: Live prototype link*
-- **1-Click Permanent Cloud Deployment (Streamlit Community Cloud):**  
-  👉 Deploy in 30 seconds: [Deploy to Streamlit Cloud](https://share.streamlit.io/deploy?repository=0xabhilok/krishiartha-mcp&branch=master&mainModule=frontend/app.py)  
-  *(Once deployed, your permanent URL will be `https://krishiartha-mcp.streamlit.app`)*
-- **Live Hackathon Stage Tunnel:** `https://krishiartha-forge26.loca.lt` *(Endpoint IP: `152.58.168.161`)*
-- **Local Stage Mirror:** `http://localhost:8501`
+- **Primary Live Public URL (SSL):** `https://krishiartha-mcp.streamlit.app`
 - **GitHub Repository Source:** `https://github.com/0xabhilok/krishiartha-mcp`
+- **Local Stage Mirror:** `http://localhost:8501`
 
 ---
 
@@ -101,7 +98,7 @@ To solve this, Team INFINITE LOOP (IIIT Guwahati) built KrishiArtha-MCP (MandiPu
 
 Check out our public GitHub repo and live demo:
 🔗 GitHub: https://github.com/0xabhilok/krishiartha-mcp
-🌐 Live Prototype: https://0e955a783109d3.lhr.life
+🌐 Live Prototype: https://krishiartha-mcp.streamlit.app
 
 Built by Abhilok Reddy Bellamkonda & Nimmakayala Naga Venkata Shanmukha Sai Chandra.
 Drop your thoughts and support us with a like and repost! 🚀
@@ -126,7 +123,7 @@ Turning ₹45,000 distress dumps into ₹68,400 (+52% income boost).
 🛡️ AgentShield: Grade A (100/100)
 🧪 70/70 Pytests passing
 
-Live prototype: https://0e955a783109d3.lhr.life
+Live prototype: https://krishiartha-mcp.streamlit.app
 Repo: https://github.com/0xabhilok/krishiartha-mcp
 
 RTs & likes help us win the Audience Choice Award! 🔁❤️
