@@ -25,7 +25,7 @@
 | **🚀 1-Click Cloud Deploy** | **[Deploy to Streamlit Cloud](https://share.streamlit.io/deploy?repository=0xabhilok/krishiartha-mcp&branch=master&mainModule=frontend/app.py)** |
 | **📊 World-Class Pitch Deck (PPTX)** | [docs/KrishiArtha_MCP_Pitch_Deck.pptx](docs/KrishiArtha_MCP_Pitch_Deck.pptx) *(9-Slide Native Morph Presentation with Embedded QR Code)* |
 | **🖥️ Interactive Web Slide Deck** | [docs/PITCH_DECK.html](docs/PITCH_DECK.html) *(Press `Ctrl+P` to export PDF)* |
-| **🎬 Official Demo Video (MP4)** | **[Download & Watch HD Video](https://github.com/0xabhilok/krishiartha-mcp/releases/download/v1.0.0-demo/KrishiArtha_MCP_Winnable_5Min_Demo.mp4)** / [Release Page](https://github.com/0xabhilok/krishiartha-mcp/releases/tag/v1.0.0-demo) |
+| **🎬 Official Demo Video (MP4)** | **[Download & Watch Masterpiece Video](https://github.com/0xabhilok/krishiartha-mcp/releases/download/v1.0.0-demo/KrishiArtha_MCP_Masterpiece_Demo.mp4)** / [Release Page](https://github.com/0xabhilok/krishiartha-mcp/releases/tag/v1.0.0-demo) |
 | **📜 Video Walkthrough Script** | [docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md) |
 | **📋 Official Portal Submission Copy** | [docs/PORTAL_SUBMISSION.md](docs/PORTAL_SUBMISSION.md) |
 | **🧪 Pytest Verification Suite** | [tests/](tests/) *(70/70 Tests Passed in 13s)* |
