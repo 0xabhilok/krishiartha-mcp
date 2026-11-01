@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KrishiArtha-MCP | FORGE'26 Pitch Deck</title>
+  <style>
+    :root {
+      --bg: #0F172A;
+      --card-bg: #1E293B;
+      --border: #334155;
+      --emerald: #10B981;
+      --amber: #F59E0B;
+      --red: #EF4444;
+      --blue: #38BDF8;
+      --purple: #A855F7;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .top-bar {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--emerald);
+      letter-spacing: 1px;
+    }
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--border); }
+    .btn-primary { background: var(--emerald); color: #022c22; border-color: var(--emerald); }
+    .btn-primary:hover { background: #059669; }
+    .deck-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1200px;
+      height: 650px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow-y: auto;
+    }
+    .slide.active { display: flex; flex-direction: column; animation: fadeIn 0.25s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .slide-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--emerald);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .slide-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      flex: 1;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      flex: 1;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .card-body {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #CBD5E1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 0.65rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #0B132B;
+      color: var(--emerald);
+      font-weight: 700;
+    }
+    .highlight-col {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--emerald);
+      font-weight: 700;
+    }
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--emerald);
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="badge">FORGE'26 HACKATHON PITCH DECK &bull; TEAM INFINITE LOOP</div>
+    <div class="controls">
+      <span id="slide-counter" style="font-size: 0.85rem; color: var(--muted); margin-right: 0.5rem;">Slide 1 / 7</span>
+      <button class="btn" onclick="prevSlide()">&#8592; Prev</button>
+      <button class="btn" onclick="nextSlide()">Next &#8594;</button>
+      <button class="btn btn-primary" onclick="window.print()">Print / Export PDF</button>
+    </div>
+  </div>
+
+  <div class="deck-container">
+    <!-- SLIDE 1 -->
+    <div class="slide active">
+      <div class="slide-tag">FORGE'26 &bull; THEME B (CLIMATE & SUPPLY RESILIENCE)</div>
+      <div class="slide-title" style="font-size: 2.4rem; margin-top: 1rem; color: #FFF;">KrishiArtha-MCP (MandiPulse)</div>
+      <p style="font-size: 1.15rem; color: var(--blue); margin-bottom: 1.8rem; font-weight: 500;">
+        Autonomous Covariate Mandi Arbitrage, Weather-Spoilage Physics & Statutory Distress-Credit Engine
+      </p>
+      <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 0.5rem;">
+          <strong style="color: #FFF;">Team INFINITE LOOP (IIIT Guwahati):</strong> Abhilok Reddy Bellamkonda (Leader) &amp; Nimmakayala Naga Venkata Shanmukha Sai Chandra
+        </p>
+        <p style="font-size: 0.95rem; color: #CBD5E1; line-height: 1.5;">
+          <strong>Core Mission:</strong> Eliminating the ₹40,000+ Crore annual post-harvest wealth destruction suffered by smallholder Indian farmers by fusing zero-shot foundation time-series forecasting (<code>amazon/chronos-2</code>), Arrhenius Q10 transit physics, and statutory warehouse receipt financing (NABARD/WDRA).
+        </p>
+      </div>
+      <div style="display: flex; gap: 1rem; margin-top: auto;">
+        <span style="font-size: 0.8rem; background: rgba(16, 185, 129, 0.15); color: var(--emerald); padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: 600;">70/70 Pytest Passed</span>
+        <span style="font-size: 0.8rem; background: rgba(56, 189, 248, 0.15); color: var(--blue); padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: 600;">AgentShield Grade A (100/100)</span>
+        <span style="font-size: 0.8rem; background: rgba(168, 85, 247, 0.15); color: var(--purple); padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: 600;">LangGraph v1.2.18 Stateful Gate</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+      <div class="slide-tag">THE PROBLEM</div>
+      <div class="slide-title">The Urgent Crisis: Why Existing Agri Systems Fail</div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title" style="color: var(--amber);">1. Passive &amp; Backward-Looking</div>
+          <div class="card-body">
+            <p>&bull; Agmarknet 2.0 &amp; eNAM only display yesterday's clearing price.</p>
+            <p>&bull; Zero predictive power: Cannot forecast crashes 7 days ahead when unseasonal rains hit.</p>
+            <p>&bull; Farmers panic-harvest simultaneously, crashing local mandis below the ₹1,100 cost floor.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--red);">2. Blind to Transit Rot &amp; Diesel</div>
+          <div class="card-body">
+            <p>&bull; Portals assume 0% crop loss across highways.</p>
+            <p>&bull; In reality, carrying tomatoes 234 km to Surat in open trucks at 32°C/85% RH causes 18.4% biological rot ($Q_{10}$ decay).</p>
+            <p>&bull; High nominal prices are false arbitrage traps that destroy farmer capital.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">3. Zero Financial Recourse</div>
+          <div class="card-body">
+            <p>&bull; When all reachable mandis crash, existing apps offer zero actionable safety net.</p>
+            <p>&bull; Statutory government benefits (NABARD Circular 128) remain undiscovered.</p>
+            <p>&bull; KrishiArtha automatically unlocks 75% e-NWR pledge loans @ 4% net interest.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+      <div class="slide-tag">THE ARCHITECTURE</div>
+      <div class="slide-title">Neuro-Symbolic Multi-Agent Architecture</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">Agent 1: Mandi &amp; Weather Telemetry (FastMCP)</div>
+          <div class="card-body">
+            <p>&bull; <strong>Zero Mock Data:</strong> Pulls live prices from <code>mandi-api.onrender.com</code> &amp; <code>data.gov.in</code> (Resource 9ef84268...).</p>
+            <p>&bull; Open-Meteo 7-day hourly rain/temp covariates + OSRM highway routing.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">Agent 2: Foundation AI Forecaster (Chronos-2)</div>
+          <div class="card-body">
+            <p>&bull; <code>amazon/chronos-2</code> zero-shot foundation model.</p>
+            <p>&bull; Predicts $P_{10}, P_{50}, P_{90}$ price cones conditioned on approaching rainfall.</p>
+            <p>&bull; Identifies post-glut price rebound (+₹580/qtl in 10 days).</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--amber);">Agent 3: Spoilage &amp; Arbitrage Optimizer</div>
+          <div class="card-body">
+            <p>&bull; Arrhenius $Q_{10}$ decay math with +2.5h APMC unloading queue buffer.</p>
+            <p>&bull; Deducts round-trip diesel ($2 \cdot d \cdot ₹22/\text{km}$) and mandi cess.</p>
+            <p>&bull; Ranks mandis by Net Realizable Price (NRP) to expose traps.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--purple);">Agent 4: LightRAG Policy &amp; Consent Gate</div>
+          <div class="card-body">
+            <p>&bull; Hybrid LightRAG indexes NABARD Cir 128, WDRA, and AIF clauses.</p>
+            <p>&bull; LangGraph <code>interrupt()</code> gate for transparent human approval.</p>
+            <p>&bull; Playwright browser agent completes WDRA portal filing in 1.21s.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+      <div class="slide-tag">SCIENTIFIC RIGOR</div>
+      <div class="slide-title">Mathematical Defensibility &bull; Zero Hallucinated Math</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">Arrhenius $Q_{10}$ Biological Spoilage Equation</div>
+          <div class="card-body">
+            <p style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 0.6rem; border-radius: 4px;">
+              k(Tamb, RH) = k_base &bull; (Q10)^((Tamb - 20) / 10) &bull; (1 + alpha_hum &bull; max(0, (RH - 70)/100))
+            </p>
+            <p>&bull; Baseline rate: $k_{\text{base}} = 0.0065$ (Tomato), $Q_{10} = 2.2$, moisture rot multiplier $\alpha_{\text{hum}} = 1.5$.</p>
+            <p>&bull; Transit duration includes queue buffer: $t_{\text{transit}} = t_{\text{duration}} + 2.5\text{h}$.</p>
+            <p>&bull; Rotting loss fraction: $L = 1 - \exp(-k \cdot t_{\text{transit}})$.</p>
+            <p>&bull; <strong>Result:</strong> 234 km transit in 32°C / 85% RH causes 18.4% rotting (₹12,420 rot penalty).</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">Freight &amp; Net Realizable Price (NRP)</div>
+          <div class="card-body">
+            <p style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 0.6rem; border-radius: 4px;">
+              NRP = [ P50 &bull; (1 - L) &bull; (1 - APMC_fee) ] - (Diesel_RoundTrip / Quantity)
+            </p>
+            <p>&bull; Freight: $2 \cdot d_{\text{km}} \cdot ₹22/\text{km} + Q \cdot ₹35/\text{qtl}$ handling.</p>
+            <p>&bull; Regional Crash Trigger: If $\max(\text{NRP}) < ₹1,100/\text{qtl}$, trigger Distress Storage Engine.</p>
+            <p>&bull; Statutory Advance: 75% LTV on valuation = ₹33,750 cash advance @ 4.0% net interest.</p>
+            <p>&bull; 100% Deterministic: Zero LLM math hallucinations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+      <div class="slide-tag">FINANCIAL IMPACT</div>
+      <div class="slide-title">The 3-Column Financial Arbitrage Matrix (Nashik 50 qtl Lot)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Financial Metric</th>
+            <th>Option A: Local Panic Sale</th>
+            <th>Option B: Long-Distance Surat</th>
+            <th class="highlight-col">Option C: KrishiArtha WDRA e-NWR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Destination Mandi</strong></td>
+            <td>Pimpalgaon APMC (12 km)</td>
+            <td>Surat APMC (234 km)</td>
+            <td class="highlight-col">MSWC Cold Storage, Ozar (14.2 km)</td>
+          </tr>
+          <tr>
+            <td><strong>Nominal Quoted Price</strong></td>
+            <td>₹900 / qtl (Severe Crash)</td>
+            <td>₹1,350 / qtl (Apparent Arbitrage)</td>
+            <td class="highlight-col">Rebound: ₹1,480 / qtl (Day +10)</td>
+          </tr>
+          <tr>
+            <td><strong>Q10 Transit Rot Loss</strong></td>
+            <td>₹945 (2.1% loss)</td>
+            <td><strong style="color: var(--red);">₹12,420 (18.4% Thermal Rot!)</strong></td>
+            <td class="highlight-col">₹0 (Cold Storage Guarantee)</td>
+          </tr>
+          <tr>
+            <td><strong>Diesel Freight &amp; Loading</strong></td>
+            <td>₹1,925 (Local mini-truck)</td>
+            <td>₹6,800 (₹22/km Round-Trip)</td>
+            <td class="highlight-col">₹750 (Short warehouse haul)</td>
+          </tr>
+          <tr>
+            <td><strong>Instant Liquidity</strong></td>
+            <td>₹45,000 (Immediate Cash)</td>
+            <td>₹48,280 (Post-transit payout)</td>
+            <td class="highlight-col"><strong>₹33,750 (75% LTV @ 4% Interest)</strong></td>
+          </tr>
+          <tr style="border-top: 2px solid var(--border);">
+            <td><strong>Final Net Realization</strong></td>
+            <td><strong>₹45,000 Net</strong></td>
+            <td><strong>₹48,280 Net (+7.3%)</strong></td>
+            <td class="highlight-col" style="font-size: 1.05rem;"><strong>₹68,400 Net</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Net Arbitrage Realization</strong></td>
+            <td>Baseline</td>
+            <td>+₹3,280 (+7.3%)</td>
+            <td class="highlight-col" style="font-size: 1.05rem;"><strong>+₹23,400 (+52.0% Income Surge)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+      <div class="slide-tag">GOVERNANCE &amp; UX</div>
+      <div class="slide-title">Human-in-the-Loop Governance &amp; Vernacular UX</div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">LangGraph interrupt() Gate</div>
+          <div class="card-body">
+            <p>&bull; Zero side-effects above interrupt boundary.</p>
+            <p>&bull; State machine safely freezes execution state.</p>
+            <p>&bull; Presents transparent financial breakdown to FPO.</p>
+            <p>&bull; Execution resumes strictly on <code>Command(resume=True)</code>.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">Automated Browser Agent</div>
+          <div class="card-body">
+            <p>&bull; Playwright browser agent auto-fills WDRA e-NWR portal in <strong>1.21 seconds</strong> (SLA &lt;4.0s).</p>
+            <p>&bull; Enters farmer Aadhaar, crop grade, and quantity.</p>
+            <p>&bull; Emits verifiable digital sanction slip with security hash &amp; QR code.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--amber);">Bhashini Multilingual UX</div>
+          <div class="card-body">
+            <p>&bull; 1-Click vernacular speech triggers in Marathi (मराठी), Hindi (हिन्दी), Telugu (తెలుగు), and English.</p>
+            <p>&bull; Offline client-side translation bridge for resilient stage presentations.</p>
+            <p>&bull; Accessible to smallholder farmers with low literacy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+      <div class="slide-tag">SECURITY &amp; ROADMAP</div>
+      <div class="slide-title">Enterprise Security, Verification &amp; National Scalability</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">Security &amp; Verification Audit</div>
+          <div class="card-body">
+            <p>&bull; <strong>AgentShield Audit:</strong> <code>npx ecc-agentshield scan</code> awarded <strong>Grade A (100/100)</strong>.</p>
+            <p>&bull; Zero exposed API keys, zero prompt injection vulnerabilities, zero CVEs.</p>
+            <p>&bull; <strong>70/70 Pytest Suite Passed:</strong> 100% passing across LangGraph, LightRAG, FastMCP, and Streamlit.</p>
+            <p>&bull; <strong>Stage Resilience:</strong> <code>OFFLINE_STAGE_SAFE_MODE=true</code> guarantees zero-fail offline demo.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--blue);">DPI Roadmap &amp; National Scalability</div>
+          <div class="card-body">
+            <p>&bull; <strong>ONDC Logistics Grid:</strong> Direct FPO dispatch booking via Open Network for Digital Commerce.</p>
+            <p>&bull; <strong>National APMC Expansion:</strong> Scaling telemetry across all 688 Indian mandis.</p>
+            <p>&bull; <strong>JAM Disbursals:</strong> Automated subvented loan disbursal via Jan Dhan-Aadhaar-Mobile in &lt;60 seconds.</p>
+            <p>&bull; <strong>Horticulture Grid:</strong> Expanding Q10 spoilage models to onions, potatoes, and cold-chains.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress" style="width: 14.28%;"></div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const counter = document.getElementById('slide-counter');
+    const progress = document.getElementById('progress');
+
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      slides[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+      counter.textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+      progress.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+    });
+  </script>
+</body>
+</html>
