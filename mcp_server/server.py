@@ -18,7 +18,19 @@ import urllib.request
 import urllib.parse
 from datetime import datetime, timedelta
 
-from mcp.server.fastmcp import FastMCP
+try:
+    from mcp.server.fastmcp import FastMCP
+except (ImportError, ModuleNotFoundError):
+    try:
+        from mcp.server.mcpserver import MCPServer as FastMCP
+    except Exception:
+        class FastMCP:
+            def __init__(self, name: str = "krishiartha-quant-engine", *args, **kwargs):
+                self.name = name
+            def tool(self, *args, **kwargs):
+                def decorator(f):
+                    return f
+                return decorator
 from mcp_server.chronos_engine import (
     forecast_commodity_price_quantiles,
     get_weather_covariates,
