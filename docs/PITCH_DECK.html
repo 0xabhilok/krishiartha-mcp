@@ -380,10 +380,16 @@
       flex-shrink: 0;
     }
 
-    /* Images and Media Containers */
+    /* Responsive Images and Media Containers */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
     .img-frame {
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       background: #0F172A;
       display: flex;
@@ -392,10 +398,12 @@
     }
 
     .img-frame img {
+      max-width: 100%;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      border-radius: 8px;
     }
 
     .img-overlay-caption {
@@ -424,11 +432,13 @@
     }
 
     .annotated-chart-box img {
+      max-width: 100%;
       width: 100%;
       height: 180px;
       object-fit: contain;
       display: block;
       background: #0F172A;
+      border-radius: 8px;
     }
 
     .chart-callout-overlay {
@@ -830,8 +840,8 @@
         </div>
 
         <!-- 3D Agritech Hero Visual -->
-        <div class="img-frame" style="border: 2px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 24px rgba(16, 185, 129, 0.15);">
-          <img src="assets/3d_hero_agritech.jpg" alt="KrishiArtha 3D Agritech Hero Visual">
+        <div class="img-frame" style="border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 8px; box-shadow: 0 0 24px rgba(16, 185, 129, 0.15);">
+          <img src="assets/3d_hero_agritech.jpg" alt="KrishiArtha 3D Agritech Hero Visual" style="max-width: 100%; border-radius: 8px;">
           <div class="img-overlay-caption">
             <span>AI Foundation Forecaster + Spoilage Physics + Statutory Liquidity</span>
             <span class="micro-pill pill-emerald">STAGE CERTIFIED</span>
@@ -852,43 +862,15 @@
         </div>
       </div>
 
-      <!-- 5-Step Horizontal Causal Panic Cycle Flow -->
-      <div class="cycle-flow-container">
-        <div class="cycle-step step-1">
-          <span class="cycle-step-num">STAGE 1</span>
-          <span class="cycle-step-text">7-Day Rain Shock</span>
-          <span style="font-size: 0.7rem; color: var(--blue);">Depression looms</span>
-        </div>
-        <div class="cycle-arrow">&#10142;</div>
-        <div class="cycle-step step-2">
-          <span class="cycle-step-num">STAGE 2</span>
-          <span class="cycle-step-text">Panic Harvest</span>
-          <span style="font-size: 0.7rem; color: var(--amber);">Early field stripping</span>
-        </div>
-        <div class="cycle-arrow">&#10142;</div>
-        <div class="cycle-step step-3">
-          <span class="cycle-step-num">STAGE 3</span>
-          <span class="cycle-step-text">Mandi Glut Crash</span>
-          <span style="font-size: 0.7rem; color: var(--red);">₹900/qtl (&lt;₹1.1k cost)</span>
-        </div>
-        <div class="cycle-arrow">&#10142;</div>
-        <div class="cycle-step step-4">
-          <span class="cycle-step-num">STAGE 4</span>
-          <span class="cycle-step-text">Highway Rot Trap</span>
-          <span style="font-size: 0.7rem; color: #FCA5A5;">-18.4% microbial rot</span>
-        </div>
-        <div class="cycle-arrow">&#10142;</div>
-        <div class="cycle-step step-5">
-          <span class="cycle-step-num">STAGE 5</span>
-          <span class="cycle-step-text">Predatory Debt</span>
-          <span style="font-size: 0.7rem; color: var(--purple);">36% APR loan sharks</span>
-        </div>
+      <!-- High-DPI 5-Stage Causal Distress Cycle Flow Infographic -->
+      <div class="img-frame" style="border: 1px solid var(--border); border-color: rgba(239, 68, 68, 0.4); border-radius: 8px; margin-bottom: 0.85rem; max-height: 120px; background: rgba(15, 23, 42, 0.95); overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); flex-shrink: 0;">
+        <img src="assets/causal_distress_cycle.png" alt="5-Stage Smallholder Causal Distress Cycle: Climate Shock -> Panic Harvest -> Mandi Glut Crash -> Transit Rot -> Predatory Debt" style="max-width: 100%; width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
       </div>
 
       <!-- Split Layout: Crisis Visual + 3 Focused Bento Cards -->
       <div class="grid-hero">
-        <div class="img-frame" style="border-color: rgba(239, 68, 68, 0.4); max-height: 380px;">
-          <img src="assets/mandi_glut_crisis.jpg" alt="Mandi Glut Crisis and Highway Rot Trap">
+        <div class="img-frame" style="border: 1px solid var(--border); border-color: rgba(239, 68, 68, 0.4); border-radius: 8px; max-height: 380px;">
+          <img src="assets/mandi_glut_crisis.jpg" alt="Mandi Glut Crisis and Highway Rot Trap" style="max-width: 100%; border-radius: 8px;">
           <div class="img-overlay-caption" style="background: rgba(11, 17, 32, 0.94); border-top: 1px solid var(--border);">
             <div style="display: flex; flex-direction: column; gap: 0.2rem; width: 100%;">
               <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -968,8 +950,8 @@
       </div>
 
       <!-- Architecture Diagram Visual -->
-      <div class="img-frame" style="max-height: 220px; margin-bottom: 0.9rem; border-color: rgba(56, 189, 248, 0.3);">
-        <img src="assets/neuro_symbolic_architecture_diagram.jpg" alt="Neuro-Symbolic Architecture Diagram" style="object-fit: contain; background: #0B1120;">
+      <div class="img-frame" style="max-height: 190px; margin-bottom: 0.9rem; border: 1px solid var(--border); border-color: rgba(56, 189, 248, 0.4); border-radius: 8px; background: #0B1120;">
+        <img src="assets/architecture_flow.png" alt="Neuro-Symbolic Architecture Flow Diagram: FastMCP -> Chronos-2 -> Spoilage Math -> LightRAG & Consent" style="max-width: 100%; width: 100%; height: 100%; object-fit: contain; background: #0B1120; border-radius: 8px;">
       </div>
 
       <!-- 4 Technical Architecture Node Cards with Latency SLA Badges -->
@@ -1058,12 +1040,9 @@
             $$k(T, RH) = k_{\text{base}} \cdot (Q_{10})^{\frac{T - 20}{10}} \cdot \left[1 + \alpha_{\text{hum}} \cdot \max\left(0, \frac{RH - 70}{100}\right)\right]$$
           </div>
 
-          <!-- Annotated Chart Box with Crimson Callout -->
-          <div class="annotated-chart-box">
-            <img src="assets/arrhenius_spoilage_chart.png" alt="Arrhenius Spoilage Curve">
-            <div class="chart-callout-overlay callout-rot">
-              🔴 234 km Highway Transit @ 32°C / 85% RH = 18.4% Rot (-₹12,420 Loss)
-            </div>
+          <!-- Annotated Chart Box -->
+          <div class="annotated-chart-box" style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #0F172A; position: relative; margin-bottom: 0.65rem;">
+            <img src="assets/annotated_arrhenius_rot.png" alt="Arrhenius Spoilage Kinetics Annotated Curve" style="max-width: 100%; width: 100%; height: 180px; object-fit: contain; border-radius: 8px; display: block; background: #0F172A;">
           </div>
 
           <div class="card-body" style="font-size: 0.8rem;">
@@ -1085,12 +1064,9 @@
             $$\hat{P}_t \sim \text{Chronos-2}(P_{t-30:t} \mid \text{Rainfall}_{t:t+7}, \text{Temp}_{t:t+7}) \implies [P_{10}, P_{50}, P_{90}]$$
           </div>
 
-          <!-- Annotated Chart Box with Emerald Callout -->
-          <div class="annotated-chart-box">
-            <img src="assets/chronos_fan_chart.png" alt="Chronos-2 Quantile Fan Chart">
-            <div class="chart-callout-overlay callout-rebound">
-              🟢 Day +10 Rebound: ₹1,480/qtl (+64.4% Surge vs ₹900 Crash)
-            </div>
+          <!-- Annotated Chart Box -->
+          <div class="annotated-chart-box" style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #0F172A; position: relative; margin-bottom: 0.65rem;">
+            <img src="assets/annotated_chronos_rebound.png" alt="Chronos-2 Price Forecasting Quantile Bands Annotated Rebound" style="max-width: 100%; width: 100%; height: 180px; object-fit: contain; border-radius: 8px; display: block; background: #0F172A;">
           </div>
 
           <div class="card-body" style="font-size: 0.8rem;">
@@ -1114,29 +1090,9 @@
         </div>
       </div>
 
-      <!-- Visual 3-Bar Comparison Chart -->
-      <div class="bars-container">
-        <div class="bar-row">
-          <div class="bar-label" style="color: #F87171;">Option A: Local Distress Trap</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width: 55%; background: linear-gradient(90deg, #EF4444, #DC2626);">₹45k</div>
-          </div>
-          <div class="bar-val" style="color: #F87171;">₹45,000 <span style="font-size: 0.68rem; color: var(--muted);">(Baseline)</span></div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color: #FBBF24;">Option B: Surat Transit Mirage</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width: 59%; background: linear-gradient(90deg, #F59E0B, #D97706);">₹48.2k</div>
-          </div>
-          <div class="bar-val" style="color: #FBBF24;">₹48,280 <span style="font-size: 0.68rem; color: var(--muted);">(+7.3% Mirage)</span></div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color: #34D399; font-weight: 800;">Option C: KrishiArtha Breakthrough</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width: 84%; background: linear-gradient(90deg, #10B981, #059669);">₹68.4k</div>
-          </div>
-          <div class="bar-val" style="color: #34D399; font-size: 0.95rem;">₹68,400 <span style="font-size: 0.68rem; font-weight: 800;">(+52.0% SURGE)</span></div>
-        </div>
+      <!-- High-DPI 3-Bar Financial Arbitrage Realization Chart Graphic -->
+      <div class="img-frame" style="border: 1px solid var(--border); border-color: rgba(16, 185, 129, 0.4); border-radius: 8px; margin-bottom: 0.75rem; max-height: 145px; background: rgba(15, 23, 42, 0.9); overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); flex-shrink: 0;">
+        <img src="assets/financial_arbitrage_3bar.png" alt="3-Column Financial Arbitrage Matrix: Option A (₹45,000 Panic Dump) vs Option B (₹48,280 Surat Mirage) vs Option C (₹68,400 KrishiArtha Net Realization)" style="max-width: 100%; width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
       </div>
 
       <!-- High-Impact 3-Column Table with Emotional Headers & Itemized Deductions -->
@@ -1224,25 +1180,9 @@
         </div>
       </div>
 
-      <!-- 3-Step Visual Governance Sequence -->
-      <div class="gov-sequence">
-        <div class="gov-step step-quant">
-          <span style="font-size: 0.7rem; font-weight: 800; color: var(--blue);">STEP 1: QUANT ASSESSMENT</span>
-          <span style="font-size: 0.82rem; font-weight: 700; color: #FFF;">Chronos-2 + Arrhenius Physics Engine</span>
-          <span style="font-size: 0.72rem; color: var(--muted);">Flags Pimpalgaon crash &lt; ₹1,100 cost floor</span>
-        </div>
-        <div class="cycle-arrow" style="color: var(--amber);">&#10142;</div>
-        <div class="gov-step step-barrier">
-          <span style="font-size: 0.7rem; font-weight: 800; color: var(--amber);">STEP 2: 🛑 STATE FROZEN</span>
-          <span style="font-size: 0.82rem; font-weight: 700; color: #FDE68A;">LangGraph <code>interrupt()</code> Consent Gate</span>
-          <span style="font-size: 0.72rem; color: #CBD5E1;">Execution halts; awaits explicit farmer approval</span>
-        </div>
-        <div class="cycle-arrow" style="color: var(--emerald);">&#10142;</div>
-        <div class="gov-step step-playwright">
-          <span style="font-size: 0.7rem; font-weight: 800; color: var(--emerald);">STEP 3: ⚡ AUTONOMOUS DISPATCH</span>
-          <span style="font-size: 0.82rem; font-weight: 700; color: #A7F3D0;">Playwright WDRA e-NWR Portal Filing</span>
-          <span style="font-size: 0.72rem; color: var(--muted);">Completes 14-field form in 1.21s with SHA-256 slip</span>
-        </div>
+      <!-- LangGraph Multi-Agent Governance & State Machine Flow Diagram -->
+      <div class="img-frame" style="border: 1px solid var(--border); border-color: rgba(56, 189, 248, 0.4); border-radius: 8px; margin-bottom: 0.85rem; max-height: 130px; background: rgba(15, 23, 42, 0.9); overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); flex-shrink: 0;">
+        <img src="assets/langgraph_governance_flow.png" alt="LangGraph 4-Node State Machine Flow with interrupt() Consent Barrier and 1.21s Auto-Filing SLA" style="max-width: 100%; width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
       </div>
 
       <!-- Visual Stopwatch Benchmark Badge -->
@@ -1288,8 +1228,8 @@
             <span class="micro-pill pill-emerald">OFFICIAL RECEIPT</span>
           </div>
 
-          <div class="img-frame" style="max-height: 200px; margin-bottom: 0.6rem; border-color: rgba(16, 185, 129, 0.3);">
-            <img src="assets/wdra_sanction_framed.png" alt="Framed WDRA Sanction Slip" style="object-fit: contain; background: #0B1120;">
+          <div class="img-frame" style="max-height: 200px; margin-bottom: 0.6rem; border: 1px solid var(--border); border-color: rgba(16, 185, 129, 0.4); border-radius: 8px;">
+            <img src="assets/annotated_wdra_sanction.png" alt="Annotated WDRA Statutory Digital Sanction Slip (75% LTV, 4% Subvented Rate)" style="max-width: 100%; object-fit: contain; background: #0B1120; border-radius: 8px;">
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
@@ -1334,8 +1274,8 @@
             <span>FPO &amp; Agri-Officer Mission Control Cockpit</span>
             <span class="micro-pill pill-blue">STREAMLIT CLOUD</span>
           </div>
-          <div class="img-frame" style="max-height: 290px; margin-bottom: 0.65rem; border-color: rgba(56, 189, 248, 0.3);">
-            <img src="assets/browser_mockup.png" alt="Streamlit UI Cockpit Mockup" style="object-fit: contain; background: #0B1120;">
+          <div class="img-frame" style="max-height: 290px; margin-bottom: 0.65rem; border: 1px solid var(--border); border-color: rgba(56, 189, 248, 0.4); border-radius: 8px;">
+            <img src="assets/browser_mockup.png" alt="Streamlit UI Cockpit Mockup" style="max-width: 100%; object-fit: contain; background: #0B1120; border-radius: 8px;">
           </div>
           <div class="card-body" style="font-size: 0.8rem;">
             <p>&bull; <strong>Mission Control Cockpit:</strong> Live Agmarknet wholesale feeds, Open-Meteo storm radar, Arrhenius thermal decay alerts, and 1-click WDRA filing.</p>
@@ -1349,8 +1289,8 @@
             <span>Smallholder Farmer Vernacular WhatsApp Edge UX</span>
             <span class="micro-pill pill-emerald">BHASHINI ULCA</span>
           </div>
-          <div class="img-frame" style="max-height: 290px; margin-bottom: 0.65rem; border-color: rgba(16, 185, 129, 0.3);">
-            <img src="assets/whatsapp_vernacular_card.png" alt="WhatsApp Vernacular Voice Card" style="object-fit: contain; background: #0B1120;">
+          <div class="img-frame" style="max-height: 290px; margin-bottom: 0.65rem; border: 1px solid var(--border); border-color: rgba(16, 185, 129, 0.4); border-radius: 8px;">
+            <img src="assets/whatsapp_vernacular_card.png" alt="WhatsApp Vernacular Voice Card" style="max-width: 100%; object-fit: contain; background: #0B1120; border-radius: 8px;">
           </div>
           <div class="card-body" style="font-size: 0.8rem;">
             <p>&bull; <strong>Bhashini Speech Rails:</strong> Translates complex arbitrage matrices into plain voice guidance: <em>"शेतकरी रमेश: टोमॅटो विकू नका! ओझर गोदामात ठेवा, ₹३३,७५० तात्काळ कर्ज मिळवा (४% व्याज)."</em></p>
@@ -1385,16 +1325,16 @@
       <!-- De-Textified Visual Layout -->
       <div style="display: flex; flex-direction: column; gap: 0.85rem;">
         <!-- Top: 3 Security Shield Badges Graphic -->
-        <div class="card" style="padding: 0.6rem; border-color: rgba(16, 185, 129, 0.4);">
-          <div class="img-frame" style="max-height: 195px; border: none; background: transparent;">
-            <img src="assets/security_shield_badges.png" alt="Security Shield Badges: AgentShield Grade A, 70/70 Pytest Suite, Pydantic v2 Sandbox" style="object-fit: contain; width: 100%; height: 100%;">
+        <div class="card" style="padding: 0.6rem; border: 1px solid var(--border); border-color: rgba(16, 185, 129, 0.4); border-radius: 8px;">
+          <div class="img-frame" style="max-height: 195px; border: 1px solid var(--border); border-radius: 8px; background: rgba(15, 23, 42, 0.8);">
+            <img src="assets/security_shield_badges.png" alt="Security Shield Badges: AgentShield Grade A, 70/70 Pytest Suite, Pydantic v2 Sandbox" style="max-width: 100%; object-fit: contain; width: 100%; height: 100%; border-radius: 8px;">
           </div>
         </div>
 
         <!-- Bottom: National DPI Architecture Interconnect Graphic -->
-        <div class="card" style="padding: 0.6rem; border-color: rgba(56, 189, 248, 0.4);">
-          <div class="img-frame" style="max-height: 250px; border: none; background: transparent;">
-            <img src="assets/national_dpi_architecture.png" alt="National DPI Architecture: Agmarknet 2.0 + Open-Meteo -> KrishiArtha Multi-Agent Brain -> ONDC + WDRA/JAM" style="object-fit: contain; width: 100%; height: 100%;">
+        <div class="card" style="padding: 0.6rem; border: 1px solid var(--border); border-color: rgba(56, 189, 248, 0.4); border-radius: 8px;">
+          <div class="img-frame" style="max-height: 250px; border: 1px solid var(--border); border-radius: 8px; background: rgba(15, 23, 42, 0.8);">
+            <img src="assets/national_dpi_architecture.png" alt="National DPI Architecture: Agmarknet 2.0 + Open-Meteo -> KrishiArtha Multi-Agent Brain -> ONDC + WDRA/JAM" style="max-width: 100%; object-fit: contain; width: 100%; height: 100%; border-radius: 8px;">
           </div>
         </div>
       </div>
@@ -1444,8 +1384,8 @@
         </div>
 
         <!-- Dual QR Codes Display -->
-        <div class="card" style="padding: 0.6rem; border-color: rgba(56, 189, 248, 0.4); display: flex; align-items: center; justify-content: center;">
-          <img src="assets/dual_qr_evaluation.png" alt="Dual QR Codes: Live Prototype and Masterpiece Demo Video" style="width: 100%; height: auto; max-height: 420px; object-fit: contain;">
+        <div class="card" style="padding: 0.6rem; border: 1px solid var(--border); border-color: rgba(56, 189, 248, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/dual_qr_evaluation.png" alt="Dual QR Codes: Live Prototype and Masterpiece Demo Video" style="max-width: 100%; width: 100%; height: auto; max-height: 420px; object-fit: contain; border-radius: 8px;">
         </div>
       </div>
 

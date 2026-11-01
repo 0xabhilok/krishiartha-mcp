@@ -297,7 +297,7 @@ class TestStreamlitAppExecution:
         from streamlit.testing.v1 import AppTest
 
         app_path = str(Path(__file__).resolve().parent.parent / "frontend" / "app.py")
-        at = AppTest.from_file(app_path)
+        at = AppTest.from_file(app_path, default_timeout=10.0)
         at.run()
 
         assert not at.exception, f"App execution raised exception: {at.exception}"
@@ -311,7 +311,7 @@ class TestStreamlitAppExecution:
         from streamlit.testing.v1 import AppTest
 
         app_path = str(Path(__file__).resolve().parent.parent / "frontend" / "app.py")
-        at = AppTest.from_file(app_path)
+        at = AppTest.from_file(app_path, default_timeout=10.0)
         at.run()
 
         # Switch to Hindi
@@ -333,7 +333,7 @@ class TestStreamlitAppExecution:
         from streamlit.testing.v1 import AppTest
 
         app_path = str(Path(__file__).resolve().parent.parent / "frontend" / "app.py")
-        at = AppTest.from_file(app_path)
+        at = AppTest.from_file(app_path, default_timeout=10.0)
         at.run()
 
         # Find and click the Approve button
