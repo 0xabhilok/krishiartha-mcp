@@ -6,31 +6,69 @@
 
 ---
 
-### Slide 1: Title & Vision
+### Slide 1: Title & Hook (YC Seed Standard)
 - **Project Name:** KrishiArtha-MCP (MandiPulse)
-- **Tagline:** Autonomous Covariate Mandi Arbitrage, Weather-Spoilage Physics & Statutory Distress-Credit Engine
+- **Crisp 8-Word YC One-Liner:** **Autonomous Climate Mandi Arbitrage & Statutory Distress-Credit Engine**
+- **Live Deployment Badge:** `● 100% Live Prototype Active on Streamlit Community Cloud (https://krishiartha-mcp.streamlit.app)`
 - **Team INFINITE LOOP:**
   - Abhilok Reddy Bellamkonda (Leader) — IIIT Guwahati
   - Nimmakayala Naga Venkata Shanmukha Sai Chandra — IIIT Guwahati
-- **Core Mission:** Eliminating the ₹40,000+ crore annual post-harvest wealth destruction suffered by smallholder Indian farmers during extreme weather gluts by fusing zero-shot foundation time-series forecasting with thermodynamic transit physics and statutory pledge credit.
+- **Value Propositions (Replacing Dense Text):**
+  - **• The Crisis:** Halting ₹40,000+ Crore annual post-harvest distress sales triggered by unseasonal weather gluts.
+  - **• The Breakthrough:** Fusing `amazon/chronos-2` foundation AI, Arrhenius transit thermodynamics, and statutory NABARD e-NWR pledge liquidity.
+- **Micro-Category Bento Cards:**
+  - `[CRISIS TARGET]` **₹40,000+ Cr** | Annual Post-Harvest Loss Targeted
+  - `[VALIDATED GAIN]` **+52.0%** | Farmer Net Income Surge (Nashik 50qtl)
+  - `[1.21s SLA]` **1.21s** | Playwright WDRA Auto-Filing (<4.0s SLA)
+  - `[70/70 TESTS]` **70/70** | Pytest Suite & AgentShield Grade A
 
 ---
 
-### Slide 2: The Urgent Crisis & Why Existing Solutions Fail
-- **The Ground Reality:** Smallholder farmers lose **25%–40%** of net crop value when unseasonal rainfall triggers panic harvests and localized APMC gluts.
-- **Why Existing Portals (Agmarknet 2.0, eNAM) Fail:**
-  1. **Backward-Looking:** Portals only report yesterday's wholesale clearing prices; they cannot predict price crashes 7 days into the future under approaching storm fronts.
-  2. **Blind to Physical Logistics:** They assume 0% transport decay. In reality, carrying tomatoes or onions 200 km in open tarp trucks under 32°C heat and 85% humidity leads to rapid biological rotting ($Q_{10}$ decay).
-  3. **Disconnected from Safety Nets:** When prices crash below the production cost floor, portals offer zero recourse, leaving farmers vulnerable to distress sales and predatory local traders.
+### Slide 2: The Urgent Crisis & Smallholder Reality
+- **The Ground Reality:** Farmer Ramesh in Nashik cultivating 50 Quintals of perishable Tomatoes faces sudden unseasonal cloudburst.
+- **Visual Anchor Diagram:** `docs/assets/causal_distress_cycle.png` (5-Step Panic Loop):
+  `[Unseasonal Monsoon (48mm)] ➔ [Premature Panic Harvest (50 qtl)] ➔ [Mandi Glut: ₹900/qtl] ➔ [Highway Rot Trap: 18.4%] ➔ [Predatory Debt: 36% APR]`
+- **3-Card Breakdown (Max 3 Bullets with Colored Lead-ins):**
+  1. **[MARKET RIGIDITY] 1. Passive & Backward-Looking (Amber):**
+     - **Blind Telemetry:** Agmarknet & eNAM only report yesterday's clearing price with zero forecast horizon.
+     - **Panic Stripping:** Farmers harvest prematurely to avoid fungal mold, glutting mandis simultaneously.
+     - **Mandi Crash:** Pimpalgaon APMC crashes to ₹900/qtl, collapsing deep below the ₹1,100 cost floor.
+  2. **[THE TRANSIT MIRAGE] 2. Blind to Transit Rot & Freight (Crimson):**
+     - **Spatial Trap:** Portals recommend Surat APMC (234 km) @ ₹1,350/qtl assuming 0% transit decay.
+     - **Thermodynamic Rot:** 32°C & 85% RH triggers 18.4% microbial rot decay (-₹12,420 loss on 50 qtl lot).
+     - **Freight Burden:** ₹6,800 diesel + handling collapses net arbitrage into a dangerous false trap (+7.3%).
+  3. **[STATUTORY LIQUIDITY] 3. Zero Financial Safety Net (Emerald):**
+     - **Predatory Debt:** When mandis crash regionally, smallholders borrow from local lenders at 24%–36% APR.
+     - **Hidden Safety Net:** Statutory NABARD Cir 128 / WDRA pledge financing remains completely undiscovered.
+     - **KrishiArtha Recourse:** Instant 75% e-NWR pledge advance (₹33,750 @ 4% net interest) unlocks +52% rebound.
+- **Spatial Dilemma Callout:**
+  - **Local Crash:** Pimpalgaon APMC (12 km) = ₹900/qtl Distress Crash (-₹10,000 Net Deficit).
+  - **Distant Mirage:** Surat APMC (234 km) = 18.4% Rot Trap (-₹12,420 Rot Loss + ₹6,800 Diesel = False Mirage).
+  - **KrishiArtha Exit:** MSWC Ozar (14.2 km) = ₹33,750 Immediate Cash (75% LTV @ 4%) + ₹1,480 Rebound = **+₹23,400 Gain (+52.0% Surge)**.
 
 ---
 
-### Slide 3: The Innovation — Neuro-Symbolic Multi-Agent Architecture
-KrishiArtha-MCP replaces generic LLM guessing with a deterministic 4-node multi-agent pipeline:
-1. **Mandi Telemetry Agent (FastMCP):** Pulls active wholesale prices from `mandi-api.onrender.com/v1/prices` and `data.gov.in` (APMC resource ID `9ef84268-d588...`).
-2. **Exogenous Weather-Covariate Forecaster:** Feeds historical modal series + 7-day Open-Meteo precipitation and temperature covariates into `amazon/chronos-2` to generate probabilistic $P_{10}, P_{50}, P_{90}$ price trajectories.
-3. **Spatial-Thermodynamic Arbitrage Engine:** Calculates real highway geometry via OSRM, applies Arrhenius $Q_{10}$ biological transit decay with a +2.5h mandi queue penalty, deducts diesel freight ($₹22/\text{km}$ round-trip), and ranks mandis by Net Realizable Profit ($\text{NRP}$).
-4. **LightRAG Policy & WDRA Distress Engine:** When a regional glut crashes all mandis below the cost floor ($₹1,100/\text{qtl}$), the engine queries NABARD Circular 128 to unlock an immediate 75% LTV e-NWR pledge advance at 4.0% effective interest while waiting for prices to rebound.
+### Slide 3: The Solution — 4-Node LangGraph Neuro-Symbolic State Machine
+- **Core Mandate:** Zero LLM Math Hallucination • Typed Pydantic v2 Contracts • 1.04s Pipeline Latency (<4.0s Target).
+- **Visual Architecture Diagram:** `docs/assets/architecture_flow.png` (High-DPI 4-Node Flow with SLA Badges & Schemas).
+- **Redesigned 4-Node Specifications & Latency SLAs:**
+  1. **Node 1: FastMCP Ingest (`[410ms SLA]`):**
+     - **Live Ingest:** Pulls Agmarknet OGD API (`9ef84268...`) + Open-Meteo 7-day hourly rain/temp. Zero mock data.
+     - **Highway Routing:** OSRM road distance, travel duration & transit hours calculated deterministically.
+     - **State Contract:** Strictly typed `MandiTelemetryPayload` (Pydantic v2) prevents input contamination.
+  2. **Node 2: Chronos-2 Forecaster (`[280ms SLA]`):**
+     - **Foundation AI:** `amazon/chronos-2` zero-shot model conditioned on rainfall & temp covariates.
+     - **Probabilistic Quantiles:** Emits $P_{10}, P_{50}, P_{90}$ trajectories; pinpoints Day +10 rebound to ₹1,480/qtl (+64.4%).
+     - **State Contract:** Typed `PriceForecastDistribution` (Pydantic v2) eliminates generative LLM pricing hallucinations.
+  3. **Node 3: Spoilage & Physics (`[12ms SLA]`):**
+     - **Arrhenius Kinetics:** $Q_{10}=2.2$ thermal decay (18.4% rot in Surat) + mandatory 2.5h APMC queue buffer.
+     - **Freight Deductions:** Round-trip diesel ($₹22/km$) + loading ($₹35/qtl$) -> Net Realizable Price.
+     - **State Contract:** Deterministic `ArbitrageRanking` (Pydantic v2) prevents unfeasible route recommendations.
+  4. **Node 4: LightRAG & Consent Gate (`[340ms SLA]`):**
+     - **Policy Graph:** LightRAG hybrid mode over NABARD Circular 128 (75% LTV @ 4% net interest).
+     - **LangGraph interrupt():** Stateful human consent barrier freezes graph execution before statutory dispatch.
+     - **Browser Agent:** Playwright agent auto-fills WDRA registration portal in **1.21s** SLA.
+     - **State Contract:** Cryptographically logged `SanctionExecutionRecord` (Pydantic v2).
 
 ---
 
