@@ -8,6 +8,14 @@ Allows judges to interactively query ANY Indian commodity & state in real time:
 """
 
 from typing import Dict, Any, List
+from pathlib import Path
+import sys
+
+# Ensure repo root is in sys.path
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 import streamlit as st
 import pandas as pd
 import requests
