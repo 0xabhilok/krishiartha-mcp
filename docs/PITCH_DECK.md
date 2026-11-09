@@ -1,18 +1,17 @@
 # KrishiArtha-MCP (MandiPulse)
-## 7-Slide Pitch Deck | FORGE'26 GenAI Buildathon
-**Track:** Climate, Resource Infrastructure & Global Supply Resilience  
-**Team:** INFINITE LOOP (IIIT Guwahati)  
-**Live Prototype:** Streamlit Mission Control Cockpit (Port 8501)  
+## Executive Product & Architecture Presentation Deck
+**Domain:** Autonomous Agricultural Supply-Chain, Physical Thermodynamics & Statutory Distress Credit  
+**Author & Architect:** Abhilok Reddy ([@0xabhilok](https://github.com/0xabhilok))  
+**Live Prototype:** [https://krishiartha-mcp.streamlit.app](https://krishiartha-mcp.streamlit.app)  
 
 ---
 
-### Slide 1: Title & Hook (YC Seed Standard)
+### Slide 1: Title & Hook (Vision & Breakthrough)
 - **Project Name:** KrishiArtha-MCP (MandiPulse)
-- **Crisp 8-Word YC One-Liner:** **Autonomous Climate Mandi Arbitrage & Statutory Distress-Credit Engine**
+- **Crisp One-Liner:** **Autonomous Climate Mandi Arbitrage & Statutory Distress-Credit Engine**
 - **Live Deployment Badge:** `● 100% Live Prototype Active on Streamlit Community Cloud (https://krishiartha-mcp.streamlit.app)`
-- **Team INFINITE LOOP:**
-  - Abhilok Reddy Bellamkonda (Leader) — IIIT Guwahati
-  - Nimmakayala Naga Venkata Shanmukha Sai Chandra — IIIT Guwahati
+- **Architect & Developer:**
+  - Abhilok Reddy — Systems & AI Architect
 - **Value Propositions (Replacing Dense Text):**
   - **• The Crisis:** Halting ₹40,000+ Crore annual post-harvest distress sales triggered by unseasonal weather gluts.
   - **• The Breakthrough:** Fusing `amazon/chronos-2` foundation AI, Arrhenius transit thermodynamics, and statutory NABARD e-NWR pledge liquidity.
@@ -168,10 +167,10 @@
 
 ---
 
-### Slide 9: Judge Evaluation Hub & Rapid Verification Protocol
+### Slide 9: Interactive Evaluation Hub & Rapid Verification Protocol
 - **Visual Assets:**
   - `docs/assets/dual_qr_evaluation.png` (Framed dual QR codes for live prototype and demo video)
-- **4-Step Rapid Evaluator Test Vector:**
+- **4-Step Rapid Interactive Test Vector:**
   1. **Open Cloud Prototype (10s):** Scan QR 1 or visit `https://krishiartha-mcp.streamlit.app` on any smartphone camera or laptop with zero login.
   2. **Input Test Vector (15s):** Select District: **Nashik** | Crop: **Tomato** | Lot: **50 Quintals**. Observe Pimpalgaon APMC ₹900/qtl crash vs ₹1,100 cost floor.
   3. **Review Financial Matrix (20s):** Compare Option A (₹45,000 distress) vs Option B (₹48,280 transit mirage) vs Option C (**₹68,400 net, +52.0% gain**).

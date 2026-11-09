@@ -1,9 +1,9 @@
 """
 KrishiArtha-MCP: Bhashini UI Mission Control Dashboard
-Main Streamlit Application — World-Class Interactive Cockpit for FORGE'26
+Main Streamlit Application — Autonomous Agricultural Arbitrage & Decision Cockpit
 
 Features:
-1. Bhashini Multilingual Voice Input & 1-Click Stage Audio Triggers (Marathi, Hindi, Telugu, English).
+1. Bhashini Multilingual Voice Input & 1-Click Live Vernacular Audio Triggers (Marathi, Hindi, Telugu, English).
 2. Live Open-Meteo Meteorological Radar Widget (Ambient Temp, Humidity, Rain Influx, Q10 factor).
 3. 3-Column Financial Arbitrage Matrix:
    - Option A: Local Panic Sale (₹45,000 Net @ ₹900/q)
@@ -230,13 +230,13 @@ def render_safe_image(
 # -----------------------------------------------------------------------------
 with st.sidebar:
     st.markdown("### ⚙️ Stage Controls")
-    st.caption("Judge & Audience Interactive Simulation")
+    st.caption("Interactive Simulation & Telemetry Controls")
 
     # OFFLINE_STAGE_SAFE_MODE toggle
     safe_mode = st.toggle(
         "OFFLINE_STAGE_SAFE_MODE",
         value=st.session_state.offline_safe_mode,
-        help="Deterministic offline snapshot mode for guaranteed zero-latency hackathon stage demos.",
+        help="Deterministic offline snapshot mode for resilient air-gapped evaluation.",
     )
     st.session_state.offline_safe_mode = safe_mode
     if safe_mode:
@@ -315,7 +315,7 @@ with header_col2:
         st.markdown(
             """<div style='background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius:10px; padding:10px 14px; text-align:center; color:white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);'>
             <b style='font-size:0.95rem;'>🟢 LIVE APMC & FASTMCP ACTIVE</b><br>
-            <small style='color:#ecfdf5; font-size:0.8rem;'>Rule 4: Zero Dummy Data (Data.gov.in & Open-Meteo)</small>
+            <small style='color:#ecfdf5; font-size:0.8rem;'>Live Telemetry: Zero-Mock Production APIs (Data.gov.in & Open-Meteo)</small>
             </div>""",
             unsafe_allow_html=True,
         )
@@ -337,7 +337,7 @@ st.markdown(f"### 🎙️ {_('Bhashini Multilingual Voice Input')}")
 voice_box = st.container()
 with voice_box:
     st.write(
-        f"**{_('1-Click Stage Demo Voice Triggers')}** "
+        f"**{_('1-Click Live Vernacular Voice Triggers')}** "
         f"— {_('Click to simulate spoken farmer query in your preferred language:')}"
     )
 
@@ -551,7 +551,7 @@ fan_chart_fig = create_quantile_fan_chart(
 st.plotly_chart(fan_chart_fig, use_container_width=True)
 
 # -----------------------------------------------------------------------------
-# SECTION 6: Live Pan-India APMC Telemetry Explorer (Rule 4 Zero Mock Data)
+# SECTION 6: Live Pan-India APMC Telemetry Explorer (Live Production APIs)
 # -----------------------------------------------------------------------------
 st.markdown("---")
 render_live_telemetry_section()
@@ -778,5 +778,5 @@ with st.expander(f"📜 {_('Statutory Policy Citations')} (NABARD Circulars & WD
 
 st.markdown("---")
 st.caption(
-    "KrishiArtha-MCP | Built for FORGE'26 GenAI Buildathon | Neuro-Symbolic Agricultural Decision Engine"
+    "KrishiArtha-MCP | Developed by Abhilok Reddy | Neuro-Symbolic Agricultural Decision Engine"
 )

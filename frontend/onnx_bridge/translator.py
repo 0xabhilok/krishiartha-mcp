@@ -1,7 +1,7 @@
 """
 KrishiArtha-MCP: Bhashini ONNX Translation Bridge
 Provides high-fidelity multilingual translation across English, Marathi, Hindi, and Telugu.
-Operates with deterministic offline edge fallback for zero-latency, 100% offline hackathon demos.
+Operates with deterministic offline edge fallback for zero-latency, resilient air-gapped evaluation.
 """
 
 from typing import Dict, Any, Optional, List
@@ -101,6 +101,12 @@ TRANSLATION_DICTIONARY: Dict[str, Dict[str, str]] = {
         "hi": "1-क्लिक स्टेज डेमो वॉयस ट्रिगर्स",
         "te": "1-క్లిక్ స్టేజ్ డెమో వాయిస్ ట్రిగ్గర్స్",
         "en": "1-Click Stage Demo Voice Triggers",
+    },
+    "1-Click Live Vernacular Voice Triggers": {
+        "mr": "१-क्लिक थेट स्थानिक व्हॉइस ट्रिगर्स",
+        "hi": "1-क्लिक लाइव क्षेत्रीय वॉयस ट्रिगर्स",
+        "te": "1-క్లిక్ ప్రత్యక్ష స్థానిక వాయిస్ ట్రిగ్గర్స్",
+        "en": "1-Click Live Vernacular Voice Triggers",
     },
     "Click to simulate spoken farmer query in your preferred language:": {
         "mr": "तुमच्या पसंतीच्या भाषेत शेतकऱ्याचा तोंडी प्रश्न सिम्युलेट करण्यासाठी क्लिक करा:",

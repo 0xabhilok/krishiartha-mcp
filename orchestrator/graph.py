@@ -395,7 +395,7 @@ def build_krishi_artha_graph(checkpointer: Optional[Any] = None) -> Any:
 graph = build_krishi_artha_graph()
 
 
-def resume_graph(thread_id: str = "forge_stage_demo", resume_value: Any = True) -> Dict[str, Any]:
+def resume_graph(thread_id: str = "krishiartha_default_session", resume_value: Any = True) -> Dict[str, Any]:
     """
     Convenience helper to resume a paused LangGraph thread with Command(resume=resume_value).
     """

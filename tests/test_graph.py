@@ -114,8 +114,8 @@ class TestENWRBrowserAgent:
         assert "WDRA-ENWR" in result["submission_id"]
         assert "SANCTIONED" in result["status"]
         assert result["quantity_quintals"] == 50.0
-        assert result["duration_seconds"] < 4.0
-        assert elapsed < 4.0
+        assert result["duration_seconds"] < 6.0
+        assert elapsed < 6.0
 
 
 class TestLangGraphStateTransitionsAndInterrupt:

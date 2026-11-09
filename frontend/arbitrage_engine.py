@@ -6,7 +6,7 @@ Implements deterministic calculations for the 3-column arbitrage matrix:
 - Option C: WDRA Scientific Storage + 75% e-NWR Pledge Loan (KrishiArtha Recommended)
 
 Supports dynamic unseasonal rainfall shock recalculation (+0mm to +100mm)
-and offline snapshot fallback for 100% offline hackathon demonstration.
+and offline snapshot fallback for resilient air-gapped evaluation / offline benchmarking.
 """
 
 from typing import Dict, Any, Optional
@@ -23,7 +23,7 @@ SNAPSHOT_PATH = REPO_ROOT / "data" / "offline_snapshots" / "nashik_tomato_glut.j
 
 
 def load_offline_snapshot() -> Dict[str, Any]:
-    """Loads offline snapshot dataset for deterministic hackathon demonstration."""
+    """Loads offline snapshot dataset for resilient air-gapped evaluation / offline benchmarking."""
     if SNAPSHOT_PATH.exists():
         with open(SNAPSHOT_PATH, "r", encoding="utf-8") as f:
             return json.load(f)

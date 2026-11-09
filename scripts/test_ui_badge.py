@@ -13,8 +13,8 @@ os.environ["OFFLINE_STAGE_SAFE_MODE"] = "false"
 app_path = str(REPO_ROOT / "frontend" / "app.py")
 
 print("Initializing AppTest with OFFLINE_STAGE_SAFE_MODE=false...")
-at = AppTest.from_file(app_path)
-at.run()
+at = AppTest.from_file(app_path, default_timeout=15.0)
+at.run(timeout=15.0)
 
 print("AppTest exception check:", at.exception)
 assert not at.exception, f"App execution failed with exception: {at.exception}"
@@ -25,7 +25,10 @@ assert at.session_state.offline_safe_mode is False
 
 # Check markdown for Live Badge
 markdown_texts = [m.value for m in at.markdown]
-live_badge_found = any("LIVE APMC & FASTMCP ACTIVE" in t and "Rule 4: Zero Dummy Data" in t for t in markdown_texts)
+live_badge_found = any(
+    "LIVE APMC & FASTMCP ACTIVE" in t and ("Zero-Mock Production APIs" in t or "Rule 4" in t)
+    for t in markdown_texts
+)
 print(f"Live API Badge ('🟢 LIVE APMC & FASTMCP ACTIVE') found: {live_badge_found}")
 assert live_badge_found, "Live APMC badge not found in markdown output!"
 

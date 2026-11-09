@@ -1,6 +1,6 @@
 """
 KrishiArtha-MCP: Live Telemetry, Weather Radar & Pan-India APMC Search
-Allows judges to interactively query ANY Indian commodity & state in real time:
+Allows interactive real-time queries for ANY Indian commodity & state:
 - Tomato, Onion, Potato, Green Chilli, Cotton, Soybean, Wheat, Rice
 - Across Maharashtra, Karnataka, Gujarat, Madhya Pradesh, Uttar Pradesh, Punjab
 - Live Open-Meteo weather radar widget with 7-day rainfall and temperature
@@ -27,7 +27,7 @@ from mcp_server.spoilage_arbitrage import evaluate_mandi_arbitrage
 def render_live_telemetry_section():
     """Renders the live interactive Pan-India Mandi & Weather Telemetry explorer."""
     st.markdown("### 🌐 Live Pan-India Telemetry & Real-Time APMC Search")
-    st.caption("Zero Mock Data (Rule 4) — Consumes live Agmarknet / Mandi-API & Open-Meteo APIs in real time")
+    st.caption("Zero Mock Data: Consumes live Agmarknet / Mandi-API & Open-Meteo APIs in real time")
 
     col_q1, col_q2, col_q3, col_q4 = st.columns([2, 2, 2, 1.5])
 

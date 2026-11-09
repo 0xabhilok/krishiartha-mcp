@@ -1,6 +1,7 @@
 # PROJECT: KrishiArtha-MCP (MandiPulse) — Autonomous Covariate Mandi Arbitrage & Policy Execution Engine
-# TARGET EVENT: FORGE'26 (48-Hour GenAI Buildathon)
-# TRACK: Theme B (Climate & Supply Resilience) + Theme A (Civic Pulse & DPI)
+# ARCHITECTURE: KrishiArtha-MCP — Production Specification
+# AUTHOR: Abhilok Reddy
+# DOMAIN: Climate & Supply Resilience + Civic Pulse & Digital Public Infrastructure (DPI)
 
 ## 1. CORE ARCHITECTURAL MANDATE
 KrishiArtha-MCP is a production-grade, neuro-symbolic multi-agent agricultural supply-chain and spatial arbitrage engine.
@@ -12,7 +13,7 @@ KrishiArtha-MCP is a production-grade, neuro-symbolic multi-agent agricultural s
   4. **Orchestration:** `langchain-ai/langgraph` (v1.2.18) `StateGraph` with `InMemorySaver` checkpointer and an explicit `interrupt()` human-in-the-loop gate before statutory PDF generation or truck dispatch.
   5. **Data Ingestion:** Standardized Model Context Protocol (`FastMCP`) tool servers wrapping `mandi-api.onrender.com/v1/prices`, `api.data.gov.in` (OGD resource IDs `9ef84268-d588-465a-a308-a864a43d0070` and `35985678-0d79-46b4-9ed6-6f13308a1d24`), and Open-Meteo.
   6. **Multilingual Voice & Vernacular Edge:** Bhashini ULCA ASR/TTS across 22 scheduled Indian languages paired with client-side translation bridge for Marathi, Hindi, Telugu, and English.
-  7. **Offline Stage Resilience:** Every component obeys `OFFLINE_STAGE_SAFE_MODE=true` (or >2.5s network timeout fallback) reading deterministic local snapshots from `data/offline_snapshots/nashik_tomato_glut.json`.
+  7. **Offline Evaluation Resilience:** Every component obeys `OFFLINE_STAGE_SAFE_MODE=true` (or >2.5s network timeout fallback) reading deterministic local snapshots from `data/offline_snapshots/nashik_tomato_glut.json`.
 
 ---
 
