@@ -18,7 +18,7 @@
 | :--- | :--- |
 | **🌐 Live Deployed Application** | **[krishiartha-mcp.streamlit.app](https://krishiartha-mcp.streamlit.app/)** *(24/7 Global Production Cloud)* |
 | **🎬 4-Minute System Demo Video** | **[Watch / Download Masterpiece Demo MP4](https://github.com/0xabhilok/krishiartha-mcp/releases/download/v1.0.0-demo/KrishiArtha_MCP_Masterpiece_Demo.mp4)** |
-| **📖 Technical Interview & System Design Playbook** | **[docs/INTERVIEW_PLAYBOOK.md](docs/INTERVIEW_PLAYBOOK.md)** *(System design Q&A, trade-offs, STAR stories, resume bullets)* |
+| **🏛️ System Architecture Specification** | **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** *(Comprehensive distributed topology, physics & state-machine spec)* |
 | **📊 Executive Architecture Deck (PPTX)** | **[docs/KrishiArtha_MCP_Pitch_Deck.pptx](docs/KrishiArtha_MCP_Pitch_Deck.pptx)** *(9-Slide Widescreen Presentation with Native Morph)* |
 | **🖥️ Interactive HTML Presentation** | **[docs/PITCH_DECK.html](docs/PITCH_DECK.html)** *(Responsive browser slide deck; press `Ctrl+P` for PDF)* |
 | **🧪 Pytest Verification Suite** | **[tests/](tests/)** *(70/70 Passing Tests: Quant, RAG, Graph State Machine, UI)* |
@@ -27,12 +27,12 @@
 
 ## 📌 Motivation & Problem Context
 
-Smallholder farmers and Farmer Producer Organizations (FPOs) across India lose over **₹40,000 Crore annually** to post-harvest distress sales during unseasonal climate shocks and harvest gluts. When localized cloudbursts, unseasonal monsoons, or extreme heatwaves threaten perishable commodities (tomatoes, onions, green chillies), smallholders are forced to panic-harvest to prevent fungal mold and dump their entire yield into the nearest Agricultural Produce Market Committee (APMC) wholesale mandi. 
+Smallholder farmers and Farmer Producer Organizations (FPOs) across India lose over **₹40,000 Crore annually** to post-harvest distress sales during unseasonal climate shocks and harvest gluts. When localized cloudbursts, unseasonal monsoons, or extreme heatwaves threaten perishable commodities (tomatoes, onions, green chillies), smallholders are forced to panic-harvest to prevent fungal rot and dump their entire yield into the nearest Agricultural Produce Market Committee (APMC) wholesale mandi. 
 
 This localized supply glut causes catastrophic price collapses—often driving clearing prices to **₹900/quintal**, far below the **₹1,100/quintal cost of production**.
 
 Existing agricultural portals (Agmarknet 2.0, eNAM) fail to prevent this structural crisis:
-1. **Passive & Backward-Looking:** They display yesterday's clearing price but cannot forecast price trajectory under approaching weather shock fronts.
+1. **Passive & Backward-Looking:** They display yesterday's clearing price but cannot forecast price trajectories under approaching weather shock fronts.
 2. **The "Transit Mirage" (Ignorant of Biological Decay):** When portals suggest shipping produce 200+ km to higher-priced mandis (e.g., Surat at ₹1,350/qtl), they assume **0% crop decay**. In reality, 32°C ambient heat and 85% relative humidity in open trucks trigger rapid microbial respiration (**Arrhenius $Q_{10}$ decay**), rotting 18.4% of the crop in transit. Combined with round-trip diesel freight, the perceived arbitrage collapses into a dangerous false trap (+7.3% vs expected +50%).
 3. **Zero Automated Financial Recourse:** When mandis crash regionally, smallholders have no institutional liquidity, forcing them into predatory loans at 24%–36% APR.
 
@@ -65,7 +65,7 @@ flowchart TB
     subgraph Governance["LangGraph v1.2.18 Stateful Orchestration"]
         Node1["Node 1: quant_arbitrage"]
         Node2["Node 2: policy_graphrag (LightRAG Hybrid Mode)"]
-        Gate["Node 3: human_approval_gate (interrupt() Consent Barrier)"]
+        Gate{"Node 3: human_approval_gate (interrupt() Consent Barrier)"}
         Node4["Node 4: execute_enwr_browser (Playwright WDRA Agent)"]
     end
 
@@ -77,7 +77,7 @@ flowchart TB
     CoreEngine --> Chronos & Spoilage
     Node1 --> Node2
     Node2 --> Gate
-    Gate -- "Command(resume=True)" --> Node4
+    Gate -- "Approved: Command(resume=True)" --> Node4
     Node4 --> UI
 ```
 
@@ -86,27 +86,29 @@ flowchart TB
 ## 🔬 Mathematical & Physical Defensibility
 
 ### 1. Arrhenius $Q_{10}$ Biological Transit Spoilage Decay
+
 Perishable produce decays exponentially as ambient temperature and relative humidity rise. KrishiArtha-MCP calculates the dynamic biological decay coefficient $k(T_{\text{amb}}, RH)$:
 
 $$k(T_{\text{amb}}, RH) = k_{\text{base}} \cdot \left(Q_{10}\right)^{\frac{T_{\text{amb}} - 20.0}{10.0}} \cdot \left(1 + \alpha_{\text{hum}} \cdot \max\left(0, \frac{RH - 70}{100}\right)\right)$$
 
-- Baseline decay rate at 20°C: $k_{\text{base}} = 0.0065$ (Tomato), $0.0018$ (Onion), $0.0050$ (Greens).
-- Moisture rot multiplier: $\alpha_{\text{hum}} = 1.5$.
-- Temperature sensitivity coefficient: $Q_{10} = 2.2$ (Microbial spoilage more than doubles every 10°C rise).
-- Total transit time: $t_{\text{transit}} = t_{\text{duration}} + 2.5\text{h}$ (mandatory APMC gate unloading queue buffer).
-- Total spoilage loss fraction: $L = 1 - \exp\left(-k \cdot t_{\text{transit}}\right)$.
+- **Baseline decay rate at 20°C ($k_{\text{base}}$):** $0.0065$ (Tomato), $0.0018$ (Onion), $0.0050$ (Greens).
+- **Moisture rot multiplier ($\alpha_{\text{hum}}$):** $1.5$ (accelerated breakdown when $RH > 70\%$).
+- **Temperature sensitivity coefficient ($Q_{10}$):** $2.2$ (microbial spoilage more than doubles every 10°C rise).
+- **Total transit duration ($t_{\text{transit}}$):** $t_{\text{transit}} = t_{\text{duration}} + 2.5\text{h}$ (incorporating mandatory APMC gate unloading queue buffer).
+- **Total spoilage loss fraction ($L$):** $L = 1 - \exp\left(-k \cdot t_{\text{transit}}\right)$.
 
-### 2. Freight & Net Realizable Price ($\text{NRP}$)
+### 2. Freight & Net Realizable Price (NRP)
+
 LLMs are barred from calculating transport economics. Deterministic freight equations account for round-trip deadheading and APMC deductions:
 
-$$C_{\text{transport}} = 2 \cdot d_{\text{km}} \cdot r_{\text{diesel\_per\_km}} + Q \cdot C_{\text{loading\_per\_qtl}}$$
+$$C_{\text{transport}} = 2 \cdot d_{\text{km}} \cdot r_{\text{freight}} + Q \cdot c_{\text{handling}}$$
 
 $$\text{NRP}_m = \left[ P_{50} \cdot (1 - L) \cdot (1 - \gamma_{\text{APMC}}) \right] - \frac{C_{\text{transport}}}{Q}$$
 
-- Round-trip mini-truck rate: $r_{\text{diesel\_per\_km}} = ₹22/\text{km}$.
-- Loading/unloading (*hamali*): $C_{\text{loading\_per\_qtl}} = ₹35/\text{quintal}$.
-- Mandi cess: $\gamma_{\text{APMC}} = 1.0\% - 2.5\%$.
-- **Regional Glut Trigger:** If $\max_m (\text{NRP}_m) < \text{CostFloor}$ ($\text{CostFloor} = ₹1,100/\text{qtl}$), the engine automatically triggers the statutory distress-credit protocol.
+- **Round-Trip Freight Rate ($r_{\text{freight}}$):** ₹22 / km (mini-truck round-trip diesel rate)
+- **Handling & Loading Fee ($c_{\text{handling}}$):** ₹35 / quintal (*hamali* loading/unloading)
+- **APMC Statutory User Cess ($\gamma_{\text{APMC}}$):** $1.0\% - 2.5\%$
+- **Regional Glut Trigger:** If $\max_m (\text{NRP}_m) < \text{CostFloor}$ (where $\text{CostFloor} =$ ₹1,100 / qtl), the engine automatically activates the statutory warehouse credit protocol.
 
 ---
 
@@ -116,8 +118,8 @@ $$\text{NRP}_m = \left[ P_{50} \cdot (1 - L) \cdot (1 - \gamma_{\text{APMC}}) \r
 | :--- | :--- | :--- | :--- |
 | **Market Destination** | Pimpalgaon APMC (Local) | Surat APMC (234 km) | MSWC Scientific Cold Chain, Ozar (14.2 km) |
 | **Nominal Quoted Price** | ₹900 / quintal | ₹1,350 / quintal | Rebound: ₹1,480 / quintal (10 days post-glut) |
-| **$Q_{10}$ Transit Spoilage** | ₹945 (2.1% loss) | **₹12,420 (18.4% rotting loss)** | ₹0 (Accredited cold storage fiduciary guarantee) |
-| **Round-Trip Diesel Freight** | ₹1,925 | ₹6,800 ($₹22/\text{km}$ round-trip) | ₹750 (Local transfer) |
+| **Arrhenius Q10 Transit Spoilage** | ₹945 (2.1% loss) | **₹12,420 (18.4% rotting loss)** | ₹0 (Accredited cold storage fiduciary guarantee) |
+| **Round-Trip Diesel Freight** | ₹1,925 | ₹6,800 (₹22/km round-trip) | ₹750 (Local transfer) |
 | **Cold Storage & Carrying Cost** | ₹0 | ₹0 | −₹5,600 (Itemized storage fee + subvented interest) |
 | **Instant Cash Liquidity** | ₹45,000 | ₹48,280 | **₹33,750 Immediate Cash (75% LTV @ 4% net interest)** |
 | **Final Net Farmer Income** | **₹45,000** | **₹48,280** | **₹68,400 Net Take-Home** |
@@ -173,21 +175,7 @@ Bypasses rural literacy barriers with multi-modal voice interaction across **Mar
 - **AgentShield Security Scan:** Audited via `npx ecc-agentshield scan` with **Grade A (100/100)** score (0 Critical, 0 High, 0 Medium, 0 Low).
 - **Data Contracts:** 100% frozen Pydantic v2 schemas (`contracts/schemas.py`) with strict runtime type validation and serialization.
 - **Zero API Key Leakage:** Pure environment variable injection with zero credentials committed to repository history.
-- **Comprehensive Test Suite:** **70 / 70 tests passed in 15.96s** across state transitions, quant calculations, LightRAG retrieval, and Streamlit AppTest simulation.
-
----
-
-## 💼 Resume & Portfolio Highlights
-
-For technical recruiters and hiring managers evaluating this project for **Senior AI Engineer**, **Machine Learning Systems Engineer**, or **Full-Stack AI** roles:
-
-### Formatted Resume Bullet Points
-- **Architected KrishiArtha-MCP**, an autonomous neuro-symbolic multi-agent agricultural arbitrage platform integrating foundation time-series AI (`amazon/chronos-2`), biological transit thermodynamics, and statutory distress credit.
-- **Engineered an Arrhenius $Q_{10}$ microbial decay and OSRM freight optimization engine**, replacing LLM hallucinated calculations with deterministic physical economics and preventing false spatial arbitrage traps that rot 18.4% of transit crops.
-- **Implemented a 4-node LangGraph v1.2.18 StateGraph** with an explicit `interrupt()` Human-in-the-Loop barrier, state checkpointing, and automated Playwright browser agent auto-filing statutory WDRA loan applications in 1.21s.
-- **Integrated LightRAG hybrid knowledge graph retrieval** over NABARD Circular 128, unlocking 75% LTV e-NWR pledge advances at 4% net interest and delivering a +52.0% net revenue surge (+₹23,400 on 50 qtl lots) over distress sales.
-- **Decoupled data ingestion using Model Context Protocol (FastMCP)** across active Agmarknet OGD and Open-Meteo APIs, implementing air-gapped deterministic fallbacks and securing Grade A (100/100) on AgentShield security audit.
-- **Maintained a 100% test pass rate across 70 unit and integration tests** (`pytest`) covering quant math, graph state transitions, and multilingual Bhashini translation across Marathi, Hindi, Telugu, and English.
+- **Comprehensive Test Suite:** **70 / 70 tests passed in ~10s** across state transitions, quant calculations, LightRAG retrieval, and Streamlit AppTest simulation.
 
 ---
 
@@ -218,7 +206,7 @@ playwright install chromium
 ```bash
 pytest
 ```
-*Expected output: `70 passed in ~15s (100% PASS)`*
+*Expected output: `70 passed in ~10s (100% PASS)`*
 
 ### 4. Launch the Mission Control Cockpit
 ```bash
@@ -271,8 +259,7 @@ krishiartha-mcp/
 │   └── offline_snapshots/
 │       └── nashik_tomato_glut.json # Canonical 50qtl Nashik tomato glut dataset
 ├── docs/
-│   ├── INTERVIEW_PLAYBOOK.md   # Elite System Design & Technical Interview Guide
-│   ├── ARCHITECTURE.md         # Detailed neuro-symbolic multi-agent architecture
+│   ├── ARCHITECTURE.md         # Comprehensive System Architecture & Design Specification
 │   ├── KrishiArtha_MCP_Pitch_Deck.pptx # 9-Slide Presentation with native morph
 │   └── PITCH_DECK.html         # Responsive interactive web presentation
 ├── tests/
